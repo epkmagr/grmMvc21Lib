@@ -9,19 +9,19 @@
     <div class="row">
         <div class="col-md-2 col-md-offset-1">
             <div class="list-group">
-                <a href="/me/report2/kmom01" class="list-group-item active" aria-current="true">kmom01</a>
-                <a href="/me/report2/kmom02" class="list-group-item">kmom02</a>
-                <a href="/me/report2/kmom03" class="list-group-item">kmom03</a>
-                <a href="/me/report2/kmom04" class="list-group-item">kmom04</a>
-                <a href="/me/report2/kmom05" class="list-group-item">kmom05</a>
-                <a href="/me/report2/kmom06" class="list-group-item">kmom06</a>
-                <a href="/me/report2/kmom10" class="list-group-item">kmom10</a>
+                <a {% if kmom == "kmom01" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom01">kmom01</a>
+                <a {% if kmom == "kmom02" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom02" class="list-group-item">kmom02</a>
+                <a {% if kmom == "kmom03" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom03" class="list-group-item">kmom03</a>
+                <a {% if kmom == "kmom04" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom04" class="list-group-item">kmom04</a>
+                <a {% if kmom == "kmom05" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom05" class="list-group-item">kmom05</a>
+                <a {% if kmom == "kmom06" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom06" class="list-group-item">kmom06</a>
+                <a {% if kmom == "kmom10" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom10" class="list-group-item">kmom10</a>
             </div>
         </div>
         <div class="col-md-7 col-md-offset-1">
-            <p> Valt kmom är  </p>
             {% if kmom is defined %}
-                <p> {{ kmom }} </p>
+                {% set my_path = 'reports/' ~ kmom ~ ".html" %}
+                {% include my_path %}
             {% endif %}
         </div>
     </div>

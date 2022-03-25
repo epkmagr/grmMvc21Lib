@@ -1,5 +1,5 @@
 body {
-    background-color: lightgray
+    background-color: #e4eef7;
     padding-top: 4em;
     padding-bottom: 2em;
 }
@@ -8,10 +8,25 @@ navbar {
     padding-bottom: 2em;
 }
 
+.jumbotron {
+    background-color: #88b5dd; /* #3172ab; */
+}
+
 h1 {
     text-align: center;
 }
 
 h3 {
+    text-align: center;
+}
+
+.my-footer {
+    /* background-color: #88b5dd; */
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    margin-bottom: 0px;
+    font-size: large;
+}
+
+.symfony-logo {
     text-align: center;
 }
