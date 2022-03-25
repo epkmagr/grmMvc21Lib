@@ -7,3 +7,11 @@ body {
 navbar {
     padding-bottom: 2em;
 }
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}

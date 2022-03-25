@@ -25,10 +25,10 @@ class MeController extends AbstractController
      */
     public function about(): Response
     {
-        $number = random_int(0, 100);
+        $kmom = "0";
 
         return $this->render('me_about.html.twig', [
-            'number' => $number,
+            'kmom' => $kmom,
         ]);
     }
 
@@ -37,10 +37,18 @@ class MeController extends AbstractController
      */
     public function report(): Response
     {
-        $number = random_int(0, 100);
+        return $this->render('me_report.html.twig');
+    }
+
+    /**
+     * @Route("/me/report2/{show_kmom}", name="report2")
+     */
+    public function report2(string $show_kmom): Response
+    {
+        $kmom = $show_kmom !== "0" ? $show_kmom : "0";
 
         return $this->render('me_report.html.twig', [
-            'number' => $number,
+            'kmom' => $kmom,
         ]);
     }
 }
