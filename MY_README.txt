@@ -25,3 +25,13 @@ Start lokalt
 php -S localhost:8888 -t public &
 Kolla router
 bin/console debug:routes
+composer recipes (vad som är installerat)
+
+Git och Github
+mvc-report
+git add .
+git commit -a -m "meddelande"
+git push
+git tag -a 1.0.0 -m "First draft"
+git tag
+git push --tags
