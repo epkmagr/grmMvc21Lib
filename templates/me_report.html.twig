@@ -7,6 +7,14 @@
         <h1>Redovisningstexter</h1>
     </div>
     <div class="row">
+        {% if kmom is not defined %}
+            {% set kmom = "0" %}
+        {% endif %}
+        {% if app.request is defined %}
+            <p> {{app.request}} </p>
+            <br><br>
+            <p> {{app.request.getSchemeAndHttpHost()}} </p>
+        {% endif %}
         <div class="col-md-2 col-md-offset-1">
             <div class="list-group">
                 <a {% if kmom == "kmom01" %} class="list-group-item active" {% else %} class="list-group-item" {% endif %} href="/me/report2/kmom01">kmom01</a>
@@ -19,7 +27,9 @@
             </div>
         </div>
         <div class="col-md-7 col-md-offset-1">
-            {% if kmom is defined %}
+            {% if kmom == "0" %}
+                <p>Välj ett kmom till vänster för att läsa dess text.</p>
+            {% else %}
                 {% set my_path = 'reports/' ~ kmom ~ ".html" %}
                 {% include my_path %}
             {% endif %}
