@@ -33,17 +33,9 @@ class MeController extends AbstractController
     }
 
     /**
-     * @Route("/me/report", name="report")
+     * @Route("/me/report/{show_kmom}", name="report")
      */
-    public function report(): Response
-    {
-        return $this->render('me_report.html.twig');
-    }
-
-    /**
-     * @Route("/me/report2/{show_kmom}", name="report2")
-     */
-    public function report2(string $show_kmom): Response
+    public function report(string $show_kmom="0"): Response
     {
         $kmom = $show_kmom !== "0" ? $show_kmom : "0";
 
