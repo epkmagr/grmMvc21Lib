@@ -1,7 +1,12 @@
-{# templates/me_about.html.twig #}
+{# templates/me_about2.html.twig #}
 
-{% include 'header.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block title %}About{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
 <div class="container-fluid" role="main">
     <div class="jumbotron">
         <h1>Om - mvc</h1>
@@ -27,5 +32,4 @@
         </div>
     </div>
 </div>
-
-{% include 'footer.html.twig' %}
+{% endblock %}

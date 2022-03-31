@@ -23,7 +23,7 @@ h3 {
 .my-footer {
     /* background-color: #88b5dd; */
     background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
-    margin-bottom: 0px;
+    margin-bottom: 2em;
     font-size: large;
 }
 

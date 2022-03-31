@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% block head %}
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"    rel="stylesheet">
+            {% block stylesheets %}
+                <link href="{{ asset('css/me.css') }}" type="text/css" rel="stylesheet"/>
+            {% endblock %}
+            <title>{% block title %}{% endblock %} - MVC webpage</title>
+            <link rel="shortcut icon" href="{{ absolute_url('images/favicon.ico') }}">
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body role="document">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"   aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('me') }}">MVC</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ path('me') }}">Hem</a></li>
+                        <li><a href="{{ path('about') }}">Om</a></li>
+                        <li><a href="{{ path('report') }}">Redovisning</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer" class="well text-center navbar-fixed-bottom my-footer">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+            {% block footer %}
+                &copy; 2022 Marie's programming Ltd.
+            {% endblock %}
+        </div>
     </body>
 </html>

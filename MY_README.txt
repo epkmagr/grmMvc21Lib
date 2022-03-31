@@ -17,7 +17,7 @@ docker-compose run php81 composer require annotations
 docker-compose run php81 composer require twig
 
 Kör i docker
-docker-compose up php81-apache
+docker-compose up -d php81-apache
 Kolla läget
 docker-compose run php81 bin/console debug:router
 

@@ -1,7 +1,10 @@
 {# templates/me_report.html.twig #}
 
-{% include 'header.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block title %}Report{% endblock %}
+
+{% block content %}
 <div class="container-fluid" role="main">
     <div class="jumbotron">
         <h1>Redovisningstexter</h1>
@@ -11,10 +14,13 @@
             {% set kmom = "0" %}
         {% endif %}
         {% if app.request is defined %}
-            {% if '11081' in app.request.getSchemeAndHttpHost() %}
+            {% set currentPath = path(app.request.attributes.get('_route')) %}
+            {% if '8888' in app.request.getSchemeAndHttpHost() %}
+                {% set report_path = '/me/report/' %}
+            {% elseif '11081' in app.request.getSchemeAndHttpHost() %}
                 {% set report_path = '/public/me/report/' %}
             {% else %}
-                {% set report_path = '/me/report/' %}
+                {% set report_path = currentPath ~ '/' %}
             {% endif %}
         {% endif %}
         <div class="col-md-2 col-md-offset-1">
@@ -38,5 +44,4 @@
         </div>
     </div>
 </div>
-
-{% include 'footer.html.twig' %}
+{% endblock %}
