@@ -43,12 +43,4 @@ class MeController extends AbstractController
             'kmom' => $kmom,
         ]);
     }
-
-    /**
-     * @Route("/me/about2", name="about2")
-     */
-    public function about2(): Response
-    {
-        return $this->render('me_about2.html.twig');
-    }
 }
