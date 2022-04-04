@@ -49,7 +49,7 @@ class Deck
     }
 
     /**
-    * Get the deck of the card.
+    * Get the deck of the cards.
     *
     * @return array
     */
@@ -59,7 +59,19 @@ class Deck
     }
 
     /**
-    * Get the deck of the card.
+    * Get card number $number in the deck of the cards.
+    *
+    * @var integer $number    The card to get.
+    *
+    * @return array
+    */
+    public function getCard(int $number)
+    {
+        return $this->cards[$number];
+    }
+
+    /**
+    * Shuffle the deck of the cards.
     *
     * @return void
     */

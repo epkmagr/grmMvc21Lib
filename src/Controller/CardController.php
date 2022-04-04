@@ -47,4 +47,36 @@ class CardController extends AbstractController
             'deck' => $deck->getDeck(),
         ]);
     }
+
+    /**
+     * @Route("/card/deck/draw", name="draw")
+     */
+    public function draw(): Response
+    {
+        // $deck = $session->get('deck');
+        $deck = new \App\Card\Deck();
+        $deck->shuffle();
+        $noOfCards = count($deck->getDeck());
+        $number = random_int(0, $noOfCards);
+
+        return $this->render('card/draw.html.twig', [
+            'card' => $deck->getCard($number),
+            'noOfCardsLeft' => $noOfCards - 1,
+        ]);
+    }
+
+    /**
+     * @Route("/card/deck/draw/:{cardNumber}", name="drawNumber")
+     */
+    public function drawNumber(string $cardNumber): Response
+    {
+        // $deck = $session->get('deck');
+        $deck = new \App\Card\Deck();
+        $noOfCards = count($deck->getDeck());
+
+        return $this->render('card/draw.html.twig', [
+            'card' => $deck->getCard($cardNumber),
+            'noOfCardsLeft' => $noOfCards - 1,
+        ]);
+    }
 }
