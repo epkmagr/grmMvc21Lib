@@ -24,7 +24,7 @@ docker-compose run php81 bin/console debug:router
 Start lokalt
 php -S localhost:8888 -t public &
 Kolla router
-bin/console debug:routes
+bin/console debug:router
 composer recipes (vad som är installerat)
 
 Git och Github
