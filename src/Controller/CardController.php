@@ -5,9 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+// use Symfony\Component\HttpFoundation\RequestStack;
 
 class CardController extends AbstractController
 {
+    // private $session =  new Session();
+    // $session->setId('123456');
+    // $session->start();
+
     /**
      * @Route("/card", name="card")
      */
@@ -17,14 +22,29 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/play", name="cardPlay")
+     * @Route("/card/deck", name="deck")
      */
-    public function play(): Response
+    public function deck(): Response
     {
-        $kmom = "0";
+        $deck = new \App\Card\Deck();
+        // $session->set('deck', $deck->getDeck());
 
-        return $this->render('me_about.html.twig', [
-            'kmom' => $kmom,
+        return $this->render('card/deck.html.twig', [
+            'deck' => $deck->getDeck(),
+        ]);
+    }
+
+    /**
+     * @Route("/card/deck/shuffle", name="shuffle")
+     */
+    public function shuffle(): Response
+    {
+        // $deck = $session->get('deck');
+        $deck = new \App\Card\Deck();
+        $deck->shuffle();
+
+        return $this->render('card/deck.html.twig', [
+            'deck' => $deck->getDeck(),
         ]);
     }
 }
