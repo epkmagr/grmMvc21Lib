@@ -34,6 +34,7 @@ class Deck
                 array_push($this->cards, $card);
             }
         }
+        $this->noOfCards = $noOfCards;
         if ($noOfCards === 54) {
             $cards[] = "J";
             $cards[] = "J";
@@ -67,7 +68,11 @@ class Deck
     */
     public function getCard(int $number)
     {
-        return $this->cards[$number];
+        $card = $this->cards[$number];
+        unset($this->cards[$number]);
+        $this->noOfCards -= 1;
+
+        return $card;
     }
 
     /**

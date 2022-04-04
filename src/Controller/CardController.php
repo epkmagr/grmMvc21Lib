@@ -5,13 +5,21 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\RequestStack;
+// use Symfony\Component\HttpFoundation\Session\Session;
+
+// $session =  new Session();
+// $session->setId('123456');
+// $session->start();
 
 class CardController extends AbstractController
 {
-    // private $session =  new Session();
-    // $session->setId('123456');
-    // $session->start();
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
 
     /**
      * @Route("/card", name="card")
@@ -27,7 +35,8 @@ class CardController extends AbstractController
     public function deck(): Response
     {
         $deck = new \App\Card\Deck();
-        // $session->set('deck', $deck->getDeck());
+        $session = $this->requestStack->getSession();
+        $this->session->set('deck', deck);
 
         return $this->render('card/deck.html.twig', [
             'deck' => $deck->getDeck(),
@@ -39,9 +48,11 @@ class CardController extends AbstractController
      */
     public function shuffle(): Response
     {
-        // $deck = $session->get('deck');
         $deck = new \App\Card\Deck();
         $deck->shuffle();
+
+        $session = $this->requestStack->getSession();
+        $session->set('deck', $deck);
 
         return $this->render('card/deck.html.twig', [
             'deck' => $deck->getDeck(),
@@ -49,34 +60,63 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/draw", name="draw")
+     * @Route("/card/deck/reset", name="reset")
      */
-    public function draw(): Response
+    public function reset(): Response
     {
-        // $deck = $session->get('deck');
         $deck = new \App\Card\Deck();
         $deck->shuffle();
+
         $noOfCards = count($deck->getDeck());
         $number = random_int(0, $noOfCards);
+        $card = $deck->getCard($number);
+        $session = $this->requestStack->getSession();
+        $session->set('deck', $deck);
 
         return $this->render('card/draw.html.twig', [
-            'card' => $deck->getCard($number),
-            'noOfCardsLeft' => $noOfCards - 1,
+            'card' => $card,
+            'noOfCardsLeft' => count($deck->getDeck()),
+        ]);
+    }
+
+    /**
+     * @Route("/card/deck/draw", name="draw")
+     */
+    public function draw(RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        $deck = $session->get('deck');
+        if (!isset($deck)) {
+            $deck = new \App\Card\Deck();
+        }
+        $noOfCards = count($deck->getDeck());
+        $number = random_int(0, $noOfCards);
+        $card = $deck->getCard($number);
+        $session->set('deck', $deck);
+
+        return $this->render('card/draw.html.twig', [
+            'card' => $card,
+            'noOfCardsLeft' => count($deck->getDeck()),
         ]);
     }
 
     /**
      * @Route("/card/deck/draw/:{cardNumber}", name="drawNumber")
      */
-    public function drawNumber(string $cardNumber): Response
+    public function drawNumber(RequestStack $requestStack, string $cardNumber): Response
     {
-        // $deck = $session->get('deck');
-        $deck = new \App\Card\Deck();
+        $session = $requestStack->getSession();
+        $deck = $session->get('deck');
+        if (!isset($deck)) {
+            $deck = new \App\Card\Deck();
+        }
         $noOfCards = count($deck->getDeck());
+        $card = $deck->getCard($cardNumber);
+        $session->set('deck', $deck);
 
         return $this->render('card/draw.html.twig', [
-            'card' => $deck->getCard($cardNumber),
-            'noOfCardsLeft' => $noOfCards - 1,
+            'card' => $card,
+            'noOfCardsLeft' => count($deck->getDeck()),
         ]);
     }
 }

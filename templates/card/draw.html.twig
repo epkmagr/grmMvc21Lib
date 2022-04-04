@@ -29,6 +29,12 @@
         <div class="col-md-4 col-md-offset-1">
             <h3>Antalet kort kvar</h3>
             <h3>{{ noOfCardsLeft }}</h3>
+            <div class="myButton">
+                <a href="{{ path('draw') }}">Dra ett kort</a>
+            </div>
+            <div class="myButton">
+                <a href="{{ path('reset') }}">Återställ kortleken</a>
+            </div>
         </div>
     </div>
 </div>
