@@ -1,0 +1,25 @@
+{# templates/me_report.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Report{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Dokumentation</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            {% set my_path = 'card/documentation/rules.html.twig' %}
+            {% include my_path %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md11 col-md-offset-1">
+            {% set my_path = 'card/documentation/my21.html.twig' %}
+            {% include my_path %}
+        </div>
+    </div>
+</div>
+{% endblock %}

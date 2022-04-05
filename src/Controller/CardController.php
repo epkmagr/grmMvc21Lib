@@ -121,6 +121,14 @@ class CardController extends AbstractController
     }
 
     /**
+     * @Route("/game/card", name="documentation")
+     */
+    public function documentation(): Response
+    {
+        return $this->render('card/documentation.html.twig');
+    }
+
+    /**
      * @Route("/card/deck/deal/:{players}/:{cards}", name="deal")
      */
     public function deal(RequestStack $requestStack, string $players="1", string $cards="1"): Response
