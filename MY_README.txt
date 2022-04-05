@@ -35,3 +35,7 @@ git push
 git tag -a 1.0.0 -m "First draft"
 git tag
 git push --tags
+
+Installera markdown
+composer require twig/markdown-extra
+docker-compose run php81 composer require twig/markdown-extra

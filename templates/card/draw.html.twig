@@ -10,7 +10,10 @@
         <h1>Kortspel 21</h1>
     </div>
     <div class="row">
-        <div class="col-md-2 col-md-offset-3">
+        <div class="col-md-1 home21">
+            <a href="{{ path('card') }}">&#8617;</a>
+        </div>
+        <div class="col-md-2 col-md-offset-2">
             <h3>Draget kort</h3>
             {% set suit = card.getSuit() %}
             {% set value = card.getValue() %}

@@ -24,8 +24,14 @@ class CardController extends AbstractController
     /**
      * @Route("/card", name="card")
      */
-    public function card(): Response
+    public function card(RequestStack $requestStack): Response
     {
+        $session = $this->requestStack->getSession();
+        $session->clear();
+        // $session->remove('deck');
+        // $session->remove('bank');
+        // $session->remove('myPlayers');
+
         return $this->render('card/card.html.twig');
     }
 
@@ -200,15 +206,15 @@ class CardController extends AbstractController
         ]);
     }
 
-    private function createPlayers(string $players, string $cards = "1", \App\Card\Deck $deck)
-    {
-        $myPlayers = [];
-
-        for ($i = 0; $i < intval($players); $i++) {
-            $myPlayers[] = new \App\Card\Player("Spelare " . $i);
-            $myPlayers[] = $myPlayers[$i]->increaseHand($deck);
-        }
-
-        return $myPlayers;
-    }
+    // private function createPlayers(string $players, string $cards = "1", \App\Card\Deck $deck)
+    // {
+    //     $myPlayers = [];
+    //
+    //     for ($i = 0; $i < intval($players); $i++) {
+    //         $myPlayers[] = new \App\Card\Player("Spelare " . $i);
+    //         $myPlayers[] = $myPlayers[$i]->increaseHand($deck);
+    //     }
+    //
+    //     return $myPlayers;
+    // }
 }
