@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Card;
 
 /**
@@ -9,9 +10,9 @@ namespace App\Card;
 class Player
 {
     /**
-     * @var string  $name  The name of the player.
-     * @var CardHand $hand The hand with cards.
-     * @var int  $score    The score of the player.
+     * @var string   the name of the player
+     * @var CardHand the hand with cards
+     * @var int      the score of the player
      */
     private $name;
     private $hand;
@@ -20,9 +21,9 @@ class Player
     /**
      * Constructor to initiate the dicehand with a number of dices.
      *
-     * @param string $name The name of the player, default = "".
-    */
-    public function __construct(string $name = "")
+     * @param string $name the name of the player, default = ""
+     */
+    public function __construct(string $name = '')
     {
         $this->name = $name;
         $this->hand = new CardHand();
@@ -32,7 +33,7 @@ class Player
     /**
      * Get the name of the player.
      *
-     * @return string as the name of the player.
+     * @return string as the name of the player
      */
     public function getName()
     {
@@ -42,8 +43,9 @@ class Player
     /**
      * Set the name of the player.
      *
-     * @param string $name The name of the player.
-     * @return void.
+     * @param string $name the name of the player
+     *
+     * @return void
      */
     public function setName(string $name)
     {
@@ -53,7 +55,7 @@ class Player
     /**
      * Get the score of the player.
      *
-     * @return int as the score of the player.
+     * @return int as the score of the player
      */
     public function getScore()
     {
@@ -63,8 +65,9 @@ class Player
     /**
      * Set the score of the player.
      *
-     * @param int $score The score of the player.
-     * @return void.
+     * @param int $score the score of the player
+     *
+     * @return void
      */
     public function setScore(int $score)
     {
@@ -74,7 +77,7 @@ class Player
     /**
      * Get the hand of cards of the player.
      *
-     * @return CardHand as the hand of cards of the player.
+     * @return CardHand as the hand of cards of the player
      */
     public function gethand()
     {
@@ -84,7 +87,7 @@ class Player
     /**
      * Set the score to the sum of cards in the hand. Ace is counted as 14.
      *
-     * @return int as the sum of the dices in the hand of the player.
+     * @return int as the sum of the dices in the hand of the player
      */
     public function getSumOfHandAceHigh()
     {
@@ -94,7 +97,7 @@ class Player
     /**
      * Set the score to the sum of cards in the hand. Ace is counted as 1.
      *
-     * @return int as the sum of the dices in the hand of the player.
+     * @return int as the sum of the dices in the hand of the player
      */
     public function getSumOfHandAceLow()
     {
@@ -104,8 +107,9 @@ class Player
     /**
      * Increases the hand of cards with the top card of the deck.
      *
-     * @param Card $card The deck of cards.
-     * @return void.
+     * @param Card $card the deck of cards
+     *
+     * @return void
      */
     public function increaseHand(Card $card)
     {

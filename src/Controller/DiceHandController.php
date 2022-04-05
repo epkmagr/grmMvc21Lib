@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,25 +33,25 @@ class DiceHandController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $hand = $session->get("dicehand") ?? new \App\Dice\DiceHand();
+        $hand = $session->get('dicehand') ?? new \App\Dice\DiceHand();
 
-        $roll  = $request->request->get('roll');
-        $add  = $request->request->get('add');
+        $roll = $request->request->get('roll');
+        $add = $request->request->get('add');
         $clear = $request->request->get('clear');
 
         if ($roll) {
             $hand->roll();
         } elseif ($add) {
             $hand->add(new \App\Dice\Dice());
-            //$hand->add(new \App\Dice\DiceGraphic());
+        // $hand->add(new \App\Dice\DiceGraphic());
         } elseif ($clear) {
             $hand = new \App\Dice\DiceHand();
         }
 
-        $session->set("dicehand", $hand);
+        $session->set('dicehand', $hand);
 
-        $this->addFlash("info", "Din tärningshand har " . $hand->getNumberDices() . " tärningar.");
-        $this->addFlash("info", "Valörer: " . $hand->getAsString());
+        $this->addFlash('info', 'Din tärningshand har ' . $hand->getNumberDices() . ' tärningar.');
+        $this->addFlash('info', 'Valörer: ' . $hand->getAsString());
 
         return $this->redirectToRoute('dice-hand-home');
     }

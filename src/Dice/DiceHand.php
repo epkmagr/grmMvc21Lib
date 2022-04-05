@@ -2,8 +2,6 @@
 
 namespace App\Dice;
 
-use App\Dice\Dice;
-
 class DiceHand
 {
     private $hand = [];
@@ -27,10 +25,11 @@ class DiceHand
 
     public function getAsString(): string
     {
-        $str = "";
+        $str = '';
         foreach ($this->hand as $die) {
             $str .= $die->getAsString();
         }
+
         return $str;
     }
 }

@@ -1,25 +1,25 @@
 <?php
 
 namespace App\Card;
+
 /**
  * Class Card, a class that represents a dice with
- * using a namespace
+ * using a namespace.
  *
  * @author Marie Grahn, grmstud@student.bth.se
  */
 class Card
 {
     /**
-     * @var string  $value  The value of the card.
-     * @var string  $suit  The suit of the card.
+     * @var string the value of the card
+     * @var string the suit of the card
      */
     private $value;
     private $suit;
 
     /**
-    * Constructor to create an object of Dice.
-    *
-    */
+     * Constructor to create an object of Dice.
+     */
     public function __construct(string $suit, string $value)
     {
         $this->value = $value;
@@ -27,28 +27,28 @@ class Card
     }
 
     /**
-    * Destroy an object of Dice.
-    */
+     * Destroy an object of Dice.
+     */
     public function __destruct()
     {
         // echo __METHOD__;
     }
 
     /**
-    * Get the value of the card.
-    *
-    * @return string
-    */
+     * Get the value of the card.
+     *
+     * @return string
+     */
     public function getValue()
     {
         return $this->value;
     }
 
     /**
-    * Get the suit of the card.
-    *
-    * @return string
-    */
+     * Get the suit of the card.
+     *
+     * @return string
+     */
     public function getSuit()
     {
         return $this->suit;

@@ -1,4 +1,6 @@
 {
+    "name": "me/report",
+    "description": "mvc course at BTH",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -11,6 +13,7 @@
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.11",
+        "friendsofphp/php-cs-fixer": "^3.8",
         "league/commonmark": "^2.2",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.2",
@@ -98,7 +101,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
+        "phpcs": "tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
+        "phpcbf": "tools/php-codesniffer/vendor/bin/phpcbf --standard=PSR12 src"
     },
     "conflict": {
         "symfony/symfony": "*"

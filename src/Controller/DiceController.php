@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DiceController extends AbstractController
 {
@@ -20,8 +18,9 @@ class DiceController extends AbstractController
             'title' => 'Dice',
             'die_value' => $die->roll(),
             'die_as_string' => $die->getAsString(),
-            'link_to_roll' => $this->generateUrl('dice-roll', ['numRolls' => 5,]),
+            'link_to_roll' => $this->generateUrl('dice-roll', ['numRolls' => 5]),
         ];
+
         return $this->render('dice/home.html.twig', $data);
     }
 
@@ -33,7 +32,7 @@ class DiceController extends AbstractController
         $die = new \App\Dice\Dice();
 
         $rolls = [];
-        for ($i = 1; $i <= $numRolls; $i++) {
+        for ($i = 1; $i <= $numRolls; ++$i) {
             $die->roll();
             $rolls[] = $die->getAsString();
         }
@@ -43,6 +42,7 @@ class DiceController extends AbstractController
             'numRolls' => $numRolls,
             'rolls' => $rolls,
         ];
+
         return $this->render('dice/roll.html.twig', $data);
     }
 }

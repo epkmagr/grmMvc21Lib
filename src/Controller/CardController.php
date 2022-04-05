@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RequestStack;
+
 // use Symfony\Component\HttpFoundation\Session\Session;
 
 // $session =  new Session();
@@ -137,7 +138,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/deal/:{players}/:{cards}", name="deal")
      */
-    public function deal(RequestStack $requestStack, string $players="1", string $cards="1"): Response
+    public function deal(RequestStack $requestStack, string $players = '1', string $cards = '1'): Response
     {
         $session = $requestStack->getSession();
         $deck = $session->get('deck');
@@ -148,7 +149,7 @@ class CardController extends AbstractController
 
         $bank = $session->get('bank');
         if (!isset($bank)) {
-            $bank = new \App\Card\Player("Banken");
+            $bank = new \App\Card\Player('Banken');
         }
         $card = $deck->getCard(0);
         $bank->increaseHand($card);
@@ -157,7 +158,7 @@ class CardController extends AbstractController
 
         $myPlayers = $session->get('myPlayers');
         if (!isset($myPlayers)) {
-            $myPlayers = new \App\Card\Player("Spelare 1");
+            $myPlayers = new \App\Card\Player('Spelare 1');
         }
 
         $card = $deck->getCard(0);
@@ -178,19 +179,19 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/resetDeal/:{players}/:{cards}", name="resetDeal")
      */
-    public function resetDeal(RequestStack $requestStack, string $players="1", string $cards="1"): Response
+    public function resetDeal(RequestStack $requestStack, string $players = '1', string $cards = '1'): Response
     {
         $session = $requestStack->getSession();
         $deck = new \App\Card\Deck();
         $deck->shuffle();
 
-        $bank = new \App\Card\Player("Banken");
+        $bank = new \App\Card\Player('Banken');
         $card = $deck->getCard(0);
         $bank->increaseHand($card);
         $bank->getSumOfHandAceLow();
         $session->set('bank', $bank);
 
-        $myPlayers = new \App\Card\Player("Spelare 1");
+        $myPlayers = new \App\Card\Player('Spelare 1');
         $card = $deck->getCard(0);
         $myPlayers->increaseHand($card);
         $myPlayers->getSumOfHandAceLow();

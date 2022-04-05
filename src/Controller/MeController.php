@@ -25,7 +25,7 @@ class MeController extends AbstractController
      */
     public function about(): Response
     {
-        $kmom = "0";
+        $kmom = '0';
 
         return $this->render('me_about.html.twig', [
             'kmom' => $kmom,
@@ -35,9 +35,9 @@ class MeController extends AbstractController
     /**
      * @Route("/me/report/{show_kmom}", name="report")
      */
-    public function report(string $show_kmom="0"): Response
+    public function report(string $show_kmom = '0'): Response
     {
-        $kmom = $show_kmom !== "0" ? $show_kmom : "0";
+        $kmom = '0' !== $show_kmom ? $show_kmom : '0';
 
         return $this->render('me_report.html.twig', [
             'kmom' => $kmom,
