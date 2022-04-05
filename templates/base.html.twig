@@ -30,11 +30,14 @@
                         <li><a href="{{ path('about') }}">Om</a></li>
                         <li><a href="{{ path('report') }}">Redovisning</a></li>
                         <li><a href="{{ path('card') }}">Spel 21</a></li>
+                        <li><a href="{{ path('dice-home') }}">Tärning</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
         <div id="footer" class="well text-center navbar-fixed-bottom my-footer">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

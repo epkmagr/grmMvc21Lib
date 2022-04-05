@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dice{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Grafiska tärningar</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('dice-home') }}">&#8617;</a>
+        </div>
+        <div class="col-md-10 col-md-offset-1">
+            <p>Tärningen är slagen {{ numRolls }} gånger.</p>
+
+            <ul>
+                {% for roll in rolls %}
+                    <li>{{ roll }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

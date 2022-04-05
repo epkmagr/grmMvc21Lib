@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dice{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Tärningar</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <p>Tärningen är kastad en gång.</p>
+
+            <p>Tärningens valör = {{ die_value }} och dess sträng representation är {{ die_as_string }}</p>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <p class="myButton"><a href="{{ link_to_roll }}">Roll the dice five times</a></p>
+        </div>
+    </div>
+    <div class="row divider">
+        <div class="col-md-4 col-md-offset-1">
+            <h3>Andra varianter på tärningsspel</h3>
+            <div class="myButton">
+                <a href="{{ path('dice-graphic-home') }}">Grafiska tärningar</a>
+            </div>
+            <div class="myButton">
+                <a href="{{ path('dice-hand-home') }}">Hand med tärningar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

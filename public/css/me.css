@@ -28,6 +28,11 @@ h3 {
     text-align: left;
 }
 
+.divider {
+    margin-top: 4em;
+    border-top: 2px groove #88b5dd;
+}
+
 .my-footer {
     /* background-color: #88b5dd; */
     background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
