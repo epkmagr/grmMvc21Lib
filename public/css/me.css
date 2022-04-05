@@ -20,6 +20,10 @@ h3 {
     text-align: center;
 }
 
+.h3Left {
+    text-align: left;
+}
+
 .my-footer {
     /* background-color: #88b5dd; */
     background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);

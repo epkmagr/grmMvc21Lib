@@ -2,7 +2,7 @@
 
 namespace App\Card;
 /**
- * Class Dice, a class that represents a dice with
+ * Class Card, a class that represents a dice with
  * using a namespace
  *
  * @author Marie Grahn, grmstud@student.bth.se

@@ -1,0 +1,73 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardgame{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Kortspel 21</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <h3 class="h3Left">{{ bank.getName() }}</h3>
+            {% for card in bank.getHand().getCards() %}
+                {% set suit = card.getSuit() %}
+                {% set value = card.getValue() %}
+                <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
+                    <div class="top">
+                        <span class="number">{{ value }}</span>
+                        <span class="icon">{{ suit | raw }}</span>
+                    </div>
+                    <div class="lg_icon">{{ suit | raw }}</div>
+                    <div class="bottom">
+                        <span class="icon rotate">{{ suit | raw }}</span>
+                        <span class="number rotate">{{ value }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            <h3 class="h3Left">Poäng: {{ bank.getScore() }} </h3>
+        </div>
+        <div class="col-md-3">
+            <h3>Antalet kort kvar</h3>
+            <h3>{{ noOfCardsLeft }}</h3>
+            <div class="myButton">
+                <a href="{{ path('deal') }}">Dra ett kort</a>
+            </div>
+            <div class="myButton">
+                <a href="{{ path('resetDeal') }}">Återställ kortleken</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <h3 class="h3Left"> {{ myPlayers.getName()}} </h3>
+            {% for card in myPlayers.getHand().getCards() %}
+                {% set suit = card.getSuit() %}
+                {% set value = card.getValue() %}
+                <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
+                    <div class="top">
+                        <span class="number">{{ value }}</span>
+                        <span class="icon">{{ suit | raw }}</span>
+                    </div>
+                    <div class="lg_icon">{{ suit | raw }}</div>
+                    <div class="bottom">
+                        <span class="icon rotate">{{ suit | raw }}</span>
+                        <span class="number rotate">{{ value }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            {% set playerScore = myPlayers.getScore() %}
+            {% if playerScore == 21 %}
+                {% set win = "VINST" %}
+            {% elseif playerScore > 21 %}
+                {% set win = "FÖRLUST" %}
+            {% else %}
+                {% set win = "Nytt kort?" %}
+            {% endif %}
+            <h3 class="h3Left">Poäng: {{ myPlayers.getScore() }} {{ win }}</h3>
+        </div>
+    </div>
+</div>
+{% endblock %}

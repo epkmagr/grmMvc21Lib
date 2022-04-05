@@ -64,12 +64,13 @@ class Deck
     *
     * @var integer $number    The card to get.
     *
-    * @return array
+    * @return Card
     */
     public function getCard(int $number)
     {
         $card = $this->cards[$number];
-        unset($this->cards[$number]);
+        // unset($this->cards[$number]);
+        array_splice($this->cards, $number, 1);
         $this->noOfCards -= 1;
 
         return $card;

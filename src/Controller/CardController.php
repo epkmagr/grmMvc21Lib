@@ -32,11 +32,11 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck", name="deck")
      */
-    public function deck(): Response
+    public function deck(RequestStack $requestStack): Response
     {
-        $deck = new \App\Card\Deck();
         $session = $this->requestStack->getSession();
-        $this->session->set('deck', deck);
+        $deck = new \App\Card\Deck();
+        $session->set('deck', $deck);
 
         return $this->render('card/deck.html.twig', [
             'deck' => $deck->getDeck(),
@@ -46,7 +46,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/shuffle", name="shuffle")
      */
-    public function shuffle(): Response
+    public function shuffle(RequestStack $requestStack): Response
     {
         $deck = new \App\Card\Deck();
         $deck->shuffle();
@@ -62,7 +62,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/reset", name="reset")
      */
-    public function reset(): Response
+    public function reset(RequestStack $requestStack): Response
     {
         $deck = new \App\Card\Deck();
         $deck->shuffle();
@@ -118,5 +118,89 @@ class CardController extends AbstractController
             'card' => $card,
             'noOfCardsLeft' => count($deck->getDeck()),
         ]);
+    }
+
+    /**
+     * @Route("/card/deck/deal/:{players}/:{cards}", name="deal")
+     */
+    public function deal(RequestStack $requestStack, string $players="1", string $cards="1"): Response
+    {
+        $session = $requestStack->getSession();
+        $deck = $session->get('deck');
+        if (!isset($deck)) {
+            $deck = new \App\Card\Deck();
+        }
+        $deck->shuffle();
+
+        $bank = $session->get('bank');
+        if (!isset($bank)) {
+            $bank = new \App\Card\Player("Banken");
+        }
+        $card = $deck->getCard(0);
+        $bank->increaseHand($card);
+        $bank->getSumOfHandAceLow();
+        $session->set('bank', $bank);
+
+        $myPlayers = $session->get('myPlayers');
+        if (!isset($myPlayers)) {
+            $myPlayers = new \App\Card\Player("Spelare 1");
+        }
+
+        $card = $deck->getCard(0);
+        $myPlayers->increaseHand($card);
+        $myPlayers->getSumOfHandAceLow();
+        $session->set('myPlayers', $myPlayers);
+        // $myPlayers = $this->createPlayers($players, $cards, $deck);
+        $noOfCards = count($deck->getDeck());
+        $session->set('deck', $deck);
+
+        return $this->render('card/deal.html.twig', [
+            'bank' => $bank,
+            'myPlayers' => $myPlayers,
+            'noOfCardsLeft' => count($deck->getDeck()),
+        ]);
+    }
+
+    /**
+     * @Route("/card/deck/resetDeal/:{players}/:{cards}", name="resetDeal")
+     */
+    public function resetDeal(RequestStack $requestStack, string $players="1", string $cards="1"): Response
+    {
+        $session = $requestStack->getSession();
+        $deck = new \App\Card\Deck();
+        $deck->shuffle();
+
+        $bank = new \App\Card\Player("Banken");
+        $card = $deck->getCard(0);
+        $bank->increaseHand($card);
+        $bank->getSumOfHandAceLow();
+        $session->set('bank', $bank);
+
+        $myPlayers = new \App\Card\Player("Spelare 1");
+        $card = $deck->getCard(0);
+        $myPlayers->increaseHand($card);
+        $myPlayers->getSumOfHandAceLow();
+        $session->set('myPlayers', $myPlayers);
+        // $myPlayers = $this->createPlayers($players, $cards, $deck);
+        $noOfCards = count($deck->getDeck());
+        $session->set('deck', $deck);
+
+        return $this->render('card/deal.html.twig', [
+            'bank' => $bank,
+            'myPlayers' => $myPlayers,
+            'noOfCardsLeft' => count($deck->getDeck()),
+        ]);
+    }
+
+    private function createPlayers(string $players, string $cards = "1", \App\Card\Deck $deck)
+    {
+        $myPlayers = [];
+
+        for ($i = 0; $i < intval($players); $i++) {
+            $myPlayers[] = new \App\Card\Player("Spelare " . $i);
+            $myPlayers[] = $myPlayers[$i]->increaseHand($deck);
+        }
+
+        return $myPlayers;
     }
 }
