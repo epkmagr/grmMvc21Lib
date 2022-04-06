@@ -68,11 +68,20 @@ class Deck
     public function getCard(int $number)
     {
         $card = $this->cards[$number];
-        // unset($this->cards[$number]);
-        array_splice($this->cards, $number, 1);
-        --$this->noOfCards;
+        unset($this->cards[$number]);
+        array_values($this->cards);
 
         return $card;
+    }
+
+    /**
+     * Get card number $number in the deck of the cards.
+     *
+     * @return Card
+     */
+    public function getTopCard()
+    {
+        return array_shift($this->cards);
     }
 
     /**

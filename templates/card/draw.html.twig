@@ -13,31 +13,39 @@
         <div class="col-md-1 home21">
             <a href="{{ path('card') }}">&#8617;</a>
         </div>
-        <div class="col-md-2 col-md-offset-2">
+        <div class="col-md-8">
             <h3>Draget kort</h3>
-            {% set suit = card.getSuit() %}
-            {% set value = card.getValue() %}
-            <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
-                <div class="top">
-                    <span class="number">{{ value }}</span>
-                    <span class="icon">{{ suit | raw }}</span>
-                </div>
-                <div class="lg_icon">{{ suit | raw }}</div>
-                <div class="bottom">
-                    <span class="icon rotate">{{ suit | raw }}</span>
-                    <span class="number rotate">{{ value }}</span>
-                </div>
-            </div>
+            {% if cards %}
+                {% for card in cards %}
+                    {% set suit = card.getSuit() %}
+                    {% set value = card.getValue() %}
+                    <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
+                        <div class="top">
+                            <span class="number">{{ value }}</span>
+                            <span class="icon">{{ suit | raw }}</span>
+                        </div>
+                        <div class="lg_icon">{{ suit | raw }}</div>
+                        <div class="bottom">
+                            <span class="icon rotate">{{ suit | raw }}</span>
+                            <span class="number rotate">{{ value }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
-        <div class="col-md-4 col-md-offset-1">
+        <div class="col-md-3">
             <h3>Antalet kort kvar</h3>
             <h3>{{ noOfCardsLeft }}</h3>
-            <div class="myButton">
-                <a href="{{ path('draw') }}">Dra ett kort</a>
-            </div>
-            <div class="myButton">
-                <a href="{{ path('reset') }}">Återställ kortleken</a>
-            </div>
+            <form method="post">
+                <div class="center">
+                    <input class="myButton" type="submit" name="draw" value="Ta ett kort">
+                    <input class="myButton" type="submit" name="clear" value="Återställ">
+                </div>
+                <div class="center">
+                    <input class="myNumber" type="number" name="noOfCards" max="8" min="1" value="1">
+                    <input class="myButton" type="submit" name="drawSeveral" value="Ta flera kort">
+                </div>
+            </form>
         </div>
     </div>
 </div>
