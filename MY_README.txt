@@ -39,3 +39,6 @@ git push --tags
 Installera markdown
 composer require twig/markdown-extra
 docker-compose run php81 composer require twig/markdown-extra
+
+Rensa cache
+bin/console cache:clear

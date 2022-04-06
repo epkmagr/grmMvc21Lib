@@ -48,25 +48,6 @@ class CardController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/card/deck/reset", name="reset")
-    //  */
-    // public function reset(SessionInterface $session): Response
-    // {
-    //     $deck = new \App\Card\Deck();
-    //     $deck->shuffle();
-    //
-    //     $noOfCards = count($deck->getDeck());
-    //     $number = random_int(0, $noOfCards);
-    //     $card = $deck->getCard($number);
-    //     $session->set('deck', $deck);
-    //
-    //     return $this->render('card/draw.html.twig', [
-    //         'card' => $card,
-    //         'noOfCardsLeft' => count($deck->getDeck()),
-    //     ]);
-    // }
-
     /**
      * @Route("/card/deck/draw", name="draw", methods={"GET","POST"})
      */
@@ -77,17 +58,11 @@ class CardController extends AbstractController
 
         $draw = $request->request->get('draw');
         $clear = $request->request->get('clear');
-        $drawSeveral = $request->request->get('drawSeveral');
 
         if ($draw) {
             $cards[] = $deck->getTopCard();
         } elseif ($clear) {
             $deck = new \App\Card\Deck();
-        } elseif ($drawSeveral) {
-            $noOfCards = intval($request->request->get('noOfCards'));
-            for ($i = 0; $i < $noOfCards; $i++) {
-                $cards[] = $deck->getTopCard();
-            }
         }
 
         $noOfCards = count($deck->getDeck());
@@ -100,18 +75,37 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/draw/:{cardNumber}", name="drawNumber")
+     * @Route("/card/deck/draw/:{number}", name="drawSeveral", methods={"GET","POST"})
      */
-    public function drawNumber(SessionInterface $session, string $cardNumber): Response
+    public function drawSeveral(Request $request, SessionInterface $session, string $number="1"): Response
     {
-        $deck = $session->get('deck') ?? new \App\Card\Deck();
+        if ($session->get('deck')) {
+            $deck = $session->get('deck');
+        } else {
+            $deck = new \App\Card\Deck();
+            $deck->shuffle();
+        }
+
+        $clear = $request->request->get('clear');
+        $drawSeveral = $request->request->get('drawSeveral');
+        $noOfCards =$number;
+
+        if ($clear) {
+            $session->clear();
+            $deck = new \App\Card\Deck();
+            $deck->shuffle();
+        } elseif ($drawSeveral) {
+            $noOfCards = intval($request->request->get('noOfCards'));
+            for ($i = 0; $i < $noOfCards; $i++) {
+                $cards[] = $deck->getTopCard();
+            }
+        }
 
         $noOfCards = count($deck->getDeck());
-        $card = $deck->getCard($cardNumber);
         $session->set('deck', $deck);
 
-        return $this->render('card/draw.html.twig', [
-            'card' => $card,
+        return $this->render('card/drawSeveral.html.twig', [
+            'cards' => $cards ?? NULL,
             'noOfCardsLeft' => count($deck->getDeck()),
         ]);
     }
@@ -125,61 +119,52 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/deal/:{players}/:{cards}", name="deal")
+     * @Route("/card/deck/deal/:{players}/:{cards}", name="deal", methods={"GET","POST"})
      */
-    public function deal(SessionInterface $session, string $players = '1', string $cards = '1'): Response
+    public function deal(Request $request, SessionInterface $session,
+        string $players = '1', string $cards = '1'): Response
     {
-        $deck = $session->get('deck') ?? new \App\Card\Deck();
-        $deck->shuffle();
+        if ($session->get('deck')) {
+            $deck = $session->get('deck');
+        } else {
+            $deck = new \App\Card\Deck();
+            $deck->shuffle();
+        }
 
-        $bank = $session->get('bank');
-        if (!isset($bank)) {
+        $clear = $request->request->get('clear');
+        $setup = $request->request->get('setup');
+        $deal = $request->request->get('deal');
+
+        $bank = $session->get('bank') ?? new \App\Card\Player('Banken');
+        $myPlayers = $session->get('myPlayers') ?? new \App\Card\Player('Spelare 1');
+
+        if ($clear) {
+            $session->clear();
+            $deck = new \App\Card\Deck();
+            $deck->shuffle();
             $bank = new \App\Card\Player('Banken');
+            $myPlayers =  new \App\Card\Player('Spelare 1');
+        } elseif ($setup) {
+            $players = $request->request->get('noOfPlayers') ?? "1";
+            $cards = $request->request->get('noOfCards') ?? "1";
+            // $this->generateUrl('deal', array('players'=>$players, 'cards'=>$cards));
+            return $this->redirectToRoute('deal', ['players'=>$players, 'cards'=>$cards]);
+        } elseif ($deal) {
+            for ($i = 0; $i < $cards; $i++) {
+                $card = $deck->getTopCard();
+                $bank->increaseHand($card);
+            }
+            $bank->getSumOfHandAceLow();
+            $session->set('bank', $bank);
+
+            for ($i = 0; $i < $cards; $i++) {
+                $card = $deck->getTopCard();
+                $myPlayers->increaseHand($card);
+            }
+            $myPlayers->getSumOfHandAceLow();
+            $session->set('myPlayers', $myPlayers);
         }
-        $card = $deck->getTopCard();
-        $bank->increaseHand($card);
-        $bank->getSumOfHandAceLow();
-        $session->set('bank', $bank);
 
-        $myPlayers = $session->get('myPlayers');
-        if (!isset($myPlayers)) {
-            $myPlayers = new \App\Card\Player('Spelare 1');
-        }
-
-        $card = $deck->getTopCard();
-        $myPlayers->increaseHand($card);
-        $myPlayers->getSumOfHandAceLow();
-        $session->set('myPlayers', $myPlayers);
-        // $myPlayers = $this->createPlayers($players, $cards, $deck);
-        $noOfCards = count($deck->getDeck());
-        $session->set('deck', $deck);
-
-        return $this->render('card/deal.html.twig', [
-            'bank' => $bank,
-            'myPlayers' => $myPlayers,
-            'noOfCardsLeft' => count($deck->getDeck()),
-        ]);
-    }
-
-    /**
-     * @Route("/card/deck/resetDeal/:{players}/:{cards}", name="resetDeal")
-     */
-    public function resetDeal(SessionInterface $session, string $players = '1', string $cards = '1'): Response
-    {
-        $deck = new \App\Card\Deck();
-        $deck->shuffle();
-
-        $bank = new \App\Card\Player('Banken');
-        $card = $deck->getTopCard();
-        $bank->increaseHand($card);
-        $bank->getSumOfHandAceLow();
-        $session->set('bank', $bank);
-
-        $myPlayers = new \App\Card\Player('Spelare 1');
-        $card = $deck->getTopCard();
-        $myPlayers->increaseHand($card);
-        $myPlayers->getSumOfHandAceLow();
-        $session->set('myPlayers', $myPlayers);
         // $myPlayers = $this->createPlayers($players, $cards, $deck);
         $noOfCards = count($deck->getDeck());
         $session->set('deck', $deck);

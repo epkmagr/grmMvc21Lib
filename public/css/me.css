@@ -49,12 +49,22 @@ h3 {
     text-align: center;
 }
 
-.myButton {
+.myButton, .submitButton {
     padding: 0.5em;
     margin: 0.5em;
     font-size: large;
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+}
+
+.submitButton {
+        min-width: 10em;
+        float: right;
+}
+
+.numberInput {
+    font-size: larger;
+    margin-top: 1em;
 }
 
 .home21 {
