@@ -52,6 +52,24 @@ class Deck
         return $this->cards;
     }
 
+    // /**
+    //  * Get the deck of the cards in Json.
+    //  *
+    //  * @return array
+    //  */
+    // public function getDeckJson()
+    // {
+    //     $deck = new Deck();
+    //     foreach ($this->cards as $card) {
+    //         $aCard = new Card();
+    //         $aCard->suit = $card->suit;
+    //         $aCard->value = $card->value;
+    //         $deck->append($aCard);
+    //     }
+    //
+    //     return $deck;
+    // }
+
     /**
      * Get card number $number in the deck of the cards.
      *

@@ -3,52 +3,50 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
-// use Symfony\Component\HttpFoundation\Session\Session;
-
-// $session =  new Session();
-// $session->setId('123456');
-// $session->start();
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonCardController extends AbstractController
 {
-    private $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-    }
-
     /**
-     * @Route("/card/api/deck", name="deckJson")
+     * @Route("/card/api/deck", name="deckJson", methods={"GET"})
      */
-    public function deckJson(RequestStack $requestStack): Response
+    public function deckJson(): Response
     {
-        $session = $this->requestStack->getSession();
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+
         $deck = new \App\Card\Deck();
-        $session->set('deck', $deck);
 
-        return $this->render('card/deck.html.twig', [
-            'deck' => $deck->getDeck(),
-        ]);
+        $response = new JsonResponse(['deck' => $serializer->serialize($deck->getDeck(), 'json')]);
+        $response->setEncodingOptions( $response->getEncodingOptions() | JSON_PRETTY_PRINT );
+
+        return $response;
+
+        // return new JsonResponse([
+        //     'deck' => $serializer->serialize($deck->getDeck(), 'json')
+        // ]);
     }
 
     /**
-     * @Route("/card/api/deck/shuffle", name="shuffleJson")
+     * @Route("/card/api/deck/shuffle", name="shuffleJson", methods={"GET"})
      */
-    public function shuffleJson(RequestStack $requestStack): Response
+    public function shuffleJson(SerializerInterface $serializer): Response
     {
         $deck = new \App\Card\Deck();
         $deck->shuffle();
 
-        $session = $this->requestStack->getSession();
-        $session->set('deck', $deck);
-
-        return $this->render('card/deck.html.twig', [
-            'deck' => $deck->getDeck(),
+        return new JsonResponse([
+            'deck' => (object)$deck->getDeck()
         ]);
     }
 

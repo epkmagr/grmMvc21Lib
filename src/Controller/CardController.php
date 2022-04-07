@@ -73,7 +73,9 @@ class CardController extends AbstractController
         $clear = $request->request->get('clear');
 
         if ($draw) {
-            $cards[] = $deck->getTopCard();
+            if (count($deck->getDeck()) > 0) {
+                $cards[] = $deck->getTopCard();
+            }
         } elseif ($clear) {
             $deck = new \App\Card\Deck();
         }
@@ -88,7 +90,7 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/draw/:{number}", name="drawSeveral", methods={"GET","POST"})
+     * @Route("/card/deck/draw/{number}", name="drawSeveral", methods={"GET","POST"})
      */
     public function drawSeveral(Request $request, SessionInterface $session, string $number): Response
     {
@@ -109,12 +111,12 @@ class CardController extends AbstractController
             $deck->shuffle();
         } elseif ($drawSeveral) {
             $noOfCards = intval($request->request->get('noOfCards'));
-            for ($i = 0; $i < $noOfCards; $i++) {
+            $noOfCardsLeft = count($deck->getDeck());
+            $no = ($noOfCardsLeft >= $noOfCards) ? $noOfCards : $noOfCardsLeft;
+            for ($i = 0; $i < $no; $i++) {
                 $cards[] = $deck->getTopCard();
             }
             $request->attributes->set('number', $noOfCards);
-
-            // return $this->redirectToRoute('drawSeveral', ['number'=>$noOfCards]);
         }
 
         $noOfCards = count($deck->getDeck());
@@ -135,7 +137,7 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/deal/:{players}/:{cards}", name="deal", methods={"GET","POST"})
+     * @Route("/card/deck/deal/{players}/{cards}", name="deal", methods={"GET","POST"})
      */
     public function deal(Request $request, SessionInterface $session,
         string $players, string $cards): Response
@@ -195,7 +197,6 @@ class CardController extends AbstractController
             $session->set('myPlayers', $myPlayers);
         }
 
-        // $myPlayers = $this->createPlayers($players, $cards, $deck);
         $noOfCards = count($deck->getDeck());
         $session->set('deck', $deck);
 
@@ -204,17 +205,5 @@ class CardController extends AbstractController
             'myPlayers' => $myPlayers,
             'noOfCardsLeft' => count($deck->getDeck()),
         ]);
-    }
-
-    private function createPlayers(string $players, string $cards = "1", \App\Card\Deck $deck)
-    {
-        $myPlayers = [];
-
-        for ($i = 0; $i < intval($players); $i++) {
-            $myPlayers[] = new \App\Card\Player("Spelare " . $i);
-            $myPlayers[] = $myPlayers[$i]->increaseHand($deck);
-        }
-
-        return $myPlayers;
     }
 }
