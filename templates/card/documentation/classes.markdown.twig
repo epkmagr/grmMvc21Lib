@@ -3,9 +3,14 @@
 ### Klasser
 
 Klasser:
-* Card, som innehåller valör och färg för ett spelkort
-* Deck, som innehåller en kortlek med 52 spelkort (Card) (54 kan väljas)
-* CardHand, som innehåller en hand med spelkort (Card)
-* Player, som innehåller namn, poäng och en korthand (CardHand)
+* Card, som innehåller valör och färg för ett spelkort (string suit, string value)
+* Deck, som innehåller en kortlek med 52 spelkort (en array cards med Card objekt)
+* Deck2, som innehåller en kortlek med 54 spelkort (en array cards med Card objekt)
+varav 2 jokers
+* CardHand, som innehåller en hand med spelkort (en array hand med Card objekt)
+* Player, som innehåller namn, poäng och en korthand (string name, int score, en
+ CardHand hand)
+* Game21, innehåller spelare, målpoäng och nuvarande spelare (en array med Player
+objekt, int goal, int currentPlayer)
 
 {% endapply %}
