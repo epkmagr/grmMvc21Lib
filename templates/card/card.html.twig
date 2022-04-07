@@ -28,16 +28,17 @@
                 <a href="{{ path('draw') }}">Dra ett kort</a>
             </div>
             <div class="myButton">
-                {%- set field = 'number' -%}
-                {%- set arr = { (field): '1' } -%}
                 {%- set number = '1' -%}
-                <a href="{{ '/card/deck/draw/:1' }}">Dra flera kort</a>
+                <a href="{{ path('drawSeveral', {'number': "1"}) }}">Dra flera kort</a>
                 {% dump(number) %}
             </div>
         </div>
         <div class="col-md-4 col-md-offset-1">
             <div class="myButton">
-                <a href="{{ '/card/deck/deal/:1/:1' }}">Spela med 1 spelare & 1 kort</a>
+                <a href="{{ path('deal', {'players': "1", 'cards': "1"}) }}">Spela med 1 spelare & 1 kort</a>
+            </div>
+            <div class="myButton">
+                <a href="{{ path('deck2') }}">Visa kortlek med joker</a>
             </div>
             <div class="myButton">
                 <a href="{{ path('documentation') }}">Dokumentation</a>

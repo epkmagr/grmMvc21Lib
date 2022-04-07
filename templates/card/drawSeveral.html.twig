@@ -38,7 +38,8 @@
             <h3>{{ noOfCardsLeft }}</h3>
             <form method="post">
                 <div class="center">
-                    <input class="numberInput" type="number" name="noOfCards" max="8" min="1" value="1">
+                    <input class="numberInput" type="number" name="noOfCards" max="8" min="1"
+                        value={{ app.request.get('number') }}>
                     <input class="submitButton" type="submit" name="drawSeveral" value="Ta flera kort">
                     <input class="submitButton" type="submit" name="clear" value="Återställ">
                 </div>

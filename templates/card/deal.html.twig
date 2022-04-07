@@ -51,34 +51,36 @@
             </form>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-1">
-            <h3 class="h3Left"> {{ myPlayers.getName()}} </h3>
-            {% for card in myPlayers.getHand().getCards() %}
-                {% set suit = card.getSuit() %}
-                {% set value = card.getValue() %}
-                <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
-                    <div class="top">
-                        <span class="number">{{ value }}</span>
-                        <span class="icon">{{ suit | raw }}</span>
+    <div class="row" style="margin-bottom:4em;">
+        {% for player in myPlayers %}
+            <div class="col-md-8 col-md-offset-1">
+                <h3 class="h3Left"> {{ player.getName()}} </h3>
+                {% for card in player.getHand().getCards() %}
+                    {% set suit = card.getSuit() %}
+                    {% set value = card.getValue() %}
+                    <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
+                        <div class="top">
+                            <span class="number">{{ value }}</span>
+                            <span class="icon">{{ suit | raw }}</span>
+                        </div>
+                        <div class="lg_icon">{{ suit | raw }}</div>
+                        <div class="bottom">
+                            <span class="icon rotate">{{ suit | raw }}</span>
+                            <span class="number rotate">{{ value }}</span>
+                        </div>
                     </div>
-                    <div class="lg_icon">{{ suit | raw }}</div>
-                    <div class="bottom">
-                        <span class="icon rotate">{{ suit | raw }}</span>
-                        <span class="number rotate">{{ value }}</span>
-                    </div>
-                </div>
-            {% endfor %}
-            {% set playerScore = myPlayers.getScore() %}
-            {% if playerScore == 21 %}
-                {% set win = "VINST" %}
-            {% elseif playerScore > 21 %}
-                {% set win = "FÖRLUST" %}
-            {% else %}
-                {% set win = "Nytt kort?" %}
-            {% endif %}
-            <h3 class="h3Left">Poäng: {{ myPlayers.getScore() }} {{ win }}</h3>
-        </div>
+                {% endfor %}
+                {% set playerScore = player.getScore() %}
+                {% if playerScore == 21 %}
+                    {% set win = "VINST" %}
+                {% elseif playerScore > 21 %}
+                    {% set win = "FÖRLUST" %}
+                {% else %}
+                    {% set win = "Nytt kort?" %}
+                {% endif %}
+                <h3 class="h3Left">Poäng: {{ playerScore }} {{ win }}</h3>
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

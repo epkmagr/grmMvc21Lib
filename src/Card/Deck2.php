@@ -8,7 +8,7 @@ namespace App\Card;
  *
  * @author Marie Grahn, grmstud@student.bth.se
  */
-class Deck
+class Deck2
 {
     public const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
@@ -32,6 +32,10 @@ class Deck
                 array_push($this->cards, $card);
             }
         }
+        $card = new Card('J', 'J');
+        array_push($this->cards, $card);
+        $card = new Card('J', 'J');
+        array_push($this->cards, $card);
     }
 
     /**
