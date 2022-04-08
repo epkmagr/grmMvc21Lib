@@ -152,6 +152,7 @@ class CardController extends AbstractController
         $clear = $request->request->get('clear');
         $setup = $request->request->get('setup');
         $deal = $request->request->get('deal');
+        $bankSettled = $request->request->get('bankSettled');
 
         $bank = $session->get('bank') ?? new \App\Card\Player('Banken');
         $myPlayers = [];
@@ -179,20 +180,26 @@ class CardController extends AbstractController
             return $this->redirectToRoute('deal', ['players'=>$players, 'cards'=>$cards]);
         } elseif ($deal) {
             for ($i = 0; $i < $cards; $i++) {
-                $card = $deck->getTopCard();
-                $bank->increaseHand($card);
+                if ($bank->getBankResult() == "") {
+                    $card = $deck->getTopCard();
+                    $bank->increaseHand($card);
+                }
             }
             $bank->getSumOfHandAceLow();
+            $bank->getSumOfHandAceHigh();
             $session->set('bank', $bank);
 
             for ($i = 0; $i < $cards; $i++) {
                 foreach ($myPlayers as $player) {
-                    $card = $deck->getTopCard();
-                    $player->increaseHand($card);
+                    if ($player->getPlayerResult() == "Nytt kort?") {
+                        $card = $deck->getTopCard();
+                        $player->increaseHand($card);
+                    }
                 }
             }
             foreach ($myPlayers as $player) {
                 $player->getSumOfHandAceLow();
+                $player->getSumOfHandAceHigh();
             }
             $session->set('myPlayers', $myPlayers);
         }

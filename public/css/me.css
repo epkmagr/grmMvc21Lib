@@ -97,11 +97,11 @@ h3 {
     position:relative;
 }
 
-#content > div > div:nth-child(2) > div.col-md-6 > div:nth-child(2) {
+#dealDiv > div:nth-child(2) > div.col-md-6 > div:nth-child(2) {
     margin-left: -7em;
 }
 
-#content > div > div:nth-child(3) > div > div:nth-child(2) {
+#dealDiv > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) {
     margin-left: -7em;
 }
 

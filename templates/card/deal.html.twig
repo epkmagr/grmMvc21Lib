@@ -5,7 +5,7 @@
 {% block title %}Cardgame{% endblock %}
 
 {% block content %}
-<div class="container-fluid" role="main">
+<div class="container-fluid" id="dealDiv" role="main">
     <div class="jumbotron">
         <h1>Kortspel 21</h1>
     </div>
@@ -30,7 +30,11 @@
                     </div>
                 </div>
             {% endfor %}
-            <h3 class="h3Left">Poäng: {{ bank.getScore() }} </h3>
+            {% set bankScoreLow = bank.getScoreLow() %}
+            {% set bankScoreHigh = bank.getScoreHigh() %}
+            <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
+            {% set win = bank.getBankResult() %}
+            <h3 class="h3Left">{{ win }}</h3>
         </div>
         <div class="col-md-2">
             <h3>Antalet kort kvar</h3>
@@ -44,7 +48,7 @@
                         value={{ app.request.get('players') }}>
                     <br>
                     <label for="html">Antal kort: </label>
-                    <input class="numberInput" type="number" name="noOfCards" max="8" min="1"
+                    <input class="numberInput" type="number" name="noOfCards" max="3" min="1"
                         value={{ app.request.get('cards') }}>
                     <input class="submitButton" type="submit" name="setup" value="Välj setup">
                     <input class="submitButton" type="submit" name="deal" value="Spela">
@@ -72,15 +76,11 @@
                         </div>
                     </div>
                 {% endfor %}
-                {% set playerScore = player.getScore() %}
-                {% if playerScore == 21 %}
-                    {% set win = "VINST" %}
-                {% elseif playerScore > 21 %}
-                    {% set win = "FÖRLUST" %}
-                {% else %}
-                    {% set win = "Nytt kort?" %}
-                {% endif %}
-                <h3 class="h3Left">Poäng: {{ playerScore }} {{ win }}</h3>
+                {% set playerScoreLow = player.getScoreLow() %}
+                {% set playerScoreHigh = player.getScoreHigh() %}
+                {% set win = player.getPlayerResult() %}
+                <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
+                <h3 class="h3Left">{{ win }}</h3>
             </div>
         {% endfor %}
     </div>

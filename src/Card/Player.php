@@ -12,11 +12,13 @@ class Player
     /**
      * @var string   the name of the player
      * @var CardHand the hand with cards
-     * @var int      the score of the player
+     * @var int      the scoreLow of the player with ace as 1
+     * @var int      the scoreHigh of the player with ace as 14
      */
     private $name;
     private $hand;
-    private $score;
+    private $scoreLow;
+    private $scoreHigh;
 
     /**
      * Constructor to initiate the dicehand with a number of dices.
@@ -27,7 +29,8 @@ class Player
     {
         $this->name = $name;
         $this->hand = new CardHand();
-        $this->score = 0;
+        $this->scoreLow = 0;
+        $this->scoreHigh = 0;
     }
 
     /**
@@ -53,25 +56,47 @@ class Player
     }
 
     /**
-     * Get the score of the player.
+     * Get the scoreLow of the player. Ace counted as 1.
      *
-     * @return int as the score of the player
+     * @return int $scoreLow as the scoreLow of the player
      */
-    public function getScore()
+    public function getScoreLow()
     {
-        return $this->score;
+        return $this->scoreLow;
     }
 
     /**
-     * Set the score of the player.
+     * Set the scoreLow of the player. Ace counted as 1.
      *
-     * @param int $score the score of the player
+     * @param int $scoreLow the scoreLow of the player
      *
      * @return void
      */
-    public function setScore(int $score)
+    public function setScoreLow(int $score)
     {
-        $this->score = $score;
+        $this->scoreLow = $score;
+    }
+
+    /**
+     * Get the scoreHigh of the player.
+     *
+     * @return int $scoreHigh as the scoreHigh of the player
+     */
+    public function getScoreHigh()
+    {
+        return $this->scoreHigh;
+    }
+
+    /**
+     * Set the scoreHigh of the player. Ace counted as 14.
+     *
+     * @param int $scoreHigh the scoreHigh of the player
+     *
+     * @return void
+     */
+    public function setScoreHigh(int $score)
+    {
+        $this->scoreHigh = $score;
     }
 
     /**
@@ -85,23 +110,63 @@ class Player
     }
 
     /**
-     * Set the score to the sum of cards in the hand. Ace is counted as 14.
-     *
-     * @return int as the sum of the dices in the hand of the player
-     */
-    public function getSumOfHandAceHigh()
-    {
-        $this->setScore($this->hand->getSumOfHandAceHigh());
-    }
-
-    /**
      * Set the score to the sum of cards in the hand. Ace is counted as 1.
      *
      * @return int as the sum of the dices in the hand of the player
      */
     public function getSumOfHandAceLow()
     {
-        $this->setScore($this->hand->getSumOfHandAceLow());
+        $this->setScoreLow($this->hand->getSumOfHandAceLow());
+    }
+
+    /**
+     * Get the score to the sum of cards in the hand. Ace is counted as 14.
+     *
+     * @return int as the sum of the dices in the hand of the player
+     */
+    public function getSumOfHandAceHigh()
+    {
+        $this->setScoreHigh($this->hand->getSumOfHandAceHigh());
+    }
+
+    /**
+     * Get the result for a player.
+     *
+     * @return string as the result of the score
+     */
+    public function getPlayerResult()
+    {
+        $res = "";
+        if ($this->scoreLow == 21 or $this->scoreHigh == 21) {
+            $res = "VINST";
+        } elseif ($this->scoreLow > 21) {
+            $res = "FÖRLUST";
+        } else {
+            $res = "Nytt kort?";
+        }
+
+        return $res;
+    }
+
+    /**
+     * Get the result for the bank.
+     *
+     * @return string as the result of the score
+     */
+    public function getBankResult()
+    {
+        $res = "";
+        if ($this->scoreLow == 21 or $this->scoreHigh == 21) {
+            $res = "VINST";
+        } elseif ($this->scoreLow > 21) {
+            $res = "FÖRLUST";
+        } elseif ($this->scoreLow >= 18 or ($this->scoreHigh >= 18 and $this->scoreHigh < 21)) {
+            $res = "NÖJD";
+        } else {
+            $res = "";
+        }
+
+        return $res;
     }
 
     /**
