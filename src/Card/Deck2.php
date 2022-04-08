@@ -8,7 +8,7 @@ namespace App\Card;
  *
  * @author Marie Grahn, grmstud@student.bth.se
  */
-class Deck2
+class Deck2 extends Deck
 {
     public const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
     public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
@@ -26,12 +26,9 @@ class Deck2
         // Generate deck
         $this->cards = [];
 
-        foreach (self::SUITS as $suit) {
-            foreach (self::VALUES as $value) {
-                $card = new Card($suit, $value);
-                array_push($this->cards, $card);
-            }
-        }
+        parent::__construct();
+        $this->cards = parent::getDeck();
+
         $card = new Card('J', 'J');
         array_push($this->cards, $card);
         $card = new Card('J', 'J');

@@ -37,8 +37,8 @@ git tag
 git push --tags
 
 Installera markdown
-composer require twig/markdown-extra
-docker-compose run php81 composer require twig/markdown-extra
+composer require twig/markdown-extra league/commonmark
+docker-compose run php81 composer require twig/markdown-extra league/commonmark
 
-Rensa cache
-bin/console cache:clear
+phph statisk kodvalidering
+composer require php-cs-fixer

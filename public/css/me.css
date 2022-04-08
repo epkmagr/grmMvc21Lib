@@ -35,7 +35,8 @@ h3 {
 }
 
 .center {
-    text-align: center;
+    /* text-align: center; */
+    display: grid;
 }
 
 .my-footer {
@@ -64,7 +65,6 @@ h3 {
 
 .numberInput {
     font-size: larger;
-    margin-top: 1em;
 }
 
 .home21 {
@@ -74,14 +74,35 @@ h3 {
 /*  Card design */
 .card {
     border:1px solid #ccc;
-    border-radius: 2px;
+    border-radius: 4px;
     background: #fff;
     color:#444;
     width: 175px;
     height:259px;
     margin: 10px;
     display: inline-block;
+}
+
+.cardDeal {
+    border:1px solid #ccc;
     border-radius: 4px;
+    background: #fff;
+    color:#444;
+    width: 175px;
+    height:259px;
+    margin: 10px;
+    display: inline-block;
+    margin-left: -10em;
+    z-index: 1;
+    position:relative;
+}
+
+#content > div > div:nth-child(2) > div.col-md-6 > div:nth-child(2) {
+    margin-left: -7em;
+}
+
+#content > div > div:nth-child(3) > div > div:nth-child(2) {
+    margin-left: -7em;
 }
 
 .flipped {
@@ -117,19 +138,4 @@ h3 {
     font-size: 70px;
     text-align: center;
     display: block;
-}
-
-.fade-in {
-    opacity:0;  /* make things invisible upon start */
-    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-    -moz-animation:fadeIn ease-in 1;
-    animation:fadeIn ease-in 1;
-
-    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-    -moz-animation-fill-mode:forwards;
-    animation-fill-mode:forwards;
-
-    -webkit-animation-duration:1s;
-    -moz-animation-duration:1s;
-    animation-duration:1s;
 }
