@@ -18,24 +18,32 @@
             {% for card in bank.getHand().getCards() %}
                 {% set suit = card.getSuit() %}
                 {% set value = card.getValue() %}
-                <div {% if 'hearts' in suit or 'diams' in suit %} class="cardDeal red" {% else %} class="cardDeal" {% endif %}>
-                    <div class="top">
-                        <span class="number">{{ value }}</span>
-                        <span class="icon">{{ suit | raw }}</span>
+                {% if loop.last %}
+                    <div class="cardDeal flipped">
                     </div>
-                    <div class="lg_icon">{{ suit | raw }}</div>
-                    <div class="bottom">
-                        <span class="icon rotate">{{ suit | raw }}</span>
-                        <span class="number rotate">{{ value }}</span>
+                {% else %}
+                    <div {% if 'hearts' in suit or 'diams' in suit %} class="cardDeal red" {% else %} class="cardDeal" {% endif %}>
+                        <div class="top">
+                            <span class="number">{{ value }}</span>
+                            <span class="icon">{{ suit | raw }}</span>
+                        </div>
+                        <div class="lg_icon">{{ suit | raw }}</div>
+                        <div class="bottom">
+                            <span class="icon rotate">{{ suit | raw }}</span>
+                            <span class="number rotate">{{ value }}</span>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
             {% set bankScoreLow = bank.getScoreLow() %}
             {% set bankScoreHigh = bank.getScoreHigh() %}
             {% set win = bank.getBankResult() %}
-            {% if bankScoreLow > 0 %}
-                <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
-                <h3 class="h3Left">{{ win }}</h3>
+            {% set showResult = result %}
+            {% if showResult is not same as "" %}
+                {% if bankScoreLow > 0 %}
+                    <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
+                    <h3 class="h3Left">{{ win }}</h3>
+                {% endif %}
             {% endif %}
         </div>
         <div class="col-md-2">

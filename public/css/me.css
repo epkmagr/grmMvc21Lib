@@ -111,7 +111,8 @@ h3 {
 }
 
 .flipped {
-    background-image: linear-gradient(to bottom, #3172ab, #88b5dd, #3172ab);
+    background-image: radial-gradient(#3172ab, #88b5dd, navy, navy);
+    vertical-align: bottom;
 }
 
 .red {
