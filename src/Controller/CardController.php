@@ -84,7 +84,7 @@ class CardController extends AbstractController
         $session->set('deck', $deck);
 
         return $this->render('card/draw.html.twig', [
-            'cards' => $cards ?? NULL,
+            'cards' => $cards ?? null,
             'noOfCardsLeft' => count($deck->getDeck()),
         ]);
     }
@@ -103,7 +103,7 @@ class CardController extends AbstractController
 
         $clear = $request->request->get('clear');
         $drawSeveral = $request->request->get('drawSeveral');
-        $noOfCards =$number;
+        $noOfCards = $number;
 
         if ($clear) {
             $session->clear();
@@ -123,7 +123,7 @@ class CardController extends AbstractController
         $session->set('deck', $deck);
 
         return $this->render('card/drawSeveral.html.twig', [
-            'cards' => $cards ?? NULL,
+            'cards' => $cards ?? null,
             'noOfCardsLeft' => count($deck->getDeck()),
         ]);
     }
@@ -139,9 +139,12 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/deal/{players}/{cards}", name="deal", methods={"GET","POST"})
      */
-    public function deal(Request $request, SessionInterface $session,
-        string $players, string $cards): Response
-    {
+    public function deal(
+        Request $request,
+        SessionInterface $session,
+        string $players,
+        string $cards
+    ): Response {
         if ($session->get('deck')) {
             $deck = $session->get('deck');
         } else {
@@ -152,11 +155,16 @@ class CardController extends AbstractController
         $clear = $request->request->get('clear');
         $setup = $request->request->get('setup');
         $deal = $request->request->get('deal');
-        $bankSettled = $request->request->get('bankSettled');
 
         $bank = $session->get('bank') ?? new \App\Card\Player('Banken');
         $myPlayers = [];
         $myPlayers = $session->get('myPlayers') ?? [new \App\Card\Player('Spelare 1')];
+        $this->setPlayersToContent($myPlayers, $request);
+        $gameover = $this->checkIfAllAreContent($bank, $myPlayers, $request);
+        $resultStr = "";
+        if ($gameover) {
+            $resultStr = $this->result($bank, $myPlayers);
+        }
 
         if ($clear) {
             $session->clear();
@@ -167,7 +175,7 @@ class CardController extends AbstractController
             $players = "1";
             $cards = "1";
 
-            return $this->redirectToRoute('deal', ['players'=>$players, 'cards'=>$cards]);
+            return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
         } elseif ($setup) {
             $players = $request->request->get('noOfPlayers');
             $cards = $request->request->get('noOfCards');
@@ -177,12 +185,15 @@ class CardController extends AbstractController
             }
             $session->set('myPlayers', $myPlayers);
 
-            return $this->redirectToRoute('deal', ['players'=>$players, 'cards'=>$cards]);
+            return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
         } elseif ($deal) {
             for ($i = 0; $i < $cards; $i++) {
                 if ($bank->getBankResult() == "") {
                     $card = $deck->getTopCard();
                     $bank->increaseHand($card);
+                }
+                if ($bank->getBankResult() !== "") {
+                   $bank->setContent();
                 }
             }
             $bank->getSumOfHandAceLow();
@@ -191,7 +202,7 @@ class CardController extends AbstractController
 
             for ($i = 0; $i < $cards; $i++) {
                 foreach ($myPlayers as $player) {
-                    if ($player->getPlayerResult() == "Nytt kort?") {
+                    if ($player->getPlayerResult() == "Nytt kort?" and !$player->isContent()) {
                         $card = $deck->getTopCard();
                         $player->increaseHand($card);
                     }
@@ -201,6 +212,7 @@ class CardController extends AbstractController
                 $player->getSumOfHandAceLow();
                 $player->getSumOfHandAceHigh();
             }
+            $this->setPlayersToContent($myPlayers, $request);
             $session->set('myPlayers', $myPlayers);
         }
 
@@ -211,6 +223,52 @@ class CardController extends AbstractController
             'bank' => $bank,
             'myPlayers' => $myPlayers,
             'noOfCardsLeft' => count($deck->getDeck()),
+            'result' => $resultStr,
         ]);
+    }
+
+    private function setPlayersToContent(array $myPlayers, Request $request) {
+        for ($i = 0; $i < count($myPlayers); $i++) {
+            $name = 'content' . $i;
+            $content = $request->request->get($name);
+            if ($content) {
+                $myPlayers[$i]->setContent();
+            }
+        }
+    }
+
+    private function checkIfAllAreContent(\App\Card\Player $bank, array $myPlayers) {
+        $noOfContent = 0;
+
+        for ($i = 0; $i < count($myPlayers); $i++) {
+
+        }
+        foreach ($myPlayers as $player) {
+            if ($player->isContent()) {
+                $noOfContent += 1;
+            }
+        }
+        if ($bank->isContent()) {
+            $noOfContent += 1;
+        }
+        // var_dump($bank->getName(), $bank->isContent());
+        // var_dump($myPlayers);
+        // var_dump($noOfContent);
+        $total = count($myPlayers) + 1; # bank included
+        return $total == $noOfContent ? true : false;
+    }
+
+    private function result(\App\Card\Player $bank, array $myPlayers) {
+        $result = "Vinnaren är ";
+        $winner = $bank->getName();
+        // $winner = $bank->getScoreLow() ? $bank->getName() : "";
+        // for ($i = 0; $i < count($myPlayers); $i++) {
+        //     if ($myPlayers[$i]-getScoreLow() > 21) {
+        //         $myPlayers[$i]->setContent();
+        //     }
+        // }
+
+
+        return $result . $winner;
     }
 }

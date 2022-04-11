@@ -32,13 +32,21 @@
             {% endfor %}
             {% set bankScoreLow = bank.getScoreLow() %}
             {% set bankScoreHigh = bank.getScoreHigh() %}
-            <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
             {% set win = bank.getBankResult() %}
-            <h3 class="h3Left">{{ win }}</h3>
+            {% if bankScoreLow > 0 %}
+                <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
+                <h3 class="h3Left">{{ win }}</h3>
+            {% endif %}
         </div>
         <div class="col-md-2">
             <h3>Antalet kort kvar</h3>
             <h3>{{ noOfCardsLeft }}</h3>
+            {% set showResult = result %}
+            {% if showResult is not same as "" %}
+                <h3></h3>
+                <h3>Resultat</h3>
+                <h3>{{ result }}</h3>
+            {% endif %}
         </div>
         <div class="col-md-2 col-md-offset-1">
             <form method="post">
@@ -58,6 +66,7 @@
         </div>
     </div>
     <div class="row" style="margin-bottom:4em;">
+        {% set no = 0 %}
         {% for player in myPlayers %}
             <div class="col-md-2 col-md-offset-1">
                 <h3 class="h3Left"> {{ player.getName()}} </h3>
@@ -78,10 +87,23 @@
                 {% endfor %}
                 {% set playerScoreLow = player.getScoreLow() %}
                 {% set playerScoreHigh = player.getScoreHigh() %}
+                {% set content = player.isContent() %}
                 {% set win = player.getPlayerResult() %}
-                <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
-                <h3 class="h3Left">{{ win }}</h3>
+                {% if content %}
+                    {% set contentText = "" %}
+                {% else %}
+                    {% set contentText = "Icke" %}
+                {% endif %}
+                {% if playerScoreLow > 0 and playerScoreLow < 21 %}
+                    <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
+                    <form method="post">
+                        <input class="submitButton" type="submit" name="content{{no}}" value={{ contentText }}&nbsp;Nöjd>
+                    </form>
+                {% elseif playerScoreLow != 21 %}
+                    <h3 class="h3Left">{{ win }}</h3>
+                {% endif %}
             </div>
+            {% set no = no + 1 %}
         {% endfor %}
     </div>
 </div>

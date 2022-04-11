@@ -106,11 +106,3 @@ class Deck
         shuffle($this->cards);
     }
 }
-
-$deck = new Deck();
-//
-// var_dump($deck->getDeck());
-//
-// foreach( $deck as $card ) {
-//     echo "Kort 1: " . card.suit . " " . card.value;
-// }

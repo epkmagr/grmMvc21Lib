@@ -14,6 +14,7 @@ class Player
      * @var CardHand the hand with cards
      * @var int      the scoreLow of the player with ace as 1
      * @var int      the scoreHigh of the player with ace as 14
+     * @var bool     true if the player is content, false otherwise
      */
     private $name;
     private $hand;
@@ -31,6 +32,7 @@ class Player
         $this->hand = new CardHand();
         $this->scoreLow = 0;
         $this->scoreHigh = 0;
+        $this->content = false;
     }
 
     /**
@@ -130,6 +132,26 @@ class Player
     }
 
     /**
+     * Returns true if the player is content.
+     *
+     * @return bool as true if the player is content, false otherwise
+     */
+    public function isContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set the player content.
+     *
+     * @return void
+     */
+    public function setContent()
+    {
+        $this->content = true;
+    }
+
+    /**
      * Get the result for a player.
      *
      * @return string as the result of the score
@@ -139,8 +161,10 @@ class Player
         $res = "";
         if ($this->scoreLow == 21 or $this->scoreHigh == 21) {
             $res = "VINST";
+            $this->content = true;
         } elseif ($this->scoreLow > 21) {
             $res = "FÖRLUST";
+            $this->content = true;
         } else {
             $res = "Nytt kort?";
         }
@@ -156,12 +180,12 @@ class Player
     public function getBankResult()
     {
         $res = "";
-        if ($this->scoreLow == 21 or $this->scoreHigh == 21) {
-            $res = "VINST";
-        } elseif ($this->scoreLow > 21) {
+        if ($this->scoreLow > 21) {
             $res = "FÖRLUST";
-        } elseif ($this->scoreLow >= 18 or ($this->scoreHigh >= 18 and $this->scoreHigh < 21)) {
+            $this->content = true;
+        } elseif ($this->scoreLow >= 18 or ($this->scoreHigh >= 18 and $this->scoreHigh <= 21)) {
             $res = "NÖJD";
+            $this->content = true;
         } else {
             $res = "";
         }
