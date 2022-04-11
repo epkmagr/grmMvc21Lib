@@ -14,12 +14,14 @@ class Player
      * @var CardHand the hand with cards
      * @var int      the scoreLow of the player with ace as 1
      * @var int      the scoreHigh of the player with ace as 14
+     * @var int      the bestScore of the player, scoreLow or scoreHigh
      * @var bool     true if the player is content, false otherwise
      */
     private $name;
     private $hand;
     private $scoreLow;
     private $scoreHigh;
+    private $bestScore;
 
     /**
      * Constructor to initiate the dicehand with a number of dices.
@@ -32,6 +34,7 @@ class Player
         $this->hand = new CardHand();
         $this->scoreLow = 0;
         $this->scoreHigh = 0;
+        $this->bestScore = 0;
         $this->content = false;
     }
 
@@ -102,6 +105,16 @@ class Player
     }
 
     /**
+     * Get the best score of the player.
+     *
+     * @return int $bestScore as the bestScore of the player
+     */
+    public function getBestScore()
+    {
+        return $this->bestScore;
+    }
+
+    /**
      * Get the hand of cards of the player.
      *
      * @return CardHand as the hand of cards of the player
@@ -109,6 +122,16 @@ class Player
     public function gethand()
     {
         return $this->hand;
+    }
+
+    /**
+     * Get the number of cards in the hand of the player.
+     *
+     * @return int as the number of cards in the hand
+     */
+    public function getNoOfCards()
+    {
+        return (empty($this->hand->getCards)) ? 0 : count($this->hand->getCards);
     }
 
     /**
@@ -159,14 +182,25 @@ class Player
     public function getPlayerResult()
     {
         $res = "";
-        if ($this->scoreLow == 21 or $this->scoreHigh == 21) {
+        if ($this->scoreLow == 21) {
             $res = "VINST";
             $this->content = true;
+            $this->bestScore = $this->scoreLow;
+        } elseif ($this->scoreHigh == 21) {
+            $res = "VINST";
+            $this->content = true;
+            $this->bestScore = $this->scoreHigh;
         } elseif ($this->scoreLow > 21) {
             $res = "FÖRLUST";
             $this->content = true;
+            $this->bestScore = 0;
         } else {
             $res = "Nytt kort?";
+            if ($this->scoreHigh > $this->scoreLow) {
+                $this->bestScore = $this->scoreHigh;
+            } else {
+                $this->bestScore = $this->scoreLow;
+            }
         }
 
         return $res;
@@ -183,11 +217,22 @@ class Player
         if ($this->scoreLow > 21) {
             $res = "FÖRLUST";
             $this->content = true;
-        } elseif ($this->scoreLow >= 18 or ($this->scoreHigh >= 18 and $this->scoreHigh <= 21)) {
+            $this->bestScore = 0;
+        } elseif ($this->scoreLow >= 18) {
             $res = "NÖJD";
             $this->content = true;
+            $this->bestScore = $this->scoreLow;
+        } elseif ($this->scoreHigh >= 18 and $this->scoreHigh <= 21) {
+            $res = "NÖJD";
+            $this->content = true;
+            $this->bestScore = $this->scoreHigh;
         } else {
             $res = "";
+            if ($this->scoreHigh > $this->scoreLow) {
+                $this->bestScore = $this->scoreHigh;
+            } else {
+                $this->bestScore = $this->scoreLow;
+            }
         }
 
         return $res;

@@ -193,7 +193,7 @@ class CardController extends AbstractController
                     $bank->increaseHand($card);
                 }
                 if ($bank->getBankResult() !== "") {
-                   $bank->setContent();
+                    $bank->setContent();
                 }
             }
             $bank->getSumOfHandAceLow();
@@ -227,7 +227,8 @@ class CardController extends AbstractController
         ]);
     }
 
-    private function setPlayersToContent(array $myPlayers, Request $request) {
+    private function setPlayersToContent(array $myPlayers, Request $request)
+    {
         for ($i = 0; $i < count($myPlayers); $i++) {
             $name = 'content' . $i;
             $content = $request->request->get($name);
@@ -237,11 +238,11 @@ class CardController extends AbstractController
         }
     }
 
-    private function checkIfAllAreContent(\App\Card\Player $bank, array $myPlayers) {
+    private function checkIfAllAreContent(\App\Card\Player $bank, array $myPlayers)
+    {
         $noOfContent = 0;
 
         for ($i = 0; $i < count($myPlayers); $i++) {
-
         }
         foreach ($myPlayers as $player) {
             if ($player->isContent()) {
@@ -251,24 +252,32 @@ class CardController extends AbstractController
         if ($bank->isContent()) {
             $noOfContent += 1;
         }
-        // var_dump($bank->getName(), $bank->isContent());
-        // var_dump($myPlayers);
-        // var_dump($noOfContent);
+
         $total = count($myPlayers) + 1; # bank included
         return $total == $noOfContent ? true : false;
     }
 
-    private function result(\App\Card\Player $bank, array $myPlayers) {
-        $result = "Vinnaren är ";
+    private function result(\App\Card\Player $bank, array $myPlayers)
+    {
+        $result = "Vinnaren är: ";
         $winner = $bank->getName();
-        // $winner = $bank->getScoreLow() ? $bank->getName() : "";
-        // for ($i = 0; $i < count($myPlayers); $i++) {
-        //     if ($myPlayers[$i]-getScoreLow() > 21) {
-        //         $myPlayers[$i]->setContent();
-        //     }
-        // }
+        $bestScore = $bank->getBestScore();
+        $noOfCards = $bank->getNoOfCards();
+        for ($i = 0; $i < count($myPlayers); $i++) {
+            $playerBestScore = $myPlayers[$i]->getBestScore();
+            if ($playerBestScore <= 21 and $playerBestScore > $bestScore) {
+                if ($playerBestScore == $bestScore and $noOfCards > $myPlayers[$i]->getNoOfCards()) {
+                    $winner = $myPlayers[$i]->getName();
+                    $bestScore = $playerBestScore;
+                } elseif ($playerBestScore == $bestScore and $noOfCards == $myPlayers[$i]->getNoOfCards()) {
+                    $winner = $winner . " & " . $myPlayers[$i]->getName();
+                } else {
+                    $winner = $myPlayers[$i]->getName();
+                    $bestScore = $playerBestScore;
+                }
+            }
+        }
 
-
-        return $result . $winner;
+        return $result . '<br>' . $winner;
     }
 }

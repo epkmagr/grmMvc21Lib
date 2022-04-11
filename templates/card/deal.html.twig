@@ -45,7 +45,7 @@
             {% if showResult is not same as "" %}
                 <h3></h3>
                 <h3>Resultat</h3>
-                <h3>{{ result }}</h3>
+                <h3>{{ result | raw }}</h3>
             {% endif %}
         </div>
         <div class="col-md-2 col-md-offset-1">
@@ -94,7 +94,7 @@
                 {% else %}
                     {% set contentText = "Icke" %}
                 {% endif %}
-                {% if playerScoreLow > 0 and playerScoreLow < 21 %}
+                {% if playerScoreLow > 0 and playerScoreLow <= 21 %}
                     <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
                     <form method="post">
                         <input class="submitButton" type="submit" name="content{{no}}" value={{ contentText }}&nbsp;Nöjd>
