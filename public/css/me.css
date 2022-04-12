@@ -59,6 +59,17 @@ h3 {
     text-align: center;
 }
 
+.startButton {
+    padding: 0.5em;
+    margin: 0.5em;
+    margin-bottom: 10em;
+    font-size: x-large;
+    border-radius: 10px;
+    border: 2px groove #3172ab;
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    text-align: center;
+}
+
 .submitButton {
     min-width: 10em;
     float: right;

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Card\Deck;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,7 +114,7 @@ class CardController extends AbstractController
             $noOfCards = intval($request->request->get('noOfCards'));
             $noOfCardsLeft = count($deck->getDeck());
             $no = ($noOfCardsLeft >= $noOfCards) ? $noOfCards : $noOfCardsLeft;
-            for ($i = 0; $i < $no; $i++) {
+            for ($i = 0; $i < $no; ++$i) {
                 $cards[] = $deck->getTopCard();
             }
             $request->attributes->set('number', $noOfCards);
@@ -161,7 +162,7 @@ class CardController extends AbstractController
         $myPlayers = $session->get('myPlayers') ?? [new \App\Card\Player('Spelare 1')];
         $this->setPlayersToContent($myPlayers, $request);
         $gameover = $this->checkIfAllAreContent($bank, $myPlayers, $request);
-        $resultStr = "";
+        $resultStr = '';
         if ($gameover) {
             $resultStr = $this->result($bank, $myPlayers);
         }
@@ -172,27 +173,27 @@ class CardController extends AbstractController
             $deck->shuffle();
             $bank = new \App\Card\Player('Banken');
             $myPlayers = [new \App\Card\Player('Spelare 1')];
-            $players = "1";
-            $cards = "1";
+            $players = '1';
+            $cards = '1';
 
             return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
         } elseif ($setup) {
             $players = $request->request->get('noOfPlayers');
             $cards = $request->request->get('noOfCards');
 
-            for ($i = 0; $i < $players; $i++) {
-                $myPlayers[$i] = new \App\Card\Player('Spelare ' . ($i + 1));
+            for ($i = 0; $i < $players; ++$i) {
+                $myPlayers[$i] = new \App\Card\Player('Spelare '.($i + 1));
             }
             $session->set('myPlayers', $myPlayers);
 
             return $this->redirectToRoute('deal', ['players' => $players, 'cards' => $cards]);
         } elseif ($deal) {
-            for ($i = 0; $i < $cards; $i++) {
-                if ($bank->getBankResult() == "") {
+            for ($i = 0; $i < $cards; ++$i) {
+                if ('' == $bank->getBankResult()) {
                     $card = $deck->getTopCard();
                     $bank->increaseHand($card);
                 }
-                if ($bank->getBankResult() !== "") {
+                if ('' !== $bank->getBankResult()) {
                     $bank->setContent();
                 }
             }
@@ -200,9 +201,9 @@ class CardController extends AbstractController
             $bank->getSumOfHandAceHigh();
             $session->set('bank', $bank);
 
-            for ($i = 0; $i < $cards; $i++) {
+            for ($i = 0; $i < $cards; ++$i) {
                 foreach ($myPlayers as $player) {
-                    if ($player->getPlayerResult() == "Nytt kort?" and !$player->isContent()) {
+                    if ('Nytt kort?' == $player->getPlayerResult() and !$player->isContent()) {
                         $card = $deck->getTopCard();
                         $player->increaseHand($card);
                     }
@@ -229,8 +230,8 @@ class CardController extends AbstractController
 
     private function setPlayersToContent(array $myPlayers, Request $request)
     {
-        for ($i = 0; $i < count($myPlayers); $i++) {
-            $name = 'content' . $i;
+        for ($i = 0; $i < count($myPlayers); ++$i) {
+            $name = 'content'.$i;
             $content = $request->request->get($name);
             if ($content) {
                 $myPlayers[$i]->setContent();
@@ -242,28 +243,29 @@ class CardController extends AbstractController
     {
         $noOfContent = 0;
 
-        for ($i = 0; $i < count($myPlayers); $i++) {
+        for ($i = 0; $i < count($myPlayers); ++$i) {
         }
         foreach ($myPlayers as $player) {
             if ($player->isContent()) {
-                $noOfContent += 1;
+                ++$noOfContent;
             }
         }
         if ($bank->isContent()) {
-            $noOfContent += 1;
+            ++$noOfContent;
         }
 
-        $total = count($myPlayers) + 1; # bank included
+        $total = count($myPlayers) + 1; // bank included
+
         return $total == $noOfContent ? true : false;
     }
 
     private function result(\App\Card\Player $bank, array $myPlayers)
     {
-        $result = "Vinnaren är: ";
+        $result = 'Vinnaren är: ';
         $winner = $bank->getName();
         $bestScore = $bank->getBestScore();
         $noOfCards = $bank->getNoOfCards();
-        for ($i = 0; $i < count($myPlayers); $i++) {
+        for ($i = 0; $i < count($myPlayers); ++$i) {
             $playerBestScore = $myPlayers[$i]->getBestScore();
             var_dump($bestScore);
             var_dump($playerBestScore);
@@ -272,7 +274,7 @@ class CardController extends AbstractController
                     $winner = $myPlayers[$i]->getName();
                     $bestScore = $playerBestScore;
                 } elseif ($playerBestScore == $bestScore and $noOfCards == $myPlayers[$i]->getNoOfCards()) {
-                    $winner = $winner . " & " . $myPlayers[$i]->getName();
+                    $winner = $winner.' & '.$myPlayers[$i]->getName();
                 } else {
                     $winner = $myPlayers[$i]->getName();
                     $bestScore = $playerBestScore;
@@ -280,6 +282,6 @@ class CardController extends AbstractController
             }
         }
 
-        return $result . '<br>' . $winner;
+        return $result.'<br>'.$winner;
     }
 }

@@ -22,6 +22,7 @@ class Player
     private $scoreLow;
     private $scoreHigh;
     private $bestScore;
+    private $content;
 
     /**
      * Constructor to initiate the dicehand with a number of dices.
@@ -136,8 +137,6 @@ class Player
 
     /**
      * Set the score to the sum of cards in the hand. Ace is counted as 1.
-     *
-     * @return int as the sum of the dices in the hand of the player
      */
     public function getSumOfHandAceLow()
     {
@@ -146,8 +145,6 @@ class Player
 
     /**
      * Get the score to the sum of cards in the hand. Ace is counted as 14.
-     *
-     * @return int as the sum of the dices in the hand of the player
      */
     public function getSumOfHandAceHigh()
     {
@@ -181,21 +178,21 @@ class Player
      */
     public function getPlayerResult()
     {
-        $res = "";
-        if ($this->scoreLow == 21) {
-            $res = "VINST";
+        $res = '';
+        if (21 == $this->scoreLow) {
+            $res = 'VINST';
             $this->content = true;
             $this->bestScore = $this->scoreLow;
-        } elseif ($this->scoreHigh == 21) {
-            $res = "VINST";
+        } elseif (21 == $this->scoreHigh) {
+            $res = 'VINST';
             $this->content = true;
             $this->bestScore = $this->scoreHigh;
         } elseif ($this->scoreLow > 21) {
-            $res = "FÖRLUST";
+            $res = 'FÖRLUST';
             $this->content = true;
             $this->bestScore = 0;
         } else {
-            $res = "Nytt kort?";
+            $res = 'Nytt kort?';
             if ($this->scoreHigh > $this->scoreLow) {
                 $this->bestScore = $this->scoreHigh;
             } else {
@@ -213,21 +210,21 @@ class Player
      */
     public function getBankResult()
     {
-        $res = "";
+        $res = '';
         if ($this->scoreLow > 21) {
-            $res = "FÖRLUST";
+            $res = 'FÖRLUST';
             $this->content = true;
             $this->bestScore = 0;
         } elseif ($this->scoreLow >= 18) {
-            $res = "NÖJD";
+            $res = 'NÖJD';
             $this->content = true;
             $this->bestScore = $this->scoreLow;
         } elseif ($this->scoreHigh >= 18 and $this->scoreHigh <= 21) {
-            $res = "NÖJD";
+            $res = 'NÖJD';
             $this->content = true;
             $this->bestScore = $this->scoreHigh;
         } else {
-            $res = "";
+            $res = '';
             if ($this->scoreHigh > $this->scoreLow) {
                 $this->bestScore = $this->scoreHigh;
             } else {
