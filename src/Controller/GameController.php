@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Card\Game21;
 
 class GameController extends AbstractController
 {
@@ -32,8 +33,18 @@ class GameController extends AbstractController
      */
     public function play(SessionInterface $session): Response
     {
-        $session->clear();
+        $game21 = $session->get('game21') ?? new Game21();
 
-        return $this->render('game/play.html.twig');
+        // Play round
+
+        $session->set('game21', $game21);
+        $resultStr = $game21->result();
+
+        return $this->render('game/play.html.twig', [
+            'bank' => $game21->getDealer(),
+            'myPlayers' => $game21->getPlayers(),
+            'noOfCardsLeft' => count($game21->getDeck()),
+            'result' => $resultStr,
+        ]);
     }
 }

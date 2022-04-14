@@ -42,3 +42,9 @@ docker-compose run php81 composer require twig/markdown-extra league/commonmark
 
 phph statisk kodvalidering
 composer require php-cs-fixer
+
+Testning - phpunit
+composer require --dev symfony/test-pack
+mkdir tests/Card
+php bin/phpunit
+php bin/phpunit tests/Card

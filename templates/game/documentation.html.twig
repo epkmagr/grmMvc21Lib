@@ -29,7 +29,13 @@
             {{ include('card/documentation/classes.markdown.twig')|markdown_to_html }}
         </div>
     </div>
-    <div class="row" style="height: 10em;">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            {% set uml_path = 'card/documentation/uml.html.twig' %}
+            {% include uml_path %}
+        </div>
+    </div>
+    <div class="row" style="height: 20em;">
     </div>
 </div>
 {% endblock %}

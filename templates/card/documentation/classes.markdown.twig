@@ -7,8 +7,11 @@
 * **Deck2**, som ärver **Deck** och innehåller en kortlek med 54 spelkort (en array cards
 med Card objekt) varav 2 jokers
 * **CardHand**, som innehåller en hand med spelkort (en array hand med Card objekt)
+* **Player**, används bara till kmom02 och innehåller namn, poäng, nöjd eller inte
+och en korthand (string name, int score, en bool satt till True om spelaren är nöjd,
+en CardHand hand)
 * **Participant**, som innehåller namn och en korthand (string name och en CardHand hand)
-* **Player** som ärver **Participant**, som innehåller poäng om ess är låg, poäng om ess är
+* **Player21** som ärver **Participant**, som innehåller poäng om ess är låg, poäng om ess är
 hög, en bästa poäng (närmast 21) och om spelaren är nöjd (true)  eller inte (int scoreLow,
 int scoreHigh, int bestScore och en bool content satt till true om spelaren är nöjd)
 * **Dealer** som ärver **Participant**, som innehåller poäng om ess är låg, poäng om ess är

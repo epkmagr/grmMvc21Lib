@@ -81,7 +81,6 @@ class CardController extends AbstractController
             $deck = new \App\Card\Deck();
         }
 
-        $noOfCards = count($deck->getDeck());
         $session->set('deck', $deck);
 
         return $this->render('card/draw.html.twig', [
@@ -120,7 +119,6 @@ class CardController extends AbstractController
             $request->attributes->set('number', $noOfCards);
         }
 
-        $noOfCards = count($deck->getDeck());
         $session->set('deck', $deck);
 
         return $this->render('card/drawSeveral.html.twig', [
