@@ -35,14 +35,92 @@ class Game21Test extends KernelTestCase
     }
 
     /**
-     * Construct object and test to play the game with 1 player. Player wins.
+     * Construct object and test to play the game with 1 player. Both player and
+     * bank has 21 => bank is the winner.
      */
-    public function testPlay()
+    public function testPlayEqualBankWins()
     {
         $game = new Game21();
         $result = $game->play();
         $this->assertEquals($game->getDealer()->getName(), "Banken");
         $this->assertEquals($game->getPlayers()[0]->getName(), "Spelare 1");
+        $game->getDealer()->setContent();
+        $game->getDealer()->setScoreLow(21);
+        $game->getPlayers()[0]->setContent();
+        $game->getPlayers()[0]->setScoreLow(21);
         $result = $game->play();
+        $this->assertEquals($result, "Vinnaren är: <br>Banken");
+    }
+
+    /**
+     * Construct object and test to play the game with 1 player. Both player has
+     * 20 and bank has 21 => bank is the winner.
+     */
+    public function testPlayBankWins()
+    {
+        $game = new Game21();
+        $result = $game->play();
+        $this->assertEquals($game->getDealer()->getName(), "Banken");
+        $this->assertEquals($game->getPlayers()[0]->getName(), "Spelare 1");
+        $game->getDealer()->setContent();
+        $game->getDealer()->setScoreLow(21);
+        $game->getPlayers()[0]->setContent();
+        $game->getPlayers()[0]->setScoreLow(20);
+        $result = $game->play();
+        $this->assertEquals($result, "Vinnaren är: <br>Banken");
+    }
+
+    /**
+     * Construct object and test to play the game with 1 player. Both player has
+     * 20 and bank has 18 => player is the winner.
+     */
+    public function testPlayPlayerWins()
+    {
+        $game = new Game21();
+        $result = $game->play();
+        $this->assertEquals($game->getDealer()->getName(), "Banken");
+        $this->assertEquals($game->getPlayers()[0]->getName(), "Spelare 1");
+        $game->getDealer()->setContent();
+        $game->getDealer()->setScoreLow(18);
+        $game->getPlayers()[0]->setContent();
+        $game->getPlayers()[0]->setScoreLow(20);
+        $result = $game->play();
+        $this->assertEquals($result, "Vinnaren är: <br>Spelare 1");
+    }
+
+    /**
+     * Construct object and test to play the game with 1 player. Both player has
+     * 20 and bank has more than 21 => player is the winner.
+     */
+    public function testPlayBankThickPlayerWins()
+    {
+        $game = new Game21();
+        $result = $game->play();
+        $this->assertEquals($game->getDealer()->getName(), "Banken");
+        $this->assertEquals($game->getPlayers()[0]->getName(), "Spelare 1");
+        $game->getDealer()->setContent();
+        $game->getDealer()->setScoreLow(22);
+        $game->getPlayers()[0]->setContent();
+        $game->getPlayers()[0]->setScoreLow(20);
+        $result = $game->play();
+        $this->assertEquals($result, "Vinnaren är: <br>Spelare 1");
+    }
+
+    /**
+     * Construct object and test to play the game with 1 player. Both player has
+     * 22 and bank has  20 => bank is the winner.
+     */
+    public function testPlayPlayerThickBankWins()
+    {
+        $game = new Game21();
+        $result = $game->play();
+        $this->assertEquals($game->getDealer()->getName(), "Banken");
+        $this->assertEquals($game->getPlayers()[0]->getName(), "Spelare 1");
+        $game->getDealer()->setContent();
+        $game->getDealer()->setScoreLow(20);
+        $game->getPlayers()[0]->setContent();
+        $game->getPlayers()[0]->setScoreLow(22);
+        $result = $game->play();
+        $this->assertEquals($result, "Vinnaren är: <br>Banken");
     }
 }

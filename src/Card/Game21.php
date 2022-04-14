@@ -195,8 +195,3 @@ class Game21
         return $result.'<br>'.$winner;
     }
 }
-
-// $c = new Card("&hearts;", "7");
-// var_dump($c);
-// echo $c->getValue();
-// echo $c->getSuit();

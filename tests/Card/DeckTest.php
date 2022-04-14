@@ -50,6 +50,7 @@ class DeckTest extends KernelTestCase
      */
     public function testShuffle()
     {
+        srand(12345);  // To seed random number for shuffle
         $deck = new Deck();
         $deck->shuffle();
         $card = $deck->getCard(0);
