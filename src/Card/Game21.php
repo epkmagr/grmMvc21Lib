@@ -2,28 +2,23 @@
 
 namespace App\Card;
 
-use \App\Card\Deck;
-use \App\Card\Dealer;
-use \App\Card\Player21;
-
 /**
- * Class Card, a class that represents a dice with
- * using a namespace.
+ * Class Game21 represents the car game 21.
  *
  * @author Marie Grahn, grmstud@student.bth.se
  */
 class Game21
 {
-    const MAX_PLAYERS = 4;
-    const MAX_CARDS = 3;
+    public const MAX_PLAYERS = 4;
+    public const MAX_CARDS = 3;
 
     /**
-     * @var Deck    $deck the deck of cards
-     * @var Dealer  $dealer the dealer
-     * @var array   $players the array with Player21 objects
-     * @var int     $noOfPlayers the number of players, default 1, max 4.
-     * @var int     $noOfCards the number of cards to draw per round,
-     *              default 1, max 3.
+     * @var Deck   the deck of cards
+     * @var Dealer the dealer
+     * @var array  the array with Player21 objects
+     * @var int    the number of players, default 1, max 4
+     * @var int    the number of cards to draw per round,
+     *             default 1, max 3
      */
     private $deck;
     private $dealer;
@@ -86,9 +81,9 @@ class Game21
      * Initiate the game, shuffle the deck of cards. Set the number of players and
      * the number of cards to draw per round.
      *
-     * @var int     $players the number of players, default 1, max 4.
-     * @var int     $cards the number of cards to draw per round,
-     *              default 1, max 3.
+     * @var int the number of players, default 1, max 4
+     * @var int the number of cards to draw per round,
+     *          default 1, max 3
      *
      * @return void
      */
@@ -103,13 +98,13 @@ class Game21
     }
 
     /**
-     * Play the game
+     * Play the game.
      *
      * @return string the result of the game, if any
      */
     public function play()
     {
-        $result = "";
+        $result = '';
 
         // Play the game
         // Let the players play first
@@ -124,7 +119,8 @@ class Game21
         return $result;
     }
 
-    private function playPlayers() {
+    private function playPlayers()
+    {
         for ($i = 0; $i < $this->noOfCards; ++$i) {
             foreach ($this->players as $player) {
                 if ('Nytt kort?' == $player->getResult() and !$player->isContent()) {
@@ -138,7 +134,8 @@ class Game21
         }
     }
 
-    private function playDealer() {
+    private function playDealer()
+    {
         for ($i = 0; $i < $this->noOfCards; ++$i) {
             if ('' == $this->dealer->getResult()) {
                 $card = $this->deck->getTopCard();

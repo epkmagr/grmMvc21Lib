@@ -48,3 +48,8 @@ composer require --dev symfony/test-pack
 mkdir tests/Card
 php bin/phpunit
 php bin/phpunit tests/Card
+
+phpDocumentor
+tools/phpdoc/phpdoc --version (or help)
+Generera doc:
+tools/phpdoc/phpdoc -d ./src -t ./docs/api

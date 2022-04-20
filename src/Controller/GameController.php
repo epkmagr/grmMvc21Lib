@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Card\Game21;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Card\Game21;
 
 class GameController extends AbstractController
 {
@@ -36,9 +36,9 @@ class GameController extends AbstractController
         $game21 = $session->get('game21') ?? new Game21();
 
         // Play round
+        $resultStr = $game21->play();
 
         $session->set('game21', $game21);
-        $resultStr = $game21->result();
 
         return $this->render('game/play.html.twig', [
             'bank' => $game21->getDealer(),

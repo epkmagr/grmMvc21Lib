@@ -3,7 +3,7 @@
 namespace App\Card;
 
 /**
- * A player with name, score and a hand of cards.
+ * Class Participant, base class to Dealer and Player.
  *
  * @author Marie Grahn, mbfs17@student.bth.se
  */
@@ -89,77 +89,76 @@ class Participant
         $this->hand->addNewCard($card);
     }
 
+    /**
+     * Get the scoreLow of the player. Ace counted as 1.
+     *
+     * @return int $scoreLow as the scoreLow of the player
+     */
+    public function getScoreLow()
+    {
+        return $this->scoreLow;
+    }
 
-        /**
-         * Get the scoreLow of the player. Ace counted as 1.
-         *
-         * @return int $scoreLow as the scoreLow of the player
-         */
-        public function getScoreLow()
-        {
-            return $this->scoreLow;
-        }
+    /**
+     * Set the scoreLow of the player. Ace counted as 1.
+     *
+     * @param int $scoreLow the scoreLow of the player
+     *
+     * @return void
+     */
+    public function setScoreLow(int $score)
+    {
+        $this->scoreLow = $score;
+    }
 
-        /**
-         * Set the scoreLow of the player. Ace counted as 1.
-         *
-         * @param int $scoreLow the scoreLow of the player
-         *
-         * @return void
-         */
-        public function setScoreLow(int $score)
-        {
-            $this->scoreLow = $score;
-        }
+    /**
+     * Get the scoreHigh of the player.
+     *
+     * @return int $scoreHigh as the scoreHigh of the player
+     */
+    public function getScoreHigh()
+    {
+        return $this->scoreHigh;
+    }
 
-        /**
-         * Get the scoreHigh of the player.
-         *
-         * @return int $scoreHigh as the scoreHigh of the player
-         */
-        public function getScoreHigh()
-        {
-            return $this->scoreHigh;
-        }
+    /**
+     * Set the scoreHigh of the player. Ace counted as 14.
+     *
+     * @param int $scoreHigh the scoreHigh of the player
+     *
+     * @return void
+     */
+    public function setScoreHigh(int $score)
+    {
+        $this->scoreHigh = $score;
+    }
 
-        /**
-         * Set the scoreHigh of the player. Ace counted as 14.
-         *
-         * @param int $scoreHigh the scoreHigh of the player
-         *
-         * @return void
-         */
-        public function setScoreHigh(int $score)
-        {
-            $this->scoreHigh = $score;
-        }
+    /**
+     * Set the score to the sum of cards in the hand. Ace is counted as 1.
+     */
+    public function getSumOfHand()
+    {
+        $this->setScoreLow($this->hand->getSumOfHandAceLow());
+        $this->setScoreHigh($this->hand->getSumOfHandAceHigh());
+    }
 
-        /**
-         * Set the score to the sum of cards in the hand. Ace is counted as 1.
-         */
-        public function getSumOfHand()
-        {
-            $this->setScoreLow($this->hand->getSumOfHandAceLow());
-            $this->setScoreHigh($this->hand->getSumOfHandAceHigh());
-        }
+    /**
+     * Returns true if the player is content.
+     *
+     * @return bool as true if the player is content, false otherwise
+     */
+    public function isContent()
+    {
+        return $this->content;
+    }
 
-        /**
-         * Returns true if the player is content.
-         *
-         * @return bool as true if the player is content, false otherwise
-         */
-        public function isContent()
-        {
-            return $this->content;
-        }
-
-        /**
-         * Set the player content.
-         *
-         * @return void
-         */
-        public function setContent()
-        {
-            $this->content = true;
-        }
+    /**
+     * Set the player content.
+     *
+     * @return void
+     */
+    public function setContent()
+    {
+        $this->content = true;
+    }
 }

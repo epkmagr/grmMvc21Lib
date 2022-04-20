@@ -3,8 +3,8 @@
 namespace App\Card;
 
 /**
- * Class Dice, a class that represents a dice with
- * using a namespace.
+ * Class Deck, represents a ordinary deck of cards with 52 cards and 2 jacks.
+ * A total of 54 cards.
  *
  * @author Marie Grahn, grmstud@student.bth.se
  */

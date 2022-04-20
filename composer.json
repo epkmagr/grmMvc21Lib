@@ -111,7 +111,9 @@
             "@phpcpd",
             "@phpmd",
             "@phpstan"
-        ]
+        ],
+        "phpdoc": "tools/phpdoc/phpdoc",
+        "phpunit": "php bin/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"

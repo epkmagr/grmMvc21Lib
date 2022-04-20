@@ -3,7 +3,7 @@
 namespace App\Card;
 
 /**
- * A player with name, score and a hand of cards.
+ *Class Dealer represents a dealer in card game 21.
  *
  * @author Marie Grahn, mbfs17@student.bth.se
  */
