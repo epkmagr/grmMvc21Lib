@@ -92,7 +92,7 @@ class Game21
         $this->deck->shuffle();
         $this->noOfPlayers = $players > self::MAX_PLAYERS ? self::MAX_PLAYERS : $players;
         for ($i = 0; $i < $this->noOfPlayers; ++$i) {
-            $this->players[$i] = new Player21('Spelare '.($i + 1));
+            $this->players[$i] = new Player21('Spelare ' . ($i + 1));
         }
         $this->noOfCards = $cards > self::MAX_CARDS ? self::MAX_CARDS : $cards;
     }
@@ -181,7 +181,7 @@ class Game21
                     $winner = $this->players[$i]->getName();
                     $bestScore = $playerBestScore;
                 } elseif ($playerBestScore == $bestScore and $noOfCards == $this->players[$i]->getNoOfCards()) {
-                    $winner = $winner.' & '.$this->players[$i]->getName();
+                    $winner = $winner . ' & ' . $this->players[$i]->getName();
                 } else {
                     $winner = $this->players[$i]->getName();
                     $bestScore = $playerBestScore;
@@ -189,6 +189,6 @@ class Game21
             }
         }
 
-        return $result.'<br>'.$winner;
+        return $result . '<br>' . $winner;
     }
 }
