@@ -64,6 +64,15 @@ h3 {
     text-align: center;
 }
 
+.playButton {
+    padding: 0.5em;
+    margin: 0.5em;
+    font-size: large;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    text-align: center;
+}
+
 .startButton {
     padding: 0.5em;
     margin: 0.5em;

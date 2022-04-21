@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Card\Game21;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +32,7 @@ class GameController extends AbstractController
     /**
      * @Route("/game/play", name="gamePlay", methods={"GET","POST"})
      */
-    public function play(SessionInterface $session): Response
+    public function play(Request $request, SessionInterface $session): Response
     {
         $game21 = $session->get('game21') ?? new Game21();
 
@@ -46,5 +47,24 @@ class GameController extends AbstractController
             'noOfCardsLeft' => count($game21->getDeck()),
             'result' => $resultStr,
         ]);
+    }
+
+    /**
+     * @Route("/game/play", name="gameReset", methods={"POST"})
+     */
+    public function reset(Request $request, SessionInterface $session): Response
+    {
+        $clear = $request->request->get('clear');
+        if ($clear) {
+            $session->clear();
+            $deck = new \App\Card\Deck();
+            $deck->shuffle();
+            $bank = new \App\Card\Player('Banken');
+            $myPlayers = [new \App\Card\Player('Spelare 1')];
+            $players = '1';
+            $cards = '1';
+
+            return $this->redirectToRoute('gamePlay', ['players' => $players, 'cards' => $cards]);
+        }
     }
 }

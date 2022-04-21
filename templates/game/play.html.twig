@@ -104,8 +104,9 @@
                 {% endif %}
                 {% if playerScoreLow > 0 and playerScoreLow <= 21 %}
                     <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
-                    <form method="post">
-                        <input class="submitButton" type="submit" name="content{{no}}" value={{ contentText }}&nbsp;Nöjd>
+                    <form method="post" action: path("gameReset")>
+                        <input class="playButton" type="submit" name="newCard{{no}}" value="Nytt kort?">
+                        <input class="playButton" type="submit" name="content{{no}}" value={{ contentText }}&nbsp;Nöjd>
                     </form>
                 {% elseif playerScoreLow != 21 %}
                     <h3 class="h3Left">{{ win }}</h3>
