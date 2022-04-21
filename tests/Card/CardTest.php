@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Card;
-use App\Card\Card;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -16,9 +15,9 @@ class CardTest extends KernelTestCase
      */
     public function testCreateObjectWithArgument()
     {
-        $card = new Card("&hearts;", "7");
+        $card = new Card('&hearts;', '7');
         $this->assertInstanceOf("\App\Card\Card", $card);
-        $this->assertEquals($card->getSuit(), "&hearts;");
-        $this->assertEquals($card->getValue(), "7");
+        $this->assertEquals($card->getSuit(), '&hearts;');
+        $this->assertEquals($card->getValue(), '7');
     }
 }

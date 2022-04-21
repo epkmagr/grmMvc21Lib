@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Card;
-use App\Card\Player21;
-use App\Card\Card;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -18,9 +16,9 @@ class Player21Test extends KernelTestCase
      */
     public function testCreateObjectWithArgument()
     {
-        $player = new Player21("Spelare 1");
+        $player = new Player21('Spelare 1');
         $this->assertInstanceOf("\App\Card\Player21", $player);
-        $this->assertEquals($player->getName(), "Spelare 1");
+        $this->assertEquals($player->getName(), 'Spelare 1');
         $this->assertEquals($player->getNoOfCards(), 0);
     }
 
@@ -30,10 +28,10 @@ class Player21Test extends KernelTestCase
      */
     public function testGetResultContent()
     {
-        $player = new Player21("Spelare 1");
-        $card1 = new Card("&hearts;", "7");
+        $player = new Player21('Spelare 1');
+        $card1 = new Card('&hearts;', '7');
         $player->increaseHand($card1);
-        $card2 = new Card("&hearts;", "A");
+        $card2 = new Card('&hearts;', 'A');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'NÖJD');
@@ -45,10 +43,10 @@ class Player21Test extends KernelTestCase
      */
     public function testGetResultNotContent()
     {
-        $player = new Player21("Spelare 1");
-        $card1 = new Card("&hearts;", "7");
+        $player = new Player21('Spelare 1');
+        $card1 = new Card('&hearts;', '7');
         $player->increaseHand($card1);
-        $card2 = new Card("&hearts;", "1");
+        $card2 = new Card('&hearts;', '1');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'Nytt kort?');
@@ -61,10 +59,10 @@ class Player21Test extends KernelTestCase
      */
     public function testGetResultLoss()
     {
-        $player = new Player21("Spelare 1");
-        $card1 = new Card("&hearts;", "10");
+        $player = new Player21('Spelare 1');
+        $card1 = new Card('&hearts;', '10');
         $player->increaseHand($card1);
-        $card2 = new Card("&hearts;", "K");
+        $card2 = new Card('&hearts;', 'K');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'FÖRLUST');

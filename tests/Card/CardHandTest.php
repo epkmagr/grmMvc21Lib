@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Card;
-use App\Card\CardHand;
-use App\Card\Card;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -28,41 +26,41 @@ class CardHandTest extends KernelTestCase
      */
     public function testCreateObjectWithArgument()
     {
-        $cardHand = new Card("&hearts;", "7");
-        $this->assertEquals($cardHand->getSuit(), "&hearts;");
-        $this->assertEquals($cardHand->getValue(), "7");
+        $cardHand = new Card('&hearts;', '7');
+        $this->assertEquals($cardHand->getSuit(), '&hearts;');
+        $this->assertEquals($cardHand->getValue(), '7');
     }
 
     /**
-     * Construct object, add 2 cards and verify length of hand
+     * Construct object, add 2 cards and verify length of hand.
      */
     public function testAddNewCard()
     {
         $cardHand = new CardHand();
-        $cardHand->addNewCard(new Card("&hearts;", "7"));
-        $cardHand->addNewCard(new Card("&clubs;", "8"));
+        $cardHand->addNewCard(new Card('&hearts;', '7'));
+        $cardHand->addNewCard(new Card('&clubs;', '8'));
         $this->assertEquals(count($cardHand->getCards()), 2);
     }
 
     /**
-     * Construct object, add 2 cards with one ace and verify length of hand
+     * Construct object, add 2 cards with one ace and verify length of hand.
      */
     public function testGetSumOfHandAceLow()
     {
         $cardHand = new CardHand();
-        $cardHand->addNewCard(new Card("&hearts;", "A"));
-        $cardHand->addNewCard(new Card("&clubs;", "7"));
+        $cardHand->addNewCard(new Card('&hearts;', 'A'));
+        $cardHand->addNewCard(new Card('&clubs;', '7'));
         $this->assertEquals($cardHand->getSumOfHandAceLow(), 8);
     }
 
     /**
-     * Construct object, add 2 cards with one ace and verify length of hand
+     * Construct object, add 2 cards with one ace and verify length of hand.
      */
     public function testGetSumOfHandAceHigh()
     {
         $cardHand = new CardHand();
-        $cardHand->addNewCard(new Card("&hearts;", "A"));
-        $cardHand->addNewCard(new Card("&clubs;", "7"));
+        $cardHand->addNewCard(new Card('&hearts;', 'A'));
+        $cardHand->addNewCard(new Card('&clubs;', '7'));
         $this->assertEquals($cardHand->getSumOfHandAceHigh(), 21);
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Card;
-use App\Card\Deck;
-use App\Card\Card;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -26,7 +24,7 @@ class DeckTest extends KernelTestCase
      * Construct object. Use no argument. Check some of the cards with getCard.
      * 0 is ace of clubs
      * 13 is ace of diams
-     * 51 is king of spades
+     * 51 is king of spades.
      */
     public function testGetCard()
     {
@@ -46,7 +44,7 @@ class DeckTest extends KernelTestCase
      * Construct object. Use no argument. Shuffle.
      * Check some of the cards with getCard.
      * 0 is NOT ace of clubs
-     * 51 is NOT king of spades
+     * 51 is NOT king of spades.
      */
     public function testShuffle()
     {
@@ -54,10 +52,10 @@ class DeckTest extends KernelTestCase
         $deck = new Deck();
         $deck->shuffle();
         $card = $deck->getCard(0);
-        $str = $card->getSuit() . $card->getValue();
+        $str = $card->getSuit().$card->getValue();
         $this->assertNotEquals($str, '&clubs;A');
         $card = $deck->getCard(51);
-        $str = $card->getSuit() . $card->getValue();
+        $str = $card->getSuit().$card->getValue();
         $this->assertNotEquals($str, '&spades;K');
     }
 

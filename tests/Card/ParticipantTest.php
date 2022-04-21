@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Card;
-use App\Card\Participant;
-use App\Card\Card;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -18,9 +16,9 @@ class ParticipantTest extends KernelTestCase
      */
     public function testCreateObjectWithArgument()
     {
-        $part = new Participant("Test");
+        $part = new Participant('Test');
         $this->assertInstanceOf("\App\Card\Participant", $part);
-        $this->assertEquals($part->getName(), "Test");
+        $this->assertEquals($part->getName(), 'Test');
         $this->assertEquals($part->getNoOfCards(), 0);
     }
 
@@ -31,10 +29,10 @@ class ParticipantTest extends KernelTestCase
      */
     public function testIncreaseHand()
     {
-        $part = new Participant("Test");
-        $card1 = new Card("&hearts;", "7");
+        $part = new Participant('Test');
+        $card1 = new Card('&hearts;', '7');
         $part->increaseHand($card1);
-        $card2 = new Card("&hearts;", "A");
+        $card2 = new Card('&hearts;', 'A');
         $part->increaseHand($card2);
         $this->assertEquals(count($part->getHand()->getCards()), 2);
     }
@@ -46,10 +44,10 @@ class ParticipantTest extends KernelTestCase
      */
     public function testGetSumOfHand()
     {
-        $part = new Participant("Test");
-        $card1 = new Card("&hearts;", "7");
+        $part = new Participant('Test');
+        $card1 = new Card('&hearts;', '7');
         $part->increaseHand($card1);
-        $card2 = new Card("&hearts;", "A");
+        $card2 = new Card('&hearts;', 'A');
         $part->increaseHand($card2);
         $part->getSumOfHand();
         $this->assertEquals($part->getScoreLow(), 8);
