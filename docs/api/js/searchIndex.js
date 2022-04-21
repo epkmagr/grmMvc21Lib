@@ -233,7 +233,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003Aplay\u0028\u0029",
             "name": "play",
-            "summary": "Play\u0020the\u0020game",
+            "summary": "Play\u0020the\u0020game.",
             "url": "classes/App-Card-Game21.html#method_play"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AplayPlayers\u0028\u0029",
