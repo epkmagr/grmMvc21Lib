@@ -64,6 +64,11 @@ h3 {
     text-align: center;
 }
 
+.submitButton {
+    min-width: 10em;
+    float: right;
+}
+
 .playButton {
     padding: 0.5em;
     margin: 0.5em;
@@ -84,9 +89,20 @@ h3 {
     text-align: center;
 }
 
-.submitButton {
-    min-width: 10em;
-    float: right;
+.startButton a:hover .hover-line {
+    width: 100%;
+
+}
+
+.hover-line {
+    transition: width 0.5s ease;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    bottom: -3px;
+    width: 0%;
+    left: 0;
+    right: 0;
 }
 
 .contentButton {

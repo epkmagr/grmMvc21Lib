@@ -180,7 +180,7 @@ class CardController extends AbstractController
             $cards = $request->request->get('noOfCards');
 
             for ($i = 0; $i < $players; ++$i) {
-                $myPlayers[$i] = new \App\Card\Player('Spelare ' . ($i + 1));
+                $myPlayers[$i] = new \App\Card\Player('Spelare '.($i + 1));
             }
             $session->set('myPlayers', $myPlayers);
 
@@ -229,7 +229,7 @@ class CardController extends AbstractController
     private function setPlayersToContent(array $myPlayers, Request $request)
     {
         for ($i = 0; $i < count($myPlayers); ++$i) {
-            $name = 'content' . $i;
+            $name = 'content'.$i;
             $content = $request->request->get($name);
             if ($content) {
                 $myPlayers[$i]->setContent();
@@ -272,7 +272,7 @@ class CardController extends AbstractController
                     $winner = $myPlayers[$i]->getName();
                     $bestScore = $playerBestScore;
                 } elseif ($playerBestScore == $bestScore and $noOfCards == $myPlayers[$i]->getNoOfCards()) {
-                    $winner = $winner . ' & ' . $myPlayers[$i]->getName();
+                    $winner = $winner.' & '.$myPlayers[$i]->getName();
                 } else {
                     $winner = $myPlayers[$i]->getName();
                     $bestScore = $playerBestScore;
@@ -280,6 +280,6 @@ class CardController extends AbstractController
             }
         }
 
-        return $result . '<br>' . $winner;
+        return $result.'<br>'.$winner;
     }
 }
