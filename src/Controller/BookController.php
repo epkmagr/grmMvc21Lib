@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Book;
+use App\Repository\BookRepository;
+
+class BookController extends AbstractController
+{
+    #[Route('/book', name: 'app_book')]
+    public function index(): Response
+    {
+        return $this->render('book/index.html.twig', [
+            'controller_name' => 'BookController',
+        ]);
+    }
+
+    #[Route("/book/create", name: "create_book")]
+    public function createbook(ManagerRegistry $doctrine): Response
+    //public function createbook(EntityManagerInterface $entityManager): Response
+    {
+        // you can fetch the EntityManager via $this->getDoctrine()
+        // or you can add an argument to the action:
+        //  createbook(EntityManagerInterface $entityManager)
+        // $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $doctrine->getManager();
+
+        $book = new book();
+        $number = rand(1, 9);
+        $book->setTitel('Book_' . $number);
+        $book->setISBN('ISBN_' . $number);
+        $book->setAuthor('Author_' . $number);
+
+        // tell Doctrine you want to (eventually) save the book (no queries yet)
+        $entityManager->persist($book);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return new Response('Saved new book with id '.$book->getId());
+    }
+
+    /**
+     * @Route("/book/show", name="show_all_books")
+    */
+    public function showAllBooks(
+        BookRepository $bookRepository
+    ): Response {
+        $books = $bookRepository
+            ->findAll();
+
+        return $this->json($books);
+    }
+
+    /**
+     * @Route("/book/show/{id}", name="show_book_by_id")
+     */
+    public function showBookById(
+        BookRepository $bookRepository,
+        int $id
+    ): Response {
+        $book = $bookRepository
+            ->find($id);
+
+        return $this->json($book);
+    }
+
+    /**
+     * @Route("/book/delete/{id}", name="delete_book_by_id")
+     */
+    public function deleteBookById(
+        ManagerRegistry $doctrine,
+        int $id
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id '.$id
+            );
+        }
+
+        $entityManager->remove($book);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_all_books');
+    }
+
+    /**
+     * @Route("/book/update/{id}/{author}", name="update_book")
+     */
+    public function updateBook(
+        ManagerRegistry $doctrine,
+        int $id,
+        string $author
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id '.$id
+            );
+        }
+
+        $book->setAuthor($author);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_all_books');
+    }
+}
