@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Book;
@@ -20,7 +21,7 @@ class BookController extends AbstractController
     }
 
     #[Route("/book/create", name: "create_book")]
-    public function createbook(ManagerRegistry $doctrine): Response
+    public function createbook(ManagerRegistry $doctrine, Request $request): Response
     //public function createbook(EntityManagerInterface $entityManager): Response
     {
         // you can fetch the EntityManager via $this->getDoctrine()
@@ -28,20 +29,27 @@ class BookController extends AbstractController
         //  createbook(EntityManagerInterface $entityManager)
         // $entityManager = $this->getDoctrine()->getManager();
         $entityManager = $doctrine->getManager();
+        $doSave = $request->request->get('doSave');
 
-        $book = new book();
-        $number = rand(1, 9);
-        $book->setTitel('Book_' . $number);
-        $book->setISBN('ISBN_' . $number);
-        $book->setAuthor('Author_' . $number);
+        if ($doSave) {
+            $book = new book();
+            $bookTitle = $request->request->get('bookTitle');
+            $bookISBN = $request->request->get('bookISBN');
+            $bookAuthor = $request->request->get('bookAuthor');
+            $book->setTitel($bookTitle);
+            $book->setISBN($bookISBN);
+            $book->setAuthor($bookAuthor);
 
-        // tell Doctrine you want to (eventually) save the book (no queries yet)
-        $entityManager->persist($book);
+            // tell Doctrine you want to (eventually) save the book (no queries yet)
+            $entityManager->persist($book);
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
+        }
 
-        return new Response('Saved new book with id '.$book->getId());
+        return $this->render('book/create.html.twig', [
+            'book' => $book ?? null,
+        ]);
     }
 
     /**
@@ -53,7 +61,9 @@ class BookController extends AbstractController
         $books = $bookRepository
             ->findAll();
 
-        return $this->json($books);
+        return $this->render('book/showAll.html.twig', [
+            'books' => $books ?? null,
+        ]);
     }
 
     /**

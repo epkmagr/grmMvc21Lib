@@ -1,0 +1,46 @@
+{# templates/book/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Bibliotek</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <h3>Lista på alla böcker!</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('app_book') }}">&#8617;</a>
+        </div>
+        {% if books %}
+        <div class="col-md-8 col-md-offset-1">
+            <table>
+                <tr>
+                    <th>Titel</th>
+                    <th>ISBN</th>
+                    <th>Författare</th>
+                </tr>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.getTitel() }}</td>
+                    <td>{{ book.getISBN() }}</td>
+                    <td>{{ book.getAuthor() }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                <h3>Biblioteket är tomt!</h3>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

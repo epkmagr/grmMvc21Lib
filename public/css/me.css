@@ -55,7 +55,9 @@ h3 {
     text-align: center;
 }
 
-.myButton, .submitButton {
+.myButton,
+.submitButton,
+.bookButton {
     padding: 0.5em;
     margin: 0.5em;
     font-size: large;
@@ -67,6 +69,10 @@ h3 {
 .submitButton {
     min-width: 10em;
     float: right;
+}
+
+.bookButton {
+    min-width: 10em;
 }
 
 .playButton {
@@ -185,4 +191,35 @@ h3 {
     font-size: 70px;
     text-align: center;
     display: block;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr {
+    background-color: #121389;
+    color: #fff;
+    text-align: left;
+    font-size: 24px;
+}
+
+table th,
+td {
+    padding: 12px 15px;
+}
+
+th {
+    background-color: #b6d2ea;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }

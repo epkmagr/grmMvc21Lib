@@ -1,0 +1,52 @@
+{# templates/book/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Bibliotek</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('app_book') }}">&#8617;</a>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <form method="post">
+                <fieldset>
+                <legend>Lägg till en ny book</legend>
+                <p>
+                    <label style="width: 100%">Titel:<br>
+                    <input type="text" name="bookTitle" required  style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <label  style="width: 100%">ISBN:<br>
+                    <input type="number" name="bookISBN" required  style="width: 100%"/>
+                </p>
+
+                <p>
+                    <label  style="width: 100%">Författare:<br>
+                    <input type="text" name="bookAuthor" required  style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <input class="bookButton" type="submit" name="doSave" value="Lägg till">
+                    <input class="bookButton" type="reset" value="Rensa">
+                </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    {% if book %}
+        <h3>Boken, {{ book.getTitel() }} med författaren {{ book.getAuthor() }}
+        har lagt till i biblioteket!
+        </h3>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
