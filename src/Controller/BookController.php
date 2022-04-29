@@ -67,7 +67,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/show/{id}", name="show_book_by_id")
+     * @Route("/book/show/{id}", name="show_book")
      */
     public function showBookById(
         BookRepository $bookRepository,
@@ -76,11 +76,14 @@ class BookController extends AbstractController
         $book = $bookRepository
             ->find($id);
 
-        return $this->json($book);
+        return $this->render('book/showOne.html.twig', [
+            'book' => $book ?? null,
+            'id' => $id,
+        ]);
     }
 
     /**
-     * @Route("/book/delete/{id}", name="delete_book_by_id")
+     * @Route("/book/delete/{id}", name="delete_book")
      */
     public function deleteBookById(
         ManagerRegistry $doctrine,
@@ -102,12 +105,11 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/update/{id}/{author}", name="update_book")
+     * @Route("/book/update/{id}", name="update_book")
      */
     public function updateBook(
         ManagerRegistry $doctrine,
-        int $id,
-        string $author
+        int $id
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Book::class)->find($id);
@@ -118,7 +120,7 @@ class BookController extends AbstractController
             );
         }
 
-        $book->setAuthor($author);
+        // $book->setAuthor($author);
         $entityManager->flush();
 
         return $this->redirectToRoute('show_all_books');

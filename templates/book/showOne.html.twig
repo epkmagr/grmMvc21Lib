@@ -11,43 +11,32 @@
     </div>
     <div class="row">
         <div class="col-md-5 col-md-offset-3">
-            <h3>Lista på alla böcker!</h3>
+            <h3>Detaljer om bok med id {{ id }}</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-1 home21">
-            <a href="{{ path('app_book') }}">&#8617;</a>
+            <a href="{{ path('show_all_books') }}">&#8617;</a>
         </div>
-        {% if books %}
+        {% if book %}
         <div class="col-md-8 col-md-offset-1">
             <table>
                 <tr>
                     <th>Titel</th>
+                    <th>ISBN</th>
                     <th>Författare</th>
-                    <th>Detaljer</th>
-                    <th>Ändra/Ta bort</th>
                 </tr>
-                {% set bookId = 0 %}
-                {% for book in books %}
-                {% set bookId = bookId + 1 %}
-                {% dump(bookId) %}
                 <tr>
+                    <td>{{ book.getTitel()}}</td>
                     <td>{{ book.getISBN() }}</td>
                     <td>{{ book.getAuthor() }}</td>
-                    <td>
-                        <a class="symbol" href="{{ path('show_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-info-sign"></i></a>
-                    <td>
-                        <a class="symbol" href="{{ path('update_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
-                        <a class="symbol" href="{{ path('delete_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-trash"></i></a>
-                    </td>
                 </tr>
-                {% endfor %}
             </table>
         </div>
         {% else %}
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
-                <h3>Biblioteket är tomt!</h3>
+                <h3>Det saknas information om den boken!</h3>
             </div>
         {% endif %}
     </div>
