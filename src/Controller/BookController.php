@@ -83,7 +83,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/delete/{id}", name="delete_book")
+     * @Route("/book/delete/{id}", name="delete_book", methods={"GET","POST"})
      */
     public function deleteBookById(
         ManagerRegistry $doctrine,
@@ -105,14 +105,16 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/update/{id}", name="update_book")
+     * @Route("/book/update/{id}", name="update_book", methods={"GET","POST"})
      */
     public function updateBook(
         ManagerRegistry $doctrine,
+        Request $request,
         int $id
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Book::class)->find($id);
+        $doUpdate = $request->request->get('doUpdate');
 
         if (!$book) {
             throw $this->createNotFoundException(
@@ -120,9 +122,20 @@ class BookController extends AbstractController
             );
         }
 
-        // $book->setAuthor($author);
-        $entityManager->flush();
+        if ($doUpdate) {
+            $bookTitle = $request->request->get('bookTitle');
+            $bookISBN = $request->request->get('bookISBN');
+            $bookAuthor = $request->request->get('bookAuthor');
+            $book->setTitel($bookTitle);
+            $book->setISBN($bookISBN);
+            $book->setAuthor($bookAuthor);
 
-        return $this->redirectToRoute('show_all_books');
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
+        }
+
+        return $this->render('book/update.html.twig', [
+            'book' => $book ?? null,
+        ]);
     }
 }

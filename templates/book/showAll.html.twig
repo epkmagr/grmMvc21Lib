@@ -27,12 +27,10 @@
                     <th>Detaljer</th>
                     <th>Ändra/Ta bort</th>
                 </tr>
-                {% set bookId = 0 %}
                 {% for book in books %}
-                {% set bookId = bookId + 1 %}
-                {% dump(bookId) %}
+                {% set bookId = book.id %}
                 <tr>
-                    <td>{{ book.getISBN() }}</td>
+                    <td>{{ book.getTitel() }}</td>
                     <td>{{ book.getAuthor() }}</td>
                     <td>
                         <a class="symbol" href="{{ path('show_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-info-sign"></i></a>
@@ -50,6 +48,13 @@
                 <h3>Biblioteket är tomt!</h3>
             </div>
         {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="myButton">
+                <a href="{{ path('create_book') }}">Lägg till en ny bok</a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

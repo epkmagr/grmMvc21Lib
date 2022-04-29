@@ -10,44 +10,42 @@
         <h1>Bibliotek</h1>
     </div>
     <div class="row">
-        <div class="col-md-5 col-md-offset-3">
-            <h3>Välkommen till biblioteket!</h3>
-            <p>Här kan du skapa böcker, visa detaljer om en bok och visa alla böcker.
-            Du kan också uppdatera en viss bok eller ta bort en viss bok.</p>
+        <div class="col-md-1 home21">
+            <a href="{{ path('show_all_books') }}">&#8617;</a>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2 col-md-offset-1">
+        {% if book %}
+        <div class="col-md-8 col-md-offset-1">
             <form method="post">
                 <fieldset>
-                <legend>Lägg till en ny book</legend>
+                <legend>Uppdatera booken</legend>
                 <p>
-                    <label>Titel:<br>
-                    <input type="text" name="bookTitle" value="<?= $movie->title ?>"/>
+                    <label style="width: 100%">Titel:<br>
+                    <input type="text" name="bookTitle" required  style="width: 100%"
+                    value="{{ book.getTitel() }}"/>
                     </label>
                 </p>
 
                 <p>
-                    <label>ISBN:<br>
-                    <input type="number" name="movieISBN" value="<?= $movie->year ?>"/>
-                </p>
+                    <label  style="width: 100%">ISBN:<br>
+                    <input type="text" name="bookISBN" required  style="width: 100%"
+                    value="{{ book.getISBN() }}"/>
+                    </label>
+               </p>
 
                 <p>
-                    <label>Image:<br>
-                    <input type="text" name="movieAuthor" value="<?= $movie->image ?>"/>
+                    <label  style="width: 100%">Författare:<br>
+                    <input type="text" name="bookAuthor" required  style="width: 100%"
+                    value="{{ book.getAuthor() }}"/>
                     </label>
                 </p>
 
                 <p>
-                    <input type="submit" name="doSave" value="Save">
-                    <div class="myButton">
-                        <a href="{{ path('create_book') }}">Lägg till</a>
-                    </div>
-                    <input type="reset" value="Rensa">
+                    <input class="bookButton" type="submit" name="doUpdate" value="Uppdatera">
                 </p>
                 </fieldset>
             </form>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
