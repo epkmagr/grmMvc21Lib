@@ -15,6 +15,8 @@ class BookController extends AbstractController
     #[Route('/book', name: 'app_book')]
     public function index(): Response
     {
+        // echo $_ENV['APP_ENV'];
+        // echo $_ENV['DATABASE_URL'];
         return $this->render('book/index.html.twig', [
             'controller_name' => 'BookController',
         ]);
