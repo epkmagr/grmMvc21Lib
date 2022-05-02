@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+{# read and display all flash messages #}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Bibliotek</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('app_book') }}">&#8617;</a>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <form method="post">
+                <fieldset>
+                <legend>Logga in</legend>
+                <p>
+                    <label>Akronym:
+                        <input type="text" name="user" value="">
+                    </label>
+                </p>
+                <p>
+                    <label>Lösenord:
+                        <input type="password" name="pwd" value="">
+                    </label>
+                </p>
+                <p>
+                    <input class="bookButton" type="submit" name="doLogin" value="Logga in">
+                    <input class="bookButton" type="submit" name="doCreate" value="Skapa ny användare">
+                </p>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

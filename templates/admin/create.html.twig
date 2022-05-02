@@ -1,0 +1,63 @@
+{# templates/book/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Bibliotek</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('app_book') }}">&#8617;</a>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <form action="{{ path('createUser-process') }}" method="post">
+                <fieldset>
+                <legend>Lägg till en ny användare</legend>
+                <p>
+                    <label style="width: 100%">Epost:<br>
+                    <input type="text" name="userEmail" required  style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <label  style="width: 100%">Akronym:<br>
+                    <input type="text" name="userAcronym" required  style="width: 100%"/>
+                </p>
+
+                <p>
+                    <label  style="width: 100%">Name:<br>
+                    <input type="text" name="userName" required  style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <label  style="width: 100%">Lösenord:<br>
+                    <input type="text" name="userPassword" required  style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <label  style="width: 100%">Adminanvändare:<br>
+                    <p>
+                        <input type="radio" name="isAdmin" checked>Ja</input>
+                    </p>
+                    <p>
+                        <input type="radio" name="isAdmin">Nej</input>
+                    </p>
+                    </label>
+                </p>
+
+                <p>
+                    <input class="bookButton" type="submit" name="doCreate" value="Lägg till">
+                    <input class="bookButton" type="reset" value="Rensa">
+                </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
