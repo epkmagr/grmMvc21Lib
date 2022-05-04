@@ -227,3 +227,7 @@ table tbody tr:nth-of-type(even) {
 .symbol {
     font-size: x-large;
 }
+
+.maxWidthFigure {
+    width: 100%;
+}

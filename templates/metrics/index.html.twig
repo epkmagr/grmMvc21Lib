@@ -1,0 +1,85 @@
+{# templates/metrics/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Metrics</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Introduktion</h3>
+            <p>Här har jag analyserat min kodkvalitet på denna webbplatsen.
+            Ett av verktygen (phpmetrics) har jag installerat och kört lokalt i min
+            utvecklingsmiljö. Det andra verktyget (Scrutinizer CI) är en extern
+            byggtjänst som kopplar sig mot mitt repo på GitHub/GitLab.</p>
+
+            <p><strong>Coverage:</strong></p>
+            <ul>
+                <li>Lines, files, classes, methods covered by one or several test cases.</li>
+                <li>Higher coverage could imply that the code is well tested.</li>
+                <li>Low coverage could imply potential risk in quality assurance.</li>
+            </ul>
+            <p><strong>Complexity</strong></p>
+            <ul>
+                <li>The higher the value the more complex the code might be resulting in
+                harder to maintain and develop.</li>
+                <li>A lot of nested loops and conditions.</li>
+                <li>Recommended 10.</li>
+            </ul>
+            <p><strong>Cohesion</strong></p>
+            <ul>
+                <li>Lower values indicates focused classes with single responsibilities
+                which gives "high cohesion" where the methods really belong to the class.</li>
+                <li>A higher value (low cohesion) might indicate a class with many
+                responsibilities that can be divided into several classes.</li>
+                <li>Try to aim for lower values. That is high cohesion supporting single
+                responsibility.</li>
+            </ul>
+            <p><strong>Coupling</strong></p>
+            <ul>
+                <li>Afferent coupling (AC) is the number of classes affected by given
+                class. => Outgoing connections</li>
+                <li>Efferent coupling (EC) is the number of classes from which given
+                class receives effects. => Incoming connections</li>
+                <li>High number of AC (outgoing) might say that this class uses many
+                other classes.</li>
+                <li>High number of EC (incoming) might say that many other classes
+                depends on this class.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Phpmetrics</h3>
+            <figure class="figure">
+                <img src="{{ absolute_url(asset('images/phpMetricsTest1.png')) }}" alt="Logo Symfony" class="figure-img img-fluid maxWidthFigure">
+            </figure>
+            <figure class="figure">
+                <img src="{{ absolute_url(asset('images/phpMetric2Test1.png')) }}" alt="Logo Symfony" class="figure-img img-fluid maxWidthFigure">
+            </figure>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Scrutinizer</h3>
+            <figure class="figure">
+                <img src="{{ absolute_url(asset('images/scrutinizerTest1.png')) }}" alt="Logo Symfony" class="figure-img img-fluid maxWidthFigure">
+            </figure>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Förbättringar</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Diskussion</h3>
+        </div>
+    </div>
+</div>
+{% endblock %}

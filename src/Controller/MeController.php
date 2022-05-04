@@ -43,4 +43,12 @@ class MeController extends AbstractController
             'kmom' => $kmom,
         ]);
     }
+
+    /**
+     * @Route("/metrics", name="metrics")
+     */
+    public function metrics(): Response
+    {
+        return $this->render('metrics/index.html.twig');
+    }
 }
