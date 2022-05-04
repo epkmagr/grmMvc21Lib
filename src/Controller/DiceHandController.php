@@ -50,8 +50,8 @@ class DiceHandController extends AbstractController
 
         $session->set('dicehand', $hand);
 
-        $this->addFlash('info', 'Din tärningshand har '.$hand->getNumberDices().' tärningar.');
-        $this->addFlash('info', 'Valörer: '.$hand->getAsString());
+        $this->addFlash('info', 'Din tärningshand har ' . $hand->getNumberDices() . ' tärningar.');
+        $this->addFlash('info', 'Valörer: ' . $hand->getAsString());
 
         return $this->redirectToRoute('dice-hand-home');
     }

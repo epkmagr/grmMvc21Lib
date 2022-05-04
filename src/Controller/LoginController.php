@@ -93,7 +93,7 @@ class LoginController extends AbstractController
             $user->setPassword($userPassword);
             $user->setIsAdmin(false);
             if ($isAdmin) {
-               $user->setIsAdmin(true);
+                $user->setIsAdmin(true);
             }
 
             // tell Doctrine you want to (eventually) save the user (no queries yet)

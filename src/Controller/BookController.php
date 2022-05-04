@@ -24,12 +24,7 @@ class BookController extends AbstractController
 
     #[Route("/book/create", name: "create_book")]
     public function createbook(ManagerRegistry $doctrine, Request $request): Response
-    //public function createbook(EntityManagerInterface $entityManager): Response
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to the action:
-        //  createbook(EntityManagerInterface $entityManager)
-        // $entityManager = $this->getDoctrine()->getManager();
         $entityManager = $doctrine->getManager();
         $doSave = $request->request->get('doSave');
 
@@ -96,7 +91,7 @@ class BookController extends AbstractController
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found for id '.$id
+                'No book found for id ' . $id
             );
         }
 
@@ -120,7 +115,7 @@ class BookController extends AbstractController
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found for id '.$id
+                'No book found for id ' . $id
             );
         }
 

@@ -115,8 +115,9 @@
         "phpdoc": "php tools/phpdoc/phpdoc",
         "phpunit": [
             "@putenv XDEBUG_MODE=coverage",
-            "php bin/phpunit"
-        ]
+            "php vendor/bin/phpunit"
+        ],
+        "phpmetrics": "php tools/phpmetrics/vendor/bin/phpmetrics --config=phpmetrics.json"
     },
     "conflict": {
         "symfony/symfony": "*"

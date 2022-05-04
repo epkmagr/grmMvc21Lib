@@ -5,4 +5,4 @@ parameters:
         - src
         #- test
     bootstrapFiles:
-        - .phpstan.constants.php
+        #- .phpstan.constants.php
