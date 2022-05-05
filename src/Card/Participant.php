@@ -134,6 +134,16 @@ class Participant
     }
 
     /**
+     * Get the best score of the player.
+     *
+     * @return int $bestScore as the bestScore of the player
+     */
+    public function getBestScore()
+    {
+        return $this->bestScore;
+    }
+
+    /**
      * Set the score to the sum of cards in the hand. Ace is counted as 1.
      */
     public function getSumOfHand()
