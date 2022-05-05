@@ -13,7 +13,7 @@ class Deck
     public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
 
     /**
-     * @var array the deck of the cards
+     * @var array<Card> the deck of the cards.
      */
     private $cards;
 
@@ -44,7 +44,7 @@ class Deck
     /**
      * Get the deck of the cards.
      *
-     * @return array
+     * @return array<Card>
      */
     public function getDeck()
     {
@@ -72,7 +72,7 @@ class Deck
     /**
      * Get card number $number in the deck of the cards.
      *
-     * @var int the card to get
+     * @param int $number the card to get
      *
      * @return Card
      */

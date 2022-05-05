@@ -10,12 +10,12 @@ namespace App\Card;
 class Participant
 {
     /**
-     * @var string   the name of the player
-     * @var CardHand the hand with cards
-     * @var int      the scoreLow of the player with ace as 1
-     * @var int      the scoreHigh of the player with ace as 14
-     * @var int      the bestScore of the player, scoreLow or scoreHigh
-     * @var bool     true if the player is content, false otherwise
+     * @var string $name the name of the player
+     * @var CardHand $hand the hand with cards
+     * @var int $scoreLow the scoreLow of the player with ace as 1
+     * @var int $scoreHigh the scoreHigh of the player with ace as 14
+     * @var int $bestScore the bestScore of the player, scoreLow or scoreHigh
+     * @var bool $content true if the player is content, false otherwise
      */
     private $name;
     private $hand;

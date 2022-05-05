@@ -11,8 +11,8 @@ namespace App\Card;
 class Card
 {
     /**
-     * @var string the value of the card
-     * @var string the suit of the card
+     * @var string $value the value of the card.
+     * @var string $suit the suit of the card.
      */
     private $value;
     private $suit;

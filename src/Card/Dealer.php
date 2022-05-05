@@ -20,16 +20,6 @@ class Dealer extends Participant
     }
 
     /**
-     * Get the best score of the player.
-     *
-     * @return int $bestScore as the bestScore of the player
-     */
-    public function getBestScore()
-    {
-        return $this->bestScore;
-    }
-
-    /**
      * Get the result for the bank.
      *
      * @return string as the result of the score

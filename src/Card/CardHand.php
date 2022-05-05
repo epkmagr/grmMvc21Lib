@@ -11,12 +11,15 @@ namespace App\Card;
 class CardHand
 {
     /**
-     * @var array the hand of the cards
+     * @var array<Card> $hand the hand of the cards
      */
     private $hand;
 
     /**
      * Constructor to create an object of Dice.
+     *
+     * @param array<Card> $hand the hand of the cards
+     *
      */
     public function __construct(array $hand = [])
     {
@@ -37,7 +40,7 @@ class CardHand
     /**
      * Get the hand of the cards.
      *
-     * @return array
+     * @return array<Card>
      */
     public function getCards()
     {
@@ -98,6 +101,8 @@ class CardHand
 
     /**
      * Draw a new card and add it to the hand of the cards.
+     *
+     * @param Card $card the card added to the hand
      *
      * @return void
      */

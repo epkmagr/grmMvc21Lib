@@ -10,11 +10,11 @@ namespace App\Card;
  */
 class Deck2 extends Deck
 {
-    public const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
+    // public const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    // public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
 
     /**
-     * @var array the deck of the cards
+     * @var array<Card> the deck of the cards
      */
     private $cards;
 
@@ -44,48 +44,12 @@ class Deck2 extends Deck
     }
 
     /**
-     * Get the deck of the cards.
+     * Get the deck of the cards with 2 jokers.
      *
-     * @return array
+     * @return array<Card>
      */
     public function getDeck()
     {
         return $this->cards;
-    }
-
-    /**
-     * Get card number $number in the deck of the cards.
-     *
-     * @var int the card to get
-     *
-     * @return Card
-     */
-    public function getCard(int $number)
-    {
-        $card = $this->cards[$number];
-        unset($this->cards[$number]);
-        array_values($this->cards);
-
-        return $card;
-    }
-
-    /**
-     * Get card number $number in the deck of the cards.
-     *
-     * @return Card
-     */
-    public function getTopCard()
-    {
-        return array_shift($this->cards);
-    }
-
-    /**
-     * Shuffle the deck of the cards.
-     *
-     * @return void
-     */
-    public function shuffle()
-    {
-        shuffle($this->cards);
     }
 }

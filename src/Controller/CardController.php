@@ -265,8 +265,8 @@ class CardController extends AbstractController
         $noOfCards = $bank->getNoOfCards();
         for ($i = 0; $i < count($myPlayers); ++$i) {
             $playerBestScore = $myPlayers[$i]->getBestScore();
-            var_dump($bestScore);
-            var_dump($playerBestScore);
+            // var_dump($bestScore);
+            // var_dump($playerBestScore);
             if ($playerBestScore <= 21 and $playerBestScore > $bestScore) {
                 if ($playerBestScore == $bestScore and $noOfCards > $myPlayers[$i]->getNoOfCards()) {
                     $winner = $myPlayers[$i]->getName();
