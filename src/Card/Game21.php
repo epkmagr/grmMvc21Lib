@@ -151,8 +151,9 @@ class Game21
     private function checkIfAllAreContent()
     {
         $noOfContent = 0;
+        $noOfPlayers = count($this->players);
 
-        for ($i = 0; $i < count($this->players); ++$i) {
+        for ($i = 0; $i < $noOfPlayers; ++$i) {
         }
         foreach ($this->players as $player) {
             if ($player->isContent()) {
@@ -174,10 +175,11 @@ class Game21
         $winner = $this->dealer->getName();
         $bestScore = $this->dealer->getBestScore();
         $noOfCards = $this->dealer->getNoOfCards();
-        for ($i = 0; $i < count($this->players); ++$i) {
+        $noOfPlayers = count($this->players);
+        for ($i = 0; $i < $noOfPlayers; ++$i) {
             $playerBestScore = $this->players[$i]->getBestScore();
             if ($playerBestScore <= 21 and $playerBestScore > $bestScore) {
-                if ($playerBestScore == $bestScore and $noOfCards > $this->players[$i]->getNoOfCards()) {
+                if (($playerBestScore == $bestScore) and ($noOfCards > $this->players[$i]->getNoOfCards())) {
                     $winner = $this->players[$i]->getName();
                     $bestScore = $playerBestScore;
                 } elseif ($playerBestScore == $bestScore and $noOfCards == $this->players[$i]->getNoOfCards()) {

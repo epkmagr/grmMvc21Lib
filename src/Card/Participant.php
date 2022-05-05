@@ -74,7 +74,7 @@ class Participant
      */
     public function getNoOfCards()
     {
-        return (empty($this->hand->getCards)) ? 0 : count($this->hand->getCards);
+        return (empty($this->hand->getCards())) ? 0 : count($this->hand->getCards());
     }
 
     /**

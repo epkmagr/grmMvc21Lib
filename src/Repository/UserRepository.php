@@ -64,7 +64,7 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    public function findUser($user): ?User
+    public function findUser($user): ?User | null
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.acronym = :user')

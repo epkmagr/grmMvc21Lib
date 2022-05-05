@@ -67,6 +67,7 @@ class CardController extends AbstractController
      */
     public function draw(Request $request, SessionInterface $session): Response
     {
+        $cards = array();
         $deck = $session->get('deck') ?? new \App\Card\Deck();
         $deck->shuffle();
 
@@ -103,7 +104,6 @@ class CardController extends AbstractController
 
         $clear = $request->request->get('clear');
         $drawSeveral = $request->request->get('drawSeveral');
-        $noOfCards = $number;
 
         if ($clear) {
             $session->clear();
@@ -159,7 +159,7 @@ class CardController extends AbstractController
         $myPlayers = [];
         $myPlayers = $session->get('myPlayers') ?? [new \App\Card\Player('Spelare 1')];
         $this->setPlayersToContent($myPlayers, $request);
-        $gameover = $this->checkIfAllAreContent($bank, $myPlayers, $request);
+        $gameover = $this->checkIfAllAreContent($bank, $myPlayers);
         $resultStr = '';
         if ($gameover) {
             $resultStr = $this->result($bank, $myPlayers);
@@ -265,8 +265,6 @@ class CardController extends AbstractController
         $noOfCards = $bank->getNoOfCards();
         for ($i = 0; $i < count($myPlayers); ++$i) {
             $playerBestScore = $myPlayers[$i]->getBestScore();
-            // var_dump($bestScore);
-            // var_dump($playerBestScore);
             if ($playerBestScore <= 21 and $playerBestScore > $bestScore) {
                 if ($playerBestScore == $bestScore and $noOfCards > $myPlayers[$i]->getNoOfCards()) {
                     $winner = $myPlayers[$i]->getName();

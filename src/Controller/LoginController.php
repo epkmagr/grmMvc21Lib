@@ -79,6 +79,7 @@ class LoginController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $doCreate = $request->request->get('doCreate');
+        $userAcronym = "";
 
         if ($doCreate) {
             $user = new user();
