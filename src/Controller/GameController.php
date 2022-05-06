@@ -44,7 +44,7 @@ class GameController extends AbstractController
         return $this->render('game/play.html.twig', [
             'bank' => $game21->getDealer(),
             'myPlayers' => $game21->getPlayers(),
-            'noOfCardsLeft' => count($game21->getDeck()),
+            'noOfCardsLeft' => count($game21->getDeck()->getDeck()),
             'result' => $resultStr,
         ]);
     }
@@ -52,7 +52,7 @@ class GameController extends AbstractController
     /**
      * @Route("/game/play", name="gameReset", methods={"POST"})
      */
-    public function reset(Request $request, SessionInterface $session): Response
+    public function reset(Request $request, SessionInterface $session): Response|null
     {
         $clear = $request->request->get('clear');
         if ($clear) {
@@ -63,6 +63,8 @@ class GameController extends AbstractController
             $myPlayers = [new \App\Card\Player('Spelare 1')];
             $players = '1';
             $cards = '1';
+
+            $session->set('deck', $deck);
 
             return $this->redirectToRoute('gamePlay', ['players' => $players, 'cards' => $cards]);
         }

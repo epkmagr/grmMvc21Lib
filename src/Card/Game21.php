@@ -54,7 +54,7 @@ class Game21
      */
     public function getDeck()
     {
-        return $this->deck->getDeck();
+        return $this->deck;
     }
 
     /**
