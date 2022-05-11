@@ -6,7 +6,7 @@
             <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
             <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"    rel="stylesheet">
             {% block stylesheets %}
-                <link href="{{ asset('css/me.css') }}" type="text/css" rel="stylesheet"/>
+                <link href="{{ asset('css/garden/proj.css') }}" type="text/css" rel="stylesheet"/>
             {% endblock %}
             <title>{% block title %}{% endblock %} - MVC webpage</title>
             <link rel="shortcut icon" href="{{ absolute_url('images/favicon.ico') }}">
@@ -26,14 +26,10 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ path('me') }}">Hem</a></li>
-                        <li><a href="{{ path('about') }}">Om</a></li>
-                        <li><a href="{{ path('report') }}">Redovisning</a></li>
-                        <li><a href="{{ path('card') }}">kmom02</a></li>
-                        <li><a href="{{ path('game') }}">Spel 21</a></li>
-                        <li><a href="{{ path('app_book') }}">Bibliotek</a></li>
-                        <li><a href="{{ path('metrics') }}">Metrics</a></li>
-                        <li><a href="{{ path('app_garden') }}">Projekt</a></li>
+                        <li><a href="{{ path('app_garden') }}">Hem</a></li>
+                        <li><a href="{{ path('services_garden') }}">Tjänster</a></li>
+                        <li><a href="{{ path('blogg_garden') }}">Blogg</a></li>
+                        <li><a href="{{ path('about_garden') }}">Om</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,11 +37,23 @@
         <div id="content">
             {% block content %}{% endblock %}
         </div>
-        <div id="footer" class="well text-center navbar-fixed-bottom my-footer">
+        <div id="footer" class="site-footer row">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
             {% block footer %}
-                &copy; 2022 Marie's programming Ltd.
+            <div class="col-md-12">
+                <div class="col-md-3 col-md-offset-1">
+                    {{ include('garden/block/footer-col-1.markdown.twig')|markdown_to_html }}
+                </div>
+                <div class="col-md-3">
+                    {{ include('garden/block/footer-col-2.markdown.twig')|markdown_to_html }}
+                </div>
+                <div class="col-md-3">
+                    {{ include('garden/block/footer-col-3.markdown.twig')|markdown_to_html }}
+                </div>
+                <div class="col-md-11 col-md-offset-1">
+                {{ include('garden/block/footer.markdown.twig')|markdown_to_html }}
+            </div>
             {% endblock %}
         </div>
     </body>

@@ -1,0 +1,13 @@
+/* Styling file for garden project */
+
+/* Footer */
+.site-footer {
+  background-color: #2b730a;
+  color: white;
+  clear: both;
+}
+
+.site-footer p {
+  font-style: italic;
+  margin-top: 0;
+}
