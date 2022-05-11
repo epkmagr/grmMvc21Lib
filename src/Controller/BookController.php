@@ -56,7 +56,7 @@ class BookController extends AbstractController
         BookRepository $bookRepository
     ): Response {
         $books = $bookRepository
-            ->findAll();
+            ->findAllSortedByTitle();
 
         return $this->render('book/showAll.html.twig', [
             'books' => $books ?? null,

@@ -47,6 +47,11 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllSortedByTitle()
+    {
+        return $this->findBy(array(), array('titel' => 'ASC'));
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */
