@@ -1,0 +1,51 @@
+{# templates/garden/services/showAll.html.twig #}
+
+{% extends 'garden/base.html.twig' %}
+
+{% block title %}Alla tjänster{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <h1>Visa alla trädgårdstjänster</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 backArrow">
+            <a href="{{ path('services_garden') }}">&#8617;</a>
+        </div>
+        {% if services %}
+        <div class="col-md-8 col-md-offset-1">
+            <table>
+                <tr>
+                    <th>Titel</th>
+                    <th>Bild</th>
+                    <th>Pris</th>
+                </tr>
+                {% for service in services %}
+                {% set servicesId = service.id %}
+                <tr>
+                    <td>{{ service.getTitle() }}</td>
+                    <td>{{ service.getImage() }}</td>
+                    <td>{{ service.getPrice() }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                <h3>Det finns inga trädgårdstjänster!</h3>
+            </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="myButton">
+                <a href="{{ path('create_services_garden') }}">Lägg till en ny bok</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

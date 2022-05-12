@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\garden;
-use App\Repository\gardenRepository;
+use App\Entity\Services;
+use App\Repository\ServicesRepository;
 
 class GardenController extends AbstractController
 {
@@ -29,53 +29,53 @@ class GardenController extends AbstractController
     #[Route('/proj/services', name: 'services_garden')]
     public function services(): Response
     {
-        return $this->render('garden/about.html.twig');
+        return $this->render('garden/services.html.twig');
+    }
+
+    /**
+     * @Route("/proj/services/show", name="show_all_services_garden")
+    */
+    public function showAllServices(
+        servicesRepository $servicesRepository
+    ): Response {
+        $services = $servicesRepository
+            ->findAll();
+
+        return $this->render('garden/services/showAll.html.twig', [
+            'services' => $services ?? null,
+        ]);
     }
 
     #[Route('/proj/blogg', name: 'blogg_garden')]
     public function blogg(): Response
     {
-        return $this->render('garden/about.html.twig');
+        return $this->render('garden/blogg.html.twig');
     }
 
-    #[Route("/garden/create", name: "create_garden")]
+    #[Route("/proj/services/create", name: "create_services_garden")]
     public function creategarden(ManagerRegistry $doctrine, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
-        $doSave = $request->request->get('doSave');
+        $doCreate = $request->request->get('doCreate');
 
-        if ($doSave) {
-            $garden = new garden();
-            $gardenTitle = $request->request->get('gardenTitle');
-            $gardenISBN = $request->request->get('gardenISBN');
-            $gardenAuthor = $request->request->get('gardenAuthor');
-            $garden->setTitel($gardenTitle);
-            $garden->setISBN($gardenISBN);
-            $garden->setAuthor($gardenAuthor);
+        if ($doCreate) {
+            $services = new services();
+            $serviceTitle = $request->request->get('serviceTitle');
+            $serviceImage = $request->request->get('serviceImage');
+            $servicePrice = $request->request->get('servicePrice');
+            $services->setTitle($serviceTitle);
+            $services->setISBN($serviceImage);
+            $services->setAuthor($servicePrice);
 
             // tell Doctrine you want to (eventually) save the garden (no queries yet)
-            $entityManager->persist($garden);
+            $entityManager->persist($services);
 
             // actually executes the queries (i.e. the INSERT query)
             $entityManager->flush();
         }
 
-        return $this->render('garden/create.html.twig', [
-            'garden' => $garden ?? null,
-        ]);
-    }
-
-    /**
-     * @Route("/garden/show", name="show_all_gardens")
-    */
-    public function showAllgardens(
-        gardenRepository $gardenRepository
-    ): Response {
-        $gardens = $gardenRepository
-            ->findAllSortedByTitle();
-
-        return $this->render('garden/showAll.html.twig', [
-            'gardens' => $gardens ?? null,
+        return $this->render('garden/services/create.html.twig', [
+            'services' => $services ?? null,
         ]);
     }
 

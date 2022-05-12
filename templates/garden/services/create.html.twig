@@ -1,0 +1,49 @@
+{# templates/garden/services/create.html.twig #}
+
+{% extends 'garden/base.html.twig' %}
+
+{% block title %}Skapa tjänst{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <h1>Skapa en ny tjänst</h1>
+    <div class="row">
+        <div class="col-md-1 backArrow">
+            <a href="{{ path('app_garden') }}">&#8617;</a>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <form method="post">
+                <fieldset>
+                <legend>Lägg till följande information</legend>
+                <p>
+                    <label style="width: 100%">Titel:<br>
+                    <input type="text" name="servicesTitle" style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <label style="width: 100%">Bild:<br>
+                    <input type="text" name="servicesImage" style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <label style="width: 100%">Pris:<br>
+                    <input type="text" name="servicesPrice" style="width: 100%"/>
+                    </label>
+                </p>
+
+                <p>
+                    <input class="myButton" type="submit" name="doCreate" value="Lägg till">
+                    <input class="myButton" type="reset" value="Rensa">
+                </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    {% if services %}
+        <h3>Tjänsten, {{ services.getTitel() }} har lagt till!</h3>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

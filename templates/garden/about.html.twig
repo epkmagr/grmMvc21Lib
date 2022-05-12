@@ -2,8 +2,13 @@
 
 {% extends 'garden/base.html.twig' %}
 
-{% block title %}Gardenservices{% endblock %}
+{% block title %}Om{% endblock %}
 
 {% block content %}
-{{ include('garden/content/about.markdown.twig')|markdown_to_html }}
+<div class="col-md-1 backArrow">
+    <a href="{{ path('app_garden') }}">&#8617;</a>
+</div>
+<div class="col-md-10 indexImage">
+    {{ include('garden/content/about.markdown.twig')|markdown_to_html }}
+</div>
 {% endblock %}
