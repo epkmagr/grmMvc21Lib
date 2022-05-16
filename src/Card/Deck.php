@@ -13,7 +13,7 @@ class Deck
     public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
 
     /**
-     * @var array<Card> the deck of the cards.
+     * @var array<Card> $cards the deck of the cards.
      */
     private $cards;
 

@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2022-05-06 14:20:12        , with PHPMetrics v2.8.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2022-05-16 13:28:55        , with PHPMetrics v2.8.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -269,6 +269,16 @@
     },
     {
         "name": "\\App\\Entity\\Book",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\ServicesRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Services",
         "size": 3000,
         "relations": []
     },
@@ -522,6 +532,25 @@
             "\\App\\Dice\\Dice",
             "\\Symfony\\Component\\Routing\\Annotation\\Route"
         ]
+    },
+    {
+        "name": "\\App\\Controller\\GardenController",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Repository\\ServicesRepository",
+            "\\Symfony\\Component\\Routing\\Annotation\\Route",
+            "\\Doctrine\\Persistence\\ManagerRegistry",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\App\\Entity\\Services",
+            "\\App\\Controller\\gardenRepository"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\gardenRepository",
+        "size": 3000,
+        "relations": []
     },
     {
         "name": "\\App\\Kernel",
