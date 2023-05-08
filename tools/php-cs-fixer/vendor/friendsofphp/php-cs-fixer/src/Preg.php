@@ -25,7 +25,8 @@ namespace PhpCsFixer;
 final class Preg
 {
     /**
-     * @param null|string[] $matches
+     * @param null|string[]         $matches
+     * @param int-mask<0, 256, 512> $flags
      *
      * @throws PregException
      */
@@ -103,9 +104,9 @@ final class Preg
     }
 
     /**
-     * @throws PregException
-     *
      * @return string[]
+     *
+     * @throws PregException
      */
     public static function split(string $pattern, string $subject, int $limit = -1, int $flags = 0): array
     {

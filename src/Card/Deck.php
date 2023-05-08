@@ -10,7 +10,9 @@ namespace App\Card;
 class Deck
 {
     public const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
+
+    public const SUITS = ['♣', '♦', '♠', '♥'];
+    //public const SUITS = ['&clubs;', '&diams;', '&hearts;', '&spades;'];
 
     /**
      * @var array<Card> $cards the deck of the cards.
@@ -44,30 +46,12 @@ class Deck
     /**
      * Get the deck of the cards.
      *
-     * @return array<Card>
+     * @return array<int, Card>
      */
     public function getDeck()
     {
         return $this->cards;
     }
-
-    // /**
-    //  * Get the deck of the cards in Json.
-    //  *
-    //  * @return array
-    //  */
-    // public function getDeckJson()
-    // {
-    //     $deck = new Deck();
-    //     foreach ($this->cards as $card) {
-    //         $aCard = new Card();
-    //         $aCard->suit = $card->suit;
-    //         $aCard->value = $card->value;
-    //         $deck->append($aCard);
-    //     }
-    //
-    //     return $deck;
-    // }
 
     /**
      * Get card number $number in the deck of the cards.
@@ -88,7 +72,7 @@ class Deck
     /**
      * Get card number $number in the deck of the cards.
      *
-     * @return Card
+     * @return Card|null
      */
     public function getTopCard()
     {
@@ -100,8 +84,50 @@ class Deck
      *
      * @return void
      */
-    public function shuffle()
+    public function shuffle(): void
     {
         shuffle($this->cards);
+    }
+
+    /**
+     * Get number of remaining cards in the deck.
+     *
+     * @return int
+     */
+    public function getNoOfCards(): int
+    {
+        return count($this->cards);
+    }
+
+    /**
+     * Sorts the remaining cards in the deck according to color.
+     *
+     * @return array
+     */
+    public function sortDeck(): array
+    {
+        $cardsImg = [];
+        $clubsImg = [];
+        $diamsImg = [];
+        $spadesImg = [];
+        $heartsImg = [];
+
+        foreach ($this->cards as $card) {
+            if ($card->getSuit() === '♣') {
+                array_push($clubsImg, $card->getImgUrl());
+            }
+            if ($card->getSuit() === '♦') {
+                array_push($diamsImg, $card->getImgUrl());
+            }
+            if ($card->getSuit() === '♠') {
+                array_push($spadesImg, $card->getImgUrl());
+            }
+            if ($card->getSuit() === '♥') {
+                array_push($heartsImg, $card->getImgUrl());
+            }
+        }
+        $cardsImg = array_merge($clubsImg, $diamsImg, $spadesImg, $heartsImg);
+
+        return $cardsImg;
     }
 }

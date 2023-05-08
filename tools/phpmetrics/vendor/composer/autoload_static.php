@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8979c436b1927b132a1384e56d758229
+class ComposerStaticInit493b5885b40ce77276ee6d57ac867bcd
 {
     public static $files = array (
         '5f0e95b8df5acf4a92c896dc3ac4bb6e' => __DIR__ . '/..' . '/phpmetrics/phpmetrics/src/functions.php',
@@ -41,10 +41,10 @@ class ComposerStaticInit8979c436b1927b132a1384e56d758229
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8979c436b1927b132a1384e56d758229::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8979c436b1927b132a1384e56d758229::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8979c436b1927b132a1384e56d758229::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8979c436b1927b132a1384e56d758229::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit493b5885b40ce77276ee6d57ac867bcd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit493b5885b40ce77276ee6d57ac867bcd::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit493b5885b40ce77276ee6d57ac867bcd::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit493b5885b40ce77276ee6d57ac867bcd::$classMap;
 
         }, null, ClassLoader::class);
     }

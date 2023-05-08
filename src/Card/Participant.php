@@ -11,18 +11,20 @@ class Participant
 {
     /**
      * @var string $name the name of the player
-     * @var CardHand $hand the hand with cards
      * @var int $scoreLow the scoreLow of the player with ace as 1
      * @var int $scoreHigh the scoreHigh of the player with ace as 14
      * @var int $bestScore the bestScore of the player, scoreLow or scoreHigh
      * @var bool $content true if the player is content, false otherwise
      */
     private $name;
+    /**
+     * @var CardHand $hand the hand with cards
+     */
     private $hand;
-    protected $scoreLow;
-    protected $scoreHigh;
-    protected $bestScore;
-    protected $content;
+    protected int $scoreLow;
+    protected int $scoreHigh;
+    protected int $bestScore;
+    protected bool $content;
 
     /**
      * Constructor to initiate the dicehand with a number of dices.
@@ -33,6 +35,10 @@ class Participant
     {
         $this->name = $name;
         $this->hand = new CardHand();
+        $this->scoreLow = 0;
+        $this->scoreHigh = 0;
+        $this->bestScore = 0;
+        $this->content = false;
     }
 
     /**
@@ -40,7 +46,7 @@ class Participant
      *
      * @return string as the name of the player
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -52,7 +58,7 @@ class Participant
      *
      * @return void
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -62,7 +68,7 @@ class Participant
      *
      * @return CardHand as the hand of cards of the player
      */
-    public function gethand()
+    public function getHand(): CardHand
     {
         return $this->hand;
     }
@@ -84,7 +90,7 @@ class Participant
      *
      * @return void
      */
-    public function increaseHand(Card $card)
+    public function increaseHand(Card $card): void
     {
         $this->hand->addNewCard($card);
     }
@@ -106,9 +112,9 @@ class Participant
      *
      * @return void
      */
-    public function setScoreLow(int $score)
+    public function setScoreLow(int $scoreLow)
     {
-        $this->scoreLow = $score;
+        $this->scoreLow = $scoreLow;
     }
 
     /**
@@ -128,9 +134,9 @@ class Participant
      *
      * @return void
      */
-    public function setScoreHigh(int $score)
+    public function setScoreHigh(int $scoreHigh)
     {
-        $this->scoreHigh = $score;
+        $this->scoreHigh = $scoreHigh;
     }
 
     /**
@@ -144,9 +150,21 @@ class Participant
     }
 
     /**
+     * Set the bestScore of the player. .
+     *
+     * @param int $bestScore the scoreHigh of the player
+     *
+     * @return void
+     */
+    public function setBestScore(int $bestScore)
+    {
+        $this->bestScore = $bestScore;
+    }
+
+    /**
      * Set the score to the sum of cards in the hand. Ace is counted as 1.
      */
-    public function getSumOfHand()
+    public function getSumOfHand(): void
     {
         $this->setScoreLow($this->hand->getSumOfHandAceLow());
         $this->setScoreHigh($this->hand->getSumOfHandAceHigh());

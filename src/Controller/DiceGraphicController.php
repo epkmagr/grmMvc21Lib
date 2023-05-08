@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dice\DiceGraphic;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ class DiceGraphicController extends AbstractController
      */
     public function home(): Response
     {
-        $die = new \App\Dice\DiceGraphic();
+        $die = new DiceGraphic();
         $data = [
             'title' => 'Dice with graphic representation',
             'die_value' => $die->roll(),
@@ -29,7 +30,7 @@ class DiceGraphicController extends AbstractController
      */
     public function roll(int $numRolls): Response
     {
-        $die = new \App\Dice\DiceGraphic();
+        $die = new DiceGraphic();
 
         $rolls = [];
         for ($i = 1; $i <= $numRolls; ++$i) {

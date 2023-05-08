@@ -1,0 +1,98 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardgame{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="dealDiv" role="main">
+    <div class="jumbotron">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('initImg') }}">&#8617;</a>
+        </div>
+        <div class="col-md-8 dealingTable">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 class="h3Left">{{ bank.getName() }}</h3>
+                    {% for card in bank.getHand().getCardsImg() %}
+                        {% if loop.first %}
+                            <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}">
+                        {% elseif loop.last %}
+                            <img class="cardImg" src="{{ asset('images/cards/back.png') }}"
+                                style="margin-left: -{{ loop.index }}em">
+                        {% else %}
+                            <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}"
+                                style="margin-left: -{{ loop.index }}em">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-3">
+                    {% set bankScoreLow = bank.getScoreLow() %}
+                    {% set bankScoreHigh = bank.getScoreHigh() %}
+                    {% set win = bank.getResult() %}
+                    {% set showResult = result %}
+                    {% if showResult is not same as "" %}
+                        {% if bankScoreLow > 0 %}
+                            <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
+                            <h3 class="h3Left">{{ win }}</h3>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                {% set no = 0 %}
+                {% for player in myPlayers %}
+                    <div class="col-md-3">
+                        <h3 class="h3Left"> {{ player.getName()}} </h3>
+                        {% for card in player.getHand().getCardsImg() %}
+                            {% if loop.first %}
+                                <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}">
+                            {% else %}
+                                <img class="cardImg cardImgNext" src="{{ asset('images/cards/')}}{{card}}"
+                                    style="margin-left: {{ loop.index0 }}em">
+                            {% endif %}
+                        {% endfor %}
+                        {% set playerScoreLow = player.getScoreLow() %}
+                        {% set playerScoreHigh = player.getScoreHigh() %}
+                        {% set content = player.isContent() %}
+                        {% if content %}
+                            {% set contentText = "" %}
+                        {% else %}
+                            {% set contentText = "Icke" %}
+                        {% endif %}
+                        <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
+                        {% if playerScoreLow > 0 and playerScoreLow <= 21 %}
+                            <form method="post" action="{{ path('setContent') }}">
+                                <input class="contentImgButton" type="submit" name="content{{no}}" value={{ contentText }}&nbsp;Nöjd>
+                            </form>
+                        {% endif %}
+                    </div>
+                    {% set no = no + 1 %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <form method="post" action="{{ path('dealImgPost') }}">
+                <div class="center">
+                {% if showResult is not same as "" %}
+                    <input class="dealImgButtonDisabled" type="submit" name="deal" value="SLUT" disabled="disabled">
+                {% else %}
+                    <input class="dealImgButton" type="submit" name="deal" value="Spela">
+                {% endif %}
+                </div>
+            </form>
+            <h3>Antalet kort kvar</h3>
+            <h3>{{ noOfCardsLeft }}</h3>
+            {% set showResult = result %}
+            {% if showResult is not same as "" %}
+                <h3></h3>
+                <h3>Vinnare</h3>
+                <h3>{{ result | raw }}</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

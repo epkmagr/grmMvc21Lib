@@ -1,0 +1,30 @@
+{# templates/book/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Bibliotek</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('show_all_books') }}">&#8617;</a>
+        </div>
+        {% if book %}
+        <div class="col-md-8 col-md-offset-1">
+            <form method="post">
+                <h3>Vill du ta bort boken {{ book.getTitel()}} av {{ book.getAuthor() }}?</h3>
+                <div class="myButton">
+                    <input type="submit" name="deleteOne" value="Ja"
+                        onClick="this.form.action='{{ path('do_delete_book', {'id': id}) }}';this.form.method='post';"
+                    >
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

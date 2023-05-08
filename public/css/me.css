@@ -139,6 +139,15 @@ h3 {
     display: inline-block;
 }
 
+.cardImg {
+    width: 110px;
+    padding-bottom: 4px;
+}
+
+.card:hover {
+
+}
+
 .cardDeal {
     border:1px solid #ccc;
     border-radius: 4px;
@@ -234,4 +243,8 @@ table tbody tr:nth-of-type(even) {
 
 .maxWidthFigure {
     width: 100%;
+}
+
+.large-dice {
+    font-size: xx-large;
 }

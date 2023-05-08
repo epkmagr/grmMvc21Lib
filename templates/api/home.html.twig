@@ -1,0 +1,58 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Card game{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>JSON API</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" action="">
+                <div class="myButton">
+                    <a href="{{ path('quote') }}">Dagens citat</a>
+                </div>
+                <div class="myButton">
+                    <a href="{{ path('deckJson') }}">Visa kortlek, Json</a>
+                </div>
+                <div class="myButton">
+                    <input type="submit" name="shuffle" value="Blanda kortlek, Json"
+                        onClick="this.form.action='{{ path('shuffleJson') }}';this.form.method='post';"
+                    >
+                </div>
+                <div class="myButton">
+                    <input type="submit" name="drawJson" value="Dra ett kort, Json"
+                        onClick="this.form.action='{{ path('drawJson') }}';this.form.method='post';"
+                    >
+                </div>
+                <div class="myButton">
+                    <input type="number" name="number" min="1" max="52" value="1">
+                    <input type="submit" name="drawSeveralJson" value="Dra flera kort, Json"
+                        onClick="this.form.action='{{ path('drawSeveralJson', {'number': "1"}) }}';this.form.method='post';"
+                    >
+                </div>
+                <div class="myButton">
+                    <input type="submit" name="restart" value="Ny kortlek"
+                        onClick="this.form.action='{{ path('apiHome') }}';this.form.method='get';"
+                    >
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            <p>Json api visar spelkorten i json format.</p>
+
+            <p>När man bygger ett RESTFul API eller en webbtjänst tillhandahåller servern vanligtvis 
+                ett JSON-svar.</p>
+
+            <p>Enligt json.org är JSON är ett textbaserat format som är helt oberoende av programmeringsspråk 
+                men som använder syntaxkonventioner som är välkända för programmerare med erfarenhet av 
+                C-liknande språk, som C, C++, C#, Java, JavaScript, Perl, Python och många andra. Dessa 
+                egenskaper gör JSON till ett idealt språk för datautbyte.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

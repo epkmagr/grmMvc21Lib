@@ -16,9 +16,9 @@
         {% if app.request is defined %}
             {% set currentPath = path(app.request.attributes.get('_route')) %}
             {% if '8888' in app.request.getSchemeAndHttpHost() %}
-                {% set report_path = '/me/report/' %}
-            {% elseif '11081' in app.request.getSchemeAndHttpHost() %}
-                {% set report_path = '/public/me/report/' %}
+                {% set report_path = '/report/' %}
+            {% elseif '12081' in app.request.getSchemeAndHttpHost() %}
+                {% set report_path = '/public/report/' %}
             {% else %}
                 {% set report_path = currentPath ~ '/' %}
             {% endif %}

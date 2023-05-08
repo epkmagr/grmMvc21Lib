@@ -47,8 +47,40 @@ class CardHand
         return $this->hand;
     }
 
+        /**
+     * Get the hand of the cards in json format.
+     *
+     * @return array<Card>
+     */
+    public function getCardsJson()
+    {
+        $hand = array();
+
+        foreach ($this->hand as $card) {
+            array_push($hand, $card->getSuit() . $card->getValue());
+        }
+
+        return $hand;
+    }
+
+    /**
+     * Get the hand of the cards with images.
+     *
+     * @return array<Card>
+     */
+    public function getCardsImg()
+    {
+        $cardsImg = [];
+
+        foreach ($this->hand as $card) {
+            array_push($cardsImg, $card->getImgUrl());
+        }
+        return $cardsImg;
+    }
+
     /**
      * Get the sum of the cards. With ace counted as 14.
+     * @SuppressWarnings(PHPMD.ElseExpression)
      *
      * @return int
      */
@@ -75,6 +107,7 @@ class CardHand
 
     /**
      * Get the sum of the cards. With ace counted as 1.
+     * @SuppressWarnings(PHPMD.ElseExpression)
      *
      * @return int
      */

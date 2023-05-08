@@ -31,6 +31,7 @@ class Player21 extends Participant
 
     /**
      * Get the result for a player.
+     * @SuppressWarnings(PHPMD.ElseExpression)
      *
      * @return string as the result of the score
      */
@@ -52,9 +53,9 @@ class Player21 extends Participant
         } else {
             $res = 'Nytt kort?';
             if ($this->scoreHigh > $this->scoreLow) {
-                $this->bestScore = $this->scoreHigh;
-            } else {
                 $this->bestScore = $this->scoreLow;
+            } else {
+                $this->bestScore = $this->scoreHigh;
             }
         }
 

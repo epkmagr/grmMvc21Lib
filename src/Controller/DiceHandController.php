@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Dice\Dice;
+use App\Dice\DiceHand;
+use App\Dice\DiceGraphic;
 
 class DiceHandController extends AbstractController
 {
@@ -33,7 +36,10 @@ class DiceHandController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $hand = $session->get('dicehand') ?? new \App\Dice\DiceHand();
+        /**
+         * @var array<int, Dice>
+         */
+        $hand = $session->get('dicehand') ?? new DiceHand();
 
         $roll = $request->request->get('roll');
         $add = $request->request->get('add');
@@ -42,10 +48,10 @@ class DiceHandController extends AbstractController
         if ($roll) {
             $hand->roll();
         } elseif ($add) {
-            $hand->add(new \App\Dice\Dice());
-        // $hand->add(new \App\Dice\DiceGraphic());
+            $hand->add(new Dice());
+        //$hand->add(new DiceGraphic());
         } elseif ($clear) {
-            $hand = new \App\Dice\DiceHand();
+            $hand = new DiceHand();
         }
 
         $session->set('dicehand', $hand);

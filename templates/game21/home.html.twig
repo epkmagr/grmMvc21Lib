@@ -1,0 +1,60 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Card game{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Välkommen att spela 21!</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h4 class="centerText">Du spelar mot datorn som också är bank.</h4>
+            <h4 class="centerText">Lycka till!</h4>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="myButton">
+                <a href="{{ path('deal', {'players': "1", 'cards': "1"}) }}">Spela 21</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="myButton">
+                <a href="{{ path('game21Documentation') }}">Dokumentation om spelet 21</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form method="post" action="">
+                <div class="myButton">
+                    <label for="player">Antal spelare?</label>
+                    <input type="number" name="player" min="1" max="52" value="1">
+                    <label for="number">Antal kort?</label>
+                    <input type="number" name="number" min="1" max="52" value="1">
+                    <input type="submit" name="dealJson" value="Spela 21 Json API"
+                        onClick="this.form.action='{{ path('dealJson', {'players': "1", 'number': "1"}) }}';this.form.method='post';"
+                    >
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="myButton">
+                <a href="{{ path('initImg') }}">Spela 21 bildkort</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

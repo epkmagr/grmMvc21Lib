@@ -30,13 +30,13 @@ class DeckTest extends KernelTestCase
     {
         $deck = new Deck();
         $card = $deck->getCard(0);
-        $this->assertEquals($card->getSuit(), '&clubs;');
+        $this->assertEquals($card->getSuit(), '♣');
         $this->assertEquals($card->getValue(), 'A');
         $card = $deck->getCard(13);
-        $this->assertEquals($card->getSuit(), '&diams;');
+        $this->assertEquals($card->getSuit(), '♦');
         $this->assertEquals($card->getValue(), 'A');
         $card = $deck->getCard(51);
-        $this->assertEquals($card->getSuit(), '&spades;');
+        $this->assertEquals($card->getSuit(), '♥');
         $this->assertEquals($card->getValue(), 'K');
     }
 
@@ -53,10 +53,10 @@ class DeckTest extends KernelTestCase
         $deck->shuffle();
         $card = $deck->getCard(0);
         $str = $card->getSuit().$card->getValue();
-        $this->assertNotEquals($str, '&clubs;A');
+        $this->assertNotEquals($str, '♣A');
         $card = $deck->getCard(51);
         $str = $card->getSuit().$card->getValue();
-        $this->assertNotEquals($str, '&spades;K');
+        $this->assertNotEquals($str, '♠K');
     }
 
     /**
@@ -67,12 +67,36 @@ class DeckTest extends KernelTestCase
     {
         $deck = new Deck();
         $card = $deck->getTopCard();
-        $this->assertEquals($card->getSuit(), '&clubs;');
+        $this->assertEquals($card->getSuit(), '♣');
         $this->assertEquals($card->getValue(), 'A');
         $this->assertEquals(count($deck->getDeck()), 51);
         $card = $deck->getTopCard();
-        $this->assertEquals($card->getSuit(), '&clubs;');
+        $this->assertEquals($card->getSuit(), '♣');
         $this->assertEquals($card->getValue(), '2');
         $this->assertEquals(count($deck->getDeck()), 50);
+    }
+
+    /**
+     * Construct Deck object. Use no argument. Shuffle the deck and sort it
+     * and then check that the 1st and 11th card is clubs and that card 15
+     * is diamonds, card 27 is spades and card 50 is heart.
+     * Also testing function that returns the number of cards in the deck.
+     */
+    public function testSortDeck()
+    {
+        $deck = new Deck();
+        $deck->shuffle();
+        $sortedDeck = $deck->sortDeck();
+        $this->assertEquals($deck->getNoOfCards(), 52);
+        $cardImgFile = $sortedDeck[0][0];
+        $this->assertEquals('C', $cardImgFile);
+        $cardImgFile = $sortedDeck[11][0];
+        $this->assertEquals('C', $cardImgFile);
+        $cardImgFile = $sortedDeck[15][0];
+        $this->assertEquals('D', $cardImgFile);
+        $cardImgFile = $sortedDeck[27][0];
+        $this->assertEquals('S', $cardImgFile);
+        $cardImgFile = $sortedDeck[50][0];
+        $this->assertEquals('H', $cardImgFile);
     }
 }

@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\Argument\ServiceLocator as ArgumentSer
 use Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
@@ -36,11 +37,12 @@ class_exists(ArgumentServiceLocator::class);
  * The container can have four possible behaviors when a service
  * does not exist (or is not initialized for the last case):
  *
- *  * EXCEPTION_ON_INVALID_REFERENCE: Throws an exception (the default)
+ *  * EXCEPTION_ON_INVALID_REFERENCE: Throws an exception at compilation time (the default)
  *  * NULL_ON_INVALID_REFERENCE:      Returns null
  *  * IGNORE_ON_INVALID_REFERENCE:    Ignores the wrapping command asking for the reference
  *                                    (for instance, ignore a setter if the service does not exist)
  *  * IGNORE_ON_UNINITIALIZED_REFERENCE: Ignores/returns null for uninitialized services or invalid references
+ *  * RUNTIME_EXCEPTION_ON_INVALID_REFERENCE: Throws an exception at runtime
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
@@ -105,7 +107,7 @@ class Container implements ContainerInterface, ResetInterface
      *
      * @return array|bool|string|int|float|\UnitEnum|null
      *
-     * @throws InvalidArgumentException if the parameter is not defined
+     * @throws ParameterNotFoundException if the parameter is not defined
      */
     public function getParameter(string $name)
     {
@@ -194,7 +196,7 @@ class Container implements ContainerInterface, ResetInterface
     {
         return $this->services[$id]
             ?? $this->services[$id = $this->aliases[$id] ?? $id]
-            ?? ('service_container' === $id ? $this : ($this->factories[$id] ?? [$this, 'make'])($id, $invalidBehavior));
+            ?? ('service_container' === $id ? $this : ($this->factories[$id] ?? $this->make(...))($id, $invalidBehavior));
     }
 
     /**
@@ -268,9 +270,6 @@ class Container implements ContainerInterface, ResetInterface
         return isset($this->services[$id]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         $services = $this->services + $this->privates;
@@ -281,7 +280,7 @@ class Container implements ContainerInterface, ResetInterface
                 if ($service instanceof ResetInterface) {
                     $service->reset();
                 }
-            } catch (\Throwable $e) {
+            } catch (\Throwable) {
                 continue;
             }
         }
@@ -345,7 +344,7 @@ class Container implements ContainerInterface, ResetInterface
         if (!$this->has($id = 'container.env_var_processors_locator')) {
             $this->set($id, new ServiceLocator([]));
         }
-        $this->getEnv ??= \Closure::fromCallable([$this, 'getEnv']);
+        $this->getEnv ??= $this->getEnv(...);
         $processors = $this->get($id);
 
         if (false !== $i = strpos($name, ':')) {
@@ -380,7 +379,7 @@ class Container implements ContainerInterface, ResetInterface
             return false !== $registry ? $this->{$registry}[$id] ?? null : null;
         }
         if (false !== $registry) {
-            return $this->{$registry}[$id] ?? $this->{$registry}[$id] = $load ? $this->load($method) : $this->{$method}();
+            return $this->{$registry}[$id] ??= $load ? $this->load($method) : $this->{$method}();
         }
         if (!$load) {
             return $this->{$method}();

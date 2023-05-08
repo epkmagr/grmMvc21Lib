@@ -27,24 +27,20 @@ class ServicesRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Services $entity, bool $flush = false): void
+    public function add(Services $entity): void
     {
         $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        $this->_em->flush();
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Services $entity, bool $flush = false): void
+    public function remove(Services $entity): void
     {
         $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        $this->_em->flush();
     }
 
 //    /**

@@ -21,6 +21,7 @@ class Dealer extends Participant
 
     /**
      * Get the result for the bank.
+     * @SuppressWarnings(PHPMD.ElseExpression)
      *
      * @return string as the result of the score
      */

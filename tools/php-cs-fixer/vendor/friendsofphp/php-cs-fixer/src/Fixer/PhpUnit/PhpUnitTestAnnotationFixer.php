@@ -375,16 +375,18 @@ public function testItDoesSomething() {}}'.$this->whitespacesConfig->getLineEndi
 
     /**
      * Helps to find where the function name in the doc block starts.
+     *
+     * @param list<string> $line
      */
     private function findWhereDependsFunctionNameStarts(array $line): int
     {
-        $counter = \count($line);
+        $index = stripos(implode('', $line), '@depends') + 8;
 
-        do {
-            --$counter;
-        } while (' ' !== $line[$counter]);
+        while (' ' === $line[$index]) {
+            ++$index;
+        }
 
-        return $counter + 1;
+        return $index;
     }
 
     /**

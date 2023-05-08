@@ -5,14 +5,18 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Book;
 use App\Repository\BookRepository;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class BookController extends AbstractController
 {
-    #[Route('/book', name: 'app_book')]
+    #[Route('/book', name: 'app_book', methods: ["GET","HEAD"])]
     public function index(): Response
     {
         // echo $_ENV['APP_ENV'];
@@ -22,36 +26,36 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route("/book/create", name: "create_book")]
-    public function createbook(ManagerRegistry $doctrine, Request $request): Response
-    {
-        $entityManager = $doctrine->getManager();
-        $doSave = $request->request->get('doSave');
-
-        if ($doSave) {
-            $book = new book();
-            $bookTitle = $request->request->get('bookTitle');
-            $bookISBN = $request->request->get('bookISBN');
-            $bookAuthor = $request->request->get('bookAuthor');
-            $book->setTitel($bookTitle);
-            $book->setISBN($bookISBN);
-            $book->setAuthor($bookAuthor);
-
-            // tell Doctrine you want to (eventually) save the book (no queries yet)
-            $entityManager->persist($book);
-
-            // actually executes the queries (i.e. the INSERT query)
-            $entityManager->flush();
-        }
-
+    #[Route("/book/create", name: "create_book", methods: ["GET"])]
+    public function createbook(
+        SessionInterface $session
+    ): Response {
         return $this->render('book/create.html.twig', [
-            'book' => $book ?? null,
+            'book' => $session->get('createdBook') ?? null,
         ]);
     }
 
-    /**
-     * @Route("/book/show", name="show_all_books")
-    */
+    #[Route("/book/create", name: "save_book", methods: ["POST"])]
+    public function savebook(
+        BookRepository $bookRepository,
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $book = new book();
+        $bookTitle = $request->request->get('bookTitle');
+        $bookISBN = $request->request->get('bookISBN');
+        $bookAuthor = $request->request->get('bookAuthor');
+        $book->setTitel($bookTitle);
+        $book->setISBN($bookISBN);
+        $book->setAuthor($bookAuthor);
+        $session->set('createdBook', $book);
+
+        $bookRepository->add($book);
+
+        return $this->redirectToRoute('create_book');
+    }
+
+    #[Route('/book/show', name: 'show_all_books', methods: ["GET"])]
     public function showAllBooks(
         BookRepository $bookRepository
     ): Response {
@@ -63,15 +67,12 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/book/show/{id}", name="show_book")
-     */
+    #[Route('/book/show/{id}', name: 'show_book', methods: ["GET"])]
     public function showBookById(
         BookRepository $bookRepository,
         int $id
     ): Response {
-        $book = $bookRepository
-            ->find($id);
+        $book = $bookRepository->find($id);
 
         return $this->render('book/showOne.html.twig', [
             'book' => $book ?? null,
@@ -79,10 +80,21 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/book/delete/{id}", name="delete_book", methods={"GET","POST"})
-     */
+    #[Route("/book/delete/{id}", name: "delete_book", methods: ["GET"])]
     public function deleteBookById(
+        BookRepository $bookRepository,
+        int $id
+    ): Response {
+        $book = $bookRepository->find($id);
+
+        return $this->render('book/deleteOne.html.twig', [
+            'book' => $book ?? null,
+            'id' => $id,
+        ]);
+    }
+
+    #[Route("/book/delete/{id}", name: "do_delete_book", methods: ["POST"])]
+    public function doDeleteBookById(
         ManagerRegistry $doctrine,
         int $id
     ): Response {
@@ -98,20 +110,16 @@ class BookController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
+        //return $this->redirectToRoute('delete_book', ['id'=> $id]);
         return $this->redirectToRoute('show_all_books');
     }
 
-    /**
-     * @Route("/book/update/{id}", name="update_book", methods={"GET","POST"})
-     */
+    #[Route("/book/update/{id}", name: "update_book", methods: ["GET"])]
     public function updateBook(
-        ManagerRegistry $doctrine,
-        Request $request,
+        BookRepository $bookRepository,
         int $id
     ): Response {
-        $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($id);
-        $doUpdate = $request->request->get('doUpdate');
+        $book = $bookRepository->find($id);
 
         if (!$book) {
             throw $this->createNotFoundException(
@@ -119,20 +127,34 @@ class BookController extends AbstractController
             );
         }
 
-        if ($doUpdate) {
-            $bookTitle = $request->request->get('bookTitle');
-            $bookISBN = $request->request->get('bookISBN');
-            $bookAuthor = $request->request->get('bookAuthor');
-            $book->setTitel($bookTitle);
-            $book->setISBN($bookISBN);
-            $book->setAuthor($bookAuthor);
+        return $this->render('book/update.html.twig', [
+            'book' => $book
+        ]);
+    }
 
-            // actually executes the queries (i.e. the INSERT query)
-            $entityManager->flush();
+    #[Route("/book/update/{id}", name: "do_update_book", methods: ["POST"])]
+    public function doUpdateBook(
+        BookRepository $bookRepository,
+        Request $request,
+        int $id
+    ): Response {
+        $book = $bookRepository->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id ' . $id
+            );
         }
 
-        return $this->render('book/update.html.twig', [
-            'book' => $book ?? null,
-        ]);
+        $bookTitle = $request->request->get('bookTitle');
+        $bookISBN = $request->request->get('bookISBN');
+        $bookAuthor = $request->request->get('bookAuthor');
+        $book->setTitel($bookTitle);
+        $book->setISBN($bookISBN);
+        $book->setAuthor($bookAuthor);
+
+        $bookRepository->save($book);
+
+        return $this->redirectToRoute('update_book', ['id'=> $id]);
     }
 }

@@ -27,24 +27,26 @@ class BookRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Book $entity, bool $flush = true): void
+    public function add(Book $entity): void
     {
         $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        $this->_em->flush();
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Book $entity, bool $flush = true): void
+    public function remove(Book $entity): void
     {
         $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        $this->_em->flush();
+    }
+
+    public function save(Book $entity): void
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
     }
 
     public function findAllSortedByTitle()
@@ -52,32 +54,33 @@ class BookRepository extends ServiceEntityRepository
         return $this->findBy(array(), array('titel' => 'ASC'));
     }
 
-    // /**
-    //  * @return Book[] Returns an array of Book objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    // public function findAOneBy(string $isbn)
+    // {
+    //     return $this->findBy(array(), ['ISBN' => $isbn]);
+    // }
 
-    /*
-    public function findOneBySomeField($value): ?Book
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+//    /**
+//     * @return Product[] Returns an array of Product objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('p')
+//            ->andWhere('p.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('p.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
+   public function findOneByISBN($value): ?Book
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.ISBN = :val')
+           ->setParameter('val', $value)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
 }

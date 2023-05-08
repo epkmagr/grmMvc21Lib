@@ -29,6 +29,9 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  */
 abstract class AbstractDoctrineAnnotationFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
+    /**
+     * @var array<int, array{classIndex: int, token: Token, type: string}>
+     */
     private array $classyElements;
 
     /**
@@ -204,13 +207,19 @@ abstract class AbstractDoctrineAnnotationFixer extends AbstractFixer implements 
 
     private function nextElementAcceptsDoctrineAnnotations(Tokens $tokens, int $index): bool
     {
+        $classModifiers = [T_ABSTRACT, T_FINAL];
+
+        if (\defined('T_READONLY')) { // @TODO: drop condition when PHP 8.2+ is required
+            $classModifiers[] = T_READONLY;
+        }
+
         do {
             $index = $tokens->getNextMeaningfulToken($index);
 
             if (null === $index) {
                 return false;
             }
-        } while ($tokens[$index]->isGivenKind([T_ABSTRACT, T_FINAL]));
+        } while ($tokens[$index]->isGivenKind($classModifiers));
 
         if ($tokens[$index]->isGivenKind(T_CLASS)) {
             return true;

@@ -1,0 +1,363 @@
+html {
+    margin: 0;
+}
+
+body {
+    background-color: #e4eef7;
+    padding-top: 4em;
+    padding-bottom: 2em;
+}
+
+navbar {
+    padding-bottom: 2em;
+}
+
+.jumbotron {
+    background-color: #88b5dd; /* #3172ab; */
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.h3Left {
+    text-align: left;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.divider {
+    margin-top: 4em;
+    margin-bottom: 2em;
+    border-top: 2px groove #88b5dd;
+}
+
+.umlFigure {
+    transform: scale(1.7);
+    transform-origin: 0 0;
+}
+
+.center {
+    /* text-align: center; */
+    display: grid;
+}
+
+.my-footer {
+    /* background-color: #88b5dd; */
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    margin-bottom: 2em;
+    font-size: large;
+}
+
+.marginBottom {
+    margin-bottom: 20em;
+}
+
+.symfony-logo {
+    text-align: center;
+}
+
+.myButton,
+.submitButton,
+.bookButton,
+.contentImgButton {
+    padding: 0.5em;
+    margin: 0.5em;
+    font-size: large;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    text-align: center;
+}
+
+.submitButton {
+    min-width: 10em;
+    float: right;
+}
+
+.contentImgButton {
+    min-width: 100px;
+}
+
+.bookButton {
+    min-width: 10em;
+}
+
+.playButton {
+    padding: 0.5em;
+    margin: 0.5em;
+    font-size: large;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    text-align: center;
+}
+
+.startButton {
+    padding: 0.5em;
+    margin: 0.5em;
+    margin-bottom: 10em;
+    font-size: x-large;
+    border-radius: 10px;
+    border: 2px groove #3172ab;
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    text-align: center;
+}
+
+.startButton a:hover .hover-line {
+    width: 100%;
+
+}
+
+.dealImgButton,
+.dealImgButtonDisabled {
+    padding: 0.5em;
+    font-size: x-large;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
+    text-align: center;
+}
+
+.dealImgButtonDisabled {
+    opacity: 50%;
+}
+
+.hover-line {
+    transition: width 0.5s ease;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    bottom: -3px;
+    width: 0%;
+    left: 0;
+    right: 0;
+}
+
+.contentButton {
+    margin-left: -5em;
+}
+
+.numberInput {
+    font-size: larger;
+}
+
+.home21 {
+    font-size: xxx-large;
+}
+
+/*  Card design */
+.card {
+    border:1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color:#444;
+    width: 175px;
+    height:259px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.cardImg {
+    width: 110px;
+    padding-bottom: 4px;
+}
+
+.cardImgNext {
+    margin-top: -8em;
+}
+
+.cardDeal {
+    border:1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color:#444;
+    width: 175px;
+    height:259px;
+    margin: 10px;
+    display: inline-block;
+    margin-left: -10em;
+    z-index: 1;
+    position:relative;
+}
+
+#dealDiv > div:nth-child(2) > div.col-md-6 > div:nth-child(2) {
+    margin-left: -7em;
+}
+
+#dealDiv > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) {
+    margin-left: -7em;
+}
+
+.flipped {
+    background-image: radial-gradient(#3172ab, #88b5dd, navy, navy);
+    vertical-align: bottom;
+}
+
+.dealingTable {
+    margin: 0 1em;
+    background-color: green;
+    border: 1em solid saddlebrown;
+    border-radius: 1em;
+    min-height: 700px;
+    margin-bottom: 15em;
+}
+
+.red {
+    color: red;
+}
+
+.top {
+    font-size:24px;
+    padding: 10px 10px 0 10px;
+}
+
+.bottom {
+    font-size:24px;
+    padding: 0 10px 10px 10px;
+    float: right;
+}
+
+.number, .icon {
+    display: block;
+}
+
+.rotate {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+}
+
+.lg_icon {
+    font-size: 70px;
+    text-align: center;
+    display: block;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr {
+    background-color: #121389;
+    color: #fff;
+    text-align: left;
+    font-size: 24px;
+}
+
+table th,
+td {
+    padding: 12px 15px;
+}
+
+th {
+    background-color: #b6d2ea;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.symbol {
+    font-size: x-large;
+}
+
+.maxWidthFigure {
+    width: 100%;
+}
+
+.large-dice {
+    font-size: xx-large;
+}
+
+.crazy-number {
+    font-size: xx-large;
+    text-align: center;
+}
+
+.my-date {
+    text-align: center;
+}
+
+.day {
+    font-size: 4em;
+}
+
+.month {
+    font-size: 2em;
+}
+
+.year {
+    display:block;
+    font-size: 4em;
+    /* -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg); */
+}
+
+.my-quote {
+    font-size: large;
+    text-align: center;
+}
+
+/* Pig game */
+.pig-content {
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 800px;
+    background-color: #eee;
+    font-size: 2em;
+}
+
+.pig-input {
+    font-size: 1em;
+}
+
+.pig-h1 {
+    border-bottom: 4px double green;
+}
+
+.pig-die {
+    font-size: 2em;
+}
+
+.flash-notice {
+    padding: 0.5em;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.flash-warning:before {
+    content: "⚠";
+}
+
+.myButton > input[type=submit] {
+    border: none;
+    background: none;
+    color: #0c1d2c;
+}
+
+.myButton > a {
+    color: #0c1d2c;    
+}

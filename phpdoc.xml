@@ -5,7 +5,6 @@
         xmlns="https://www.phpdoc.org"
         xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
-    <title>phpDocumentor</title>
     <paths>
         <output>docs/api</output>
     </paths>
@@ -13,7 +12,6 @@
         <api>
             <source dsn=".">
                 <path>src</path>
-                <path>tests</path>
             </source>
         </api>
     </version>

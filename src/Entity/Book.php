@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
@@ -17,7 +20,7 @@ class Book
     private $titel;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $ISBN;
+    private $isbn;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $author;
@@ -44,12 +47,12 @@ class Book
 
     public function getISBN(): ?string
     {
-        return $this->ISBN;
+        return $this->isbn;
     }
 
-    public function setISBN(string $ISBN): self
+    public function setISBN(string $isbn): self
     {
-        $this->ISBN = $ISBN;
+        $this->isbn = $isbn;
 
         return $this;
     }

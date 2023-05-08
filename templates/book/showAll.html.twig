@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-md-5 col-md-offset-3">
-            <h3>Lista på alla böcker!</h3>
+            <h3>Lista på alla böcker</h3>
         </div>
     </div>
     <div class="row">
@@ -35,8 +35,8 @@
                     <td>
                         <a class="symbol" href="{{ path('show_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-info-sign"></i></a>
                     <td>
-                        <a class="symbol" href="{{ path('update_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
-                        <a class="symbol" href="{{ path('delete_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a class="symbol" href="{{ path('do_update_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a class="symbol" href="{{ path('do_delete_book', {'id': bookId}) }}"><i class="glyphicon glyphicon-trash"></i></a>
                     </td>
                 </tr>
                 {% endfor %}

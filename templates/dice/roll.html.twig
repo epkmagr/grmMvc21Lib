@@ -13,11 +13,11 @@
             <a href="{{ path('dice-home') }}">&#8617;</a>
         </div>
         <div class="col-md-10 col-md-offset-1">
-            <p>Tärningen är slagen {{ numRolls }} gånger.</p>
+            <h4>Tärningen är slagen {{ numRolls }} gånger.</h4>
 
             <ul>
                 {% for roll in rolls %}
-                    <li>{{ roll }}</li>
+                    <li class="large-dice">{{ roll }}</li>
                 {% endfor %}
             </ul>
         </div>

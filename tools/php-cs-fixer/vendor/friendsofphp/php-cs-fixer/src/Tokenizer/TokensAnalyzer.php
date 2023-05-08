@@ -34,10 +34,7 @@ final class TokensAnalyzer
      */
     private Tokens $tokens;
 
-    /**
-     * @var ?GotoLabelAnalyzer
-     */
-    private $gotoLabelAnalyzer;
+    private ?GotoLabelAnalyzer $gotoLabelAnalyzer = null;
 
     public function __construct(Tokens $tokens)
     {
@@ -47,7 +44,7 @@ final class TokensAnalyzer
     /**
      * Get indices of methods and properties in classy code (classes, interfaces and traits).
      *
-     * @return array[]
+     * @return array<int, array{classIndex: int, token: Token, type: string}>
      */
     public function getClassyElements(): array
     {
@@ -66,11 +63,46 @@ final class TokensAnalyzer
     }
 
     /**
+     * Get indices of modifiers of a classy code (classes, interfaces and traits).
+     *
+     * @return array{
+     *     final: int|null,
+     *     abstract: int|null,
+     *     readonly: int|null
+     * }
+     */
+    public function getClassyModifiers(int $index): array
+    {
+        if (!$this->tokens[$index]->isClassy()) {
+            throw new \InvalidArgumentException(sprintf('Not an "classy" at given index %d.', $index));
+        }
+
+        $readOnlyPossible = \defined('T_READONLY'); // @TODO: drop condition when PHP 8.2+ is required
+        $modifiers = ['final' => null, 'abstract' => null, 'readonly' => null];
+
+        while (true) {
+            $index = $this->tokens->getPrevMeaningfulToken($index);
+
+            if ($this->tokens[$index]->isGivenKind(T_FINAL)) {
+                $modifiers['final'] = $index;
+            } elseif ($this->tokens[$index]->isGivenKind(T_ABSTRACT)) {
+                $modifiers['abstract'] = $index;
+            } elseif ($readOnlyPossible && $this->tokens[$index]->isGivenKind(T_READONLY)) {
+                $modifiers['readonly'] = $index;
+            } else { // no need to skip attributes as it is not possible on PHP8.2
+                break;
+            }
+        }
+
+        return $modifiers;
+    }
+
+    /**
      * Get indices of namespace uses.
      *
      * @param bool $perNamespace Return namespace uses per namespace
      *
-     * @return int[]|int[][]
+     * @return ($perNamespace is true ? array<int, list<int>> : list<int>)
      */
     public function getImportUseIndexes(bool $perNamespace = false): array
     {
@@ -172,23 +204,14 @@ final class TokensAnalyzer
     }
 
     /**
-     * Returns the attributes of the method under the given index.
+     * @param int $index Index of the T_FUNCTION token
      *
-     * The array has the following items:
-     * 'visibility' int|null  T_PRIVATE, T_PROTECTED or T_PUBLIC
-     * 'static'     bool
-     * 'abstract'   bool
-     * 'final'      bool
-     *
-     * @param int $index Token index of the method (T_FUNCTION)
+     * @return array{visibility: null|T_PRIVATE|T_PROTECTED|T_PUBLIC, static: bool, abstract: bool, final: bool}
      */
     public function getMethodAttributes(int $index): array
     {
-        $tokens = $this->tokens;
-        $token = $tokens[$index];
-
-        if (!$token->isGivenKind(T_FUNCTION)) {
-            throw new \LogicException(sprintf('No T_FUNCTION at given index %d, got "%s".', $index, $token->getName()));
+        if (!$this->tokens[$index]->isGivenKind(T_FUNCTION)) {
+            throw new \LogicException(sprintf('No T_FUNCTION at given index %d, got "%s".', $index, $this->tokens[$index]->getName()));
         }
 
         $attributes = [
@@ -199,10 +222,8 @@ final class TokensAnalyzer
         ];
 
         for ($i = $index; $i >= 0; --$i) {
-            $tokenIndex = $tokens->getPrevMeaningfulToken($i);
-
-            $i = $tokenIndex;
-            $token = $tokens[$tokenIndex];
+            $i = $this->tokens->getPrevMeaningfulToken($i);
+            $token = $this->tokens[$i];
 
             if ($token->isGivenKind(T_STATIC)) {
                 $attributes['static'] = true;
@@ -565,7 +586,7 @@ final class TokensAnalyzer
         $tokens = $this->tokens;
         $token = $tokens[$index];
 
-        if ($token->isGivenKind(T_ENCAPSED_AND_WHITESPACE)) {
+        if ($token->isGivenKind([T_INLINE_HTML, T_ENCAPSED_AND_WHITESPACE, CT::T_TYPE_INTERSECTION])) {
             return false;
         }
 
@@ -638,6 +659,8 @@ final class TokensAnalyzer
      * Returns an array; first value is the index until the method has analysed (int), second the found classy elements (array).
      *
      * @param int $classIndex classy index
+     *
+     * @return array{int, array<int, array{classIndex: int, token: Token, type: string}>}
      */
     private function findClassyElements(int $classIndex, int $index): array
     {

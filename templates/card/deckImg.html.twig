@@ -1,0 +1,23 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardgame{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('card') }}">&#8617;</a>
+        </div>
+        <div class="col-md-11">
+            {% for card in deck %}
+                <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

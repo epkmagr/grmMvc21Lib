@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Magic number</h1>
+    </div>
+    <div class="row">
+        <div class="crazy-number">{{ number }}</div>
+    </div>
+    <div class="row">
+        <figure class="figure symfony-logo">
+            <img src="{{ absolute_url(asset('images/zero_to_four.png')) }}" alt="0 to 4" class="figure-img img-fluid img-rounded">
+            <img src="{{ absolute_url(asset('images/five_to_nine.png')) }}" alt="5 to 9" class="figure-img img-fluid img-rounded">
+        </figure>
+    </div>
+</div>
+{% endblock %}

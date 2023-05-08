@@ -12,9 +12,11 @@ class Card
 {
     /**
      * @var string $value the value of the card.
-     * @var string $suit the suit of the card.
      */
     private $value;
+    /**
+     * @var string $suit the suit of the card.
+     */
     private $suit;
 
     /**
@@ -39,7 +41,7 @@ class Card
      *
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -49,9 +51,18 @@ class Card
      *
      * @return string
      */
-    public function getSuit()
+    public function getSuit(): string
     {
         return $this->suit;
+    }
+
+    /**
+     * Returns the cards image url
+     */
+    public function getImgUrl(): string
+    {
+        $suitArr = ['♣'=> 'C', '♦'=>  'D', '♥'=>  'H', '♠'=>  'S'];
+        return strtoupper($suitArr[$this->suit]) . $this->value . ".png";
     }
 }
 

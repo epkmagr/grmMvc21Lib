@@ -52,7 +52,7 @@ EOD;
 
 SAMPLE
                     ,
-                    new VersionSpecification(70300)
+                    new VersionSpecification(7_03_00)
                 ),
                 new VersionSpecificCodeSample(
                     <<<'SAMPLE'
@@ -64,7 +64,7 @@ EOD;
 
 SAMPLE
                     ,
-                    new VersionSpecification(70300)
+                    new VersionSpecification(7_03_00)
                 ),
                 new VersionSpecificCodeSample(
                     <<<'SAMPLE'
@@ -76,11 +76,21 @@ EOD;
 
 SAMPLE
                     ,
-                    new VersionSpecification(70300),
+                    new VersionSpecification(7_03_00),
                     ['indentation' => 'same_as_start']
                 ),
             ]
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Must run after BracesFixer, StatementIndentationFixer.
+     */
+    public function getPriority(): int
+    {
+        return -26;
     }
 
     /**

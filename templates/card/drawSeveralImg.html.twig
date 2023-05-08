@@ -1,0 +1,42 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardgame{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('card') }}">&#8617;</a>
+        </div>
+        <div class="col-md-8">
+            <h3 class="h3Left">Dragna kort</h3>
+            {% if deck %}
+                {% for card in deck %}
+                    <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}">
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <h3>Antalet kort kvar</h3>
+            <h3>{{ noOfCardsLeft }}</h3>
+            <form method="post">
+                <div class="myButton">
+                    <input type="submit" name="draw" value="Ta {{ drawnCards }} kort"
+                        onClick="this.form.action='{{ path('drawSeveralImgShow', { number: drawnCards }) }}';this.form.method='get';"
+                    >
+                </div>
+                <div class="myButton">
+                    <input type="submit" name="restart" value="Ny kortlek"
+                        onClick="this.form.action='{{ path('cardReset') }}';this.form.method='get';"
+                    >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

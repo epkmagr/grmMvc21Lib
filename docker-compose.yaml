@@ -21,7 +21,7 @@ services:
 
     php81-apache:
         image: anax/dev:php81-apache
-        ports: [ "11081:80" ]
+        ports: [ "12081:80" ]
         volumes: [ ".:/home/anax/repo" ]
 
     php80:

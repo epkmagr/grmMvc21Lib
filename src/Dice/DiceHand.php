@@ -2,6 +2,8 @@
 
 namespace App\Dice;
 
+use App\Dice\Dice;
+
 class DiceHand
 {
     private $hand = [];
@@ -23,13 +25,30 @@ class DiceHand
         return count($this->hand);
     }
 
-    public function getAsString(): string
+    public function getValues(): array
     {
-        $str = '';
+        $values = [];
         foreach ($this->hand as $die) {
-            $str .= $die->getAsString();
+            $values[] = $die->getValue();
         }
+        return $values;
+    }
 
-        return $str;
+    public function getString(): array
+    {
+        $values = [];
+        foreach ($this->hand as $die) {
+            $values[] = $die->getAsString();
+        }
+        return $values;
+    }
+
+    public function getSum(): int
+    {
+        $sum = 0;
+        foreach ($this->hand as $die) {
+            $sum += $die->getValue();
+        }
+        return $sum;
     }
 }

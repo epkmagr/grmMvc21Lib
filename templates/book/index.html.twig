@@ -35,5 +35,17 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-3">
+            <div class="myButton">
+                <a href="{{ path('api_book') }}">Json, visa alla böcker</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="myButton">
+                <a href="{{ path('api_one_book', {'isbn': "4444"}) }}">Json, visa bok med ISBN 4444</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

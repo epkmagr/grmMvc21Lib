@@ -1,0 +1,33 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardgame{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="dealDiv" role="main">
+    <div class="jumbotron">
+        <h1>Kortspel 21</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('game21') }}">&#8617;</a>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <form method="post" action="{{ path('initImgPost')}}">
+                <div class="center">
+                    <label for="html">Antal spelare: </label>
+                    <input class="numberInput" type="number" name="noOfPlayers" max="4" min="1"
+                        value="1">
+                    <br>
+                    <label for="html">Antal kort: </label>
+                    <input class="numberInput" type="number" name="noOfCards" max="3" min="1"
+                        value="1">
+                    <input class="submitButton" type="submit" name="start" value="Starta spelet">
+                    <input class="submitButton" type="submit" name="clear" value="Återställ">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

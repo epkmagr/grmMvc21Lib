@@ -1,0 +1,55 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Övningar{% endblock %}
+
+{% block content %}
+<div class="container-fluid" role="main">
+    <div class="jumbotron">
+        <h1>Övningsuppgifter</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <h3>kmom02</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <div class="myButton">
+                <a href="{{ path('form-search') }}">Kmom02 - search form</a>
+            </div>
+            <div class="myButton">
+                <a href="{{ path('form-login') }}">Kmom02 - login form</a>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <div class="myButton">
+                <a href="{{ path('form-session') }}">Kmom02 - session form</a>
+            </div>
+            <div class="myButton">
+                <a href="{{ path('pig_start') }}">Pig game, spela 100</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="myButton">
+                    <a href="{{ path('dice-home') }}">Tärning</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-3">
+                <h3>kmom05</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="myButton">
+                    <a href="{{ path('app_product') }}">Produkt</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -21,14 +21,33 @@ docker-compose up -d php81-apache
 Kolla läget
 docker-compose run php81 bin/console debug:router
 
-Start lokalt
-php -S localhost:8888 -t public &
+Starta lokalt
+php -S localhost:8889 -t public &
+Kolla vilka processer/jobb som är igång
+jobs
+kill %1 (om jobb 1 ska stoppas, %2 om jobb 2 ska stoppas)
+
 Kolla router
 bin/console debug:router
+Rensa cachen
+bin/console cache:clear
+Kolla kommandon
+bin/console
+
+Composer
 composer recipes (vad som är installerat)
 
 Git och Github
-mvc-report
+mvc_vt23_report
+Gör en gång bara:
+git init && git symbolic-ref HEAD refs/heads/main
+git remote add origin git@github.com:epkmagr/mvc_vt23_report.git
+git branch -M main
+git pull origin main --rebase
+git push -u origin main
+
+Gör vid varje push:
+git status
 git add .
 git commit -a -m "meddelande"
 git push
@@ -53,3 +72,8 @@ phpDocumentor
 tools/phpdoc/phpdoc --version (or help)
 Generera doc:
 tools/phpdoc/phpdoc -d ./src -t ./docs/api
+
+Sqlite3
+sqlite3 -header -column var/data.db
+php bin/console dbal:run-sql 'SELECT * FROM book;'
+

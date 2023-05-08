@@ -4,22 +4,21 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit77a0174957f865545b21d20df0cab074
+class ComposerStaticInitfde896d44f6940a0c73e5892da497138
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\DependencyInjection\\' => 38,
             'Symfony\\Component\\Config\\' => 25,
@@ -38,10 +37,6 @@ class ComposerStaticInit77a0174957f865545b21d20df0cab074
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php81\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
-        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -53,6 +48,10 @@ class ComposerStaticInit77a0174957f865545b21d20df0cab074
         'Symfony\\Contracts\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Component\\VarExporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-exporter',
         ),
         'Symfony\\Component\\Filesystem\\' => 
         array (
@@ -100,16 +99,15 @@ class ComposerStaticInit77a0174957f865545b21d20df0cab074
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit77a0174957f865545b21d20df0cab074::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit77a0174957f865545b21d20df0cab074::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit77a0174957f865545b21d20df0cab074::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit77a0174957f865545b21d20df0cab074::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfde896d44f6940a0c73e5892da497138::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfde896d44f6940a0c73e5892da497138::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitfde896d44f6940a0c73e5892da497138::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitfde896d44f6940a0c73e5892da497138::$classMap;
 
         }, null, ClassLoader::class);
     }

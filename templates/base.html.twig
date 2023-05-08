@@ -2,17 +2,25 @@
 <html>
     <head>
         {% block head %}
-        <meta charset="UTF-8">
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"    rel="stylesheet">
+            <meta charset="UTF-8">
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"    rel="stylesheet">
             {% block stylesheets %}
-                <link href="{{ asset('css/me.css') }}" type="text/css" rel="stylesheet"/>
+                {{ encore_entry_link_tags('app') }}
             {% endblock %}
             <title>{% block title %}{% endblock %} - MVC webpage</title>
             <link rel="shortcut icon" href="{{ absolute_url('images/favicon.ico') }}">
         {% endblock %}
+
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </head>
-    <body role="document">
+{#     <body>
+        {% block body %}{% endblock %}
+    </body> #}
+        <body role="document">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -29,23 +37,27 @@
                         <li><a href="{{ path('me') }}">Hem</a></li>
                         <li><a href="{{ path('about') }}">Om</a></li>
                         <li><a href="{{ path('report') }}">Redovisning</a></li>
-                        <li><a href="{{ path('card') }}">kmom02</a></li>
-                        <li><a href="{{ path('game') }}">Spel 21</a></li>
-                        <li><a href="{{ path('app_book') }}">Bibliotek</a></li>
-                        <li><a href="{{ path('metrics') }}">Metrics</a></li>
-                        <li><a href="{{ path('app_garden') }}">Projekt</a></li>
+                        <li><a href="{{ path('exercises') }}">Övningar</a></li>
+                        <li><a href="{{ path('kmom01') }}">Kmom01</a></li>
+                        <li><a href="{{ path('card') }}">Kmom02</a></li>
+                        <li><a href="{{ path('game21') }}">Kmom03</a></li>
+                        <li><a href="{{ path('app_book') }}">Kmom05</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div id="content">
-            {% block content %}{% endblock %}
+            <div class="row">
+                 <div class="col-md-10 col-md-offset-1">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
         </div>
         <div id="footer" class="well text-center navbar-fixed-bottom my-footer">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
             {% block footer %}
-                &copy; 2022 Marie's programming Ltd.
+                &copy; 2023 Marie's programming Ltd.
             {% endblock %}
         </div>
     </body>

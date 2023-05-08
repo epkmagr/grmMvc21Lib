@@ -20,16 +20,19 @@ namespace PhpCsFixer\FixerDefinition;
 final class VersionSpecification implements VersionSpecificationInterface
 {
     /**
-     * @var null|int
+     * @var null|int<1, max>
      */
-    private $minimum;
+    private ?int $minimum;
 
     /**
-     * @var null|int
+     * @var null|int<1, max>
      */
-    private $maximum;
+    private ?int $maximum;
 
     /**
+     * @param null|int<1, max> $minimum
+     * @param null|int<1, max> $maximum
+     *
      * @throws \InvalidArgumentException
      */
     public function __construct(?int $minimum = null, ?int $maximum = null)

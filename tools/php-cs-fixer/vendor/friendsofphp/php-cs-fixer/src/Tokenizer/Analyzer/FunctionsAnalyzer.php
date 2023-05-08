@@ -26,6 +26,9 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class FunctionsAnalyzer
 {
+    /**
+     * @var array{tokens: string, imports: list<NamespaceUseAnalysis>, declarations: list<int>}
+     */
     private array $functionsAnalysis = ['tokens' => '', 'imports' => [], 'declarations' => []];
 
     /**
@@ -62,12 +65,12 @@ final class FunctionsAnalyzer
             return false;
         }
 
-        if ($previousIsNamespaceSeparator) {
-            return true;
-        }
-
         if ($tokens[$tokens->getNextMeaningfulToken($nextIndex)]->isGivenKind(CT::T_FIRST_CLASS_CALLABLE)) {
             return false;
+        }
+
+        if ($previousIsNamespaceSeparator) {
+            return true;
         }
 
         if ($tokens->isChanged() || $tokens->getCodeHash() !== $this->functionsAnalysis['tokens']) {
@@ -134,7 +137,7 @@ final class FunctionsAnalyzer
     }
 
     /**
-     * @return ArgumentAnalysis[]
+     * @return array<string, ArgumentAnalysis>
      */
     public function getFunctionArguments(Tokens $tokens, int $functionIndex): array
     {

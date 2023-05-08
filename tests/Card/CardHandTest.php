@@ -17,7 +17,7 @@ class CardHandTest extends KernelTestCase
     {
         $cardHand = new CardHand();
         $this->assertInstanceOf("\App\Card\CardHand", $cardHand);
-        $this->assertEquals($cardHand->getCards(), []);
+        $this->assertEquals([], $cardHand->getCards());
     }
 
     /**
@@ -26,9 +26,9 @@ class CardHandTest extends KernelTestCase
      */
     public function testCreateObjectWithArgument()
     {
-        $cardHand = new Card('&hearts;', '7');
-        $this->assertEquals($cardHand->getSuit(), '&hearts;');
-        $this->assertEquals($cardHand->getValue(), '7');
+        $cardHand = new Card('♥', '7');
+        $this->assertEquals('♥', $cardHand->getSuit());
+        $this->assertEquals('7', $cardHand->getValue());
     }
 
     /**
@@ -37,9 +37,34 @@ class CardHandTest extends KernelTestCase
     public function testAddNewCard()
     {
         $cardHand = new CardHand();
-        $cardHand->addNewCard(new Card('&hearts;', '7'));
-        $cardHand->addNewCard(new Card('&clubs;', '8'));
-        $this->assertEquals(count($cardHand->getCards()), 2);
+        $cardHand->addNewCard(new Card('♥', '7'));
+        $cardHand->addNewCard(new Card('♣', '8'));
+        $this->assertEquals(2, count($cardHand->getCards()));
+    }
+
+    /**
+     * Construct object, add 2 cards and verify Json format.
+     */
+    public function testAddNewCardJson()
+    {
+        $cardHand = new CardHand();
+        $cardHand->addNewCard(new Card('♥', '7'));
+        $cardHand->addNewCard(new Card('♣', '8'));
+        $this->assertEquals(2, count($cardHand->getCardsJson()));
+        $this->assertEquals('♥7', $cardHand->getCardsJson()[0]);
+        $this->assertEquals('♣8', $cardHand->getCardsJson()[1]);
+    }
+
+    /**
+     * Construct object, add 2 cards and verify image format, i.e. filename.
+     */
+    public function testAddNewCardImg()
+    {
+        $cardHand = new CardHand();
+        $cardHand->addNewCard(new Card('♥', '7'));
+        $cardHand->addNewCard(new Card('♣', '8'));
+        $this->assertEquals('H7.png', $cardHand->getCardsImg()[0]);
+        $this->assertEquals('C8.png', $cardHand->getCardsImg()[1]);
     }
 
     /**
@@ -48,8 +73,8 @@ class CardHandTest extends KernelTestCase
     public function testGetSumOfHandAceLow()
     {
         $cardHand = new CardHand();
-        $cardHand->addNewCard(new Card('&hearts;', 'A'));
-        $cardHand->addNewCard(new Card('&clubs;', '7'));
+        $cardHand->addNewCard(new Card('♥', 'A'));
+        $cardHand->addNewCard(new Card('♣', '7'));
         $this->assertEquals($cardHand->getSumOfHandAceLow(), 8);
     }
 
@@ -59,8 +84,8 @@ class CardHandTest extends KernelTestCase
     public function testGetSumOfHandAceHigh()
     {
         $cardHand = new CardHand();
-        $cardHand->addNewCard(new Card('&hearts;', 'A'));
-        $cardHand->addNewCard(new Card('&clubs;', '7'));
+        $cardHand->addNewCard(new Card('♥', 'A'));
+        $cardHand->addNewCard(new Card('♣', '7'));
         $this->assertEquals($cardHand->getSumOfHandAceHigh(), 21);
     }
 }

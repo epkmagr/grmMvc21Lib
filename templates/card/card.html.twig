@@ -2,22 +2,16 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Cardgame{% endblock %}
+{% block title %}Card game{% endblock %}
 
 {% block content %}
 <div class="container-fluid" role="main">
     <div class="jumbotron">
         <h1>kmom02</h1>
     </div>
+
     <div class="row">
-        <div class="col-md-5 col-md-offset-3">
-            <h3>Välkommen!</h3>
-            <p>Du spelar mot datorn som också är bank. Lycka till!</p>
-            <p>Välkommen att börja spela genom att klicka på knappen nedan.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-1">
+        <div class="col-md-3">
             <div class="myButton">
                 <a href="{{ path('deck') }}">Visa kortleken</a>
             </div>
@@ -37,14 +31,37 @@
                 <a href="{{ path('deck2') }}">Visa kortlek med joker</a>
             </div>
             <div class="myButton">
-                <a href="{{ path('deckJson') }}">Visa kortlek, Json</a>
+                <a href="{{ path('apiHome') }}">API Json sida</a>
             </div>
-            <div class="myButton">
-                <a href="{{ path('shuffleJson') }}">Blanda kortlek, Json</a>
-            </div>
-            <div class="myButton">
-                <a href="{{ path('documentation') }}">Dokumentation</a>
-            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <form method="post" action="">
+                <div class="myButton">
+                    <a href="{{ path('deckImg') }}">Visa kortleken</a>
+                </div>
+                <div class="myButton">
+                    <input type="submit" name="drawSeveralImg" value="Blanda kortleken"
+                        onClick="this.form.action='{{ path('shuffleImg') }}';this.form.method='post';"
+                    >
+                </div>
+                <div class="myButton">
+                    <a href="{{ path('drawImg') }}">Dra ett kort</a>
+                </div>
+                <div class="myButton">
+                    <input type="number" name="number" min="1" max="52" value="1">
+                    <input type="submit" name="drawSeveralImg" value="Dra flera kort"
+                        onClick="this.form.action='{{ path('drawSeveralImg', {'number': "1"}) }}';this.form.method='post';"
+                    >
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Välkommen!</h3>
+            <p>Du spelar mot datorn som också är bank. Lycka till!</p>
+            <p>Välkommen att börja spela genom att klicka på knappen nedan.</p>
         </div>
     </div>
     <div class="row">
@@ -54,11 +71,17 @@
             </div>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="myButton">
-                <a href="{{ path('dice-home') }}">Tärning</a>
-            </div>
+        <div class="col-md-6 col-md-offset-3">
+            <h3></h3>
+            <form method="post" action="">
+                <div class="myButton">
+                    <input type="submit" name="restart" value="Ny kortlek"
+                        onClick="this.form.action='{{ path('cardReset') }}';this.form.method='get';"
+                    >
+                </div>
+            </form>
         </div>
     </div>
 </div>

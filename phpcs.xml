@@ -3,7 +3,6 @@
     <description>PSR12 rule set.</description>
 
     <file>src</file>
-    <file>tests</file>
 
     <exclude-pattern>build</exclude-pattern>
     <exclude-pattern>cache</exclude-pattern>

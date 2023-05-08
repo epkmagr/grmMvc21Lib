@@ -34,7 +34,7 @@ final class TypeAlternationTransformer extends AbstractTypeTransformer
      */
     public function getPriority(): int
     {
-        // needs to run after ArrayTypehintTransformer and TypeColonTransformer
+        // needs to run after ArrayTypehintTransformer, TypeColonTransformer and AttributeTransformer
         return -15;
     }
 
@@ -43,7 +43,7 @@ final class TypeAlternationTransformer extends AbstractTypeTransformer
      */
     public function getRequiredPhpVersionId(): int
     {
-        return 70100;
+        return 7_01_00;
     }
 
     /**

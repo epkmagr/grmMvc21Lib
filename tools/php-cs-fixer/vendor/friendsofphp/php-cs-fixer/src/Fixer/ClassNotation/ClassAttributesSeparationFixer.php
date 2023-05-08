@@ -146,7 +146,7 @@ class Sample
     public $e;
 }
 ',
-                    new VersionSpecification(80000),
+                    new VersionSpecification(8_00_00),
                     ['elements' => ['property' => self::SPACING_ONLY_IF_META]]
                 ),
             ]
@@ -156,8 +156,8 @@ class Sample
     /**
      * {@inheritdoc}
      *
-     * Must run before BracesFixer, IndentationTypeFixer, NoExtraBlankLinesFixer.
-     * Must run after OrderedClassElementsFixer, SingleClassElementPerStatementFixer.
+     * Must run before BracesFixer, IndentationTypeFixer, NoExtraBlankLinesFixer, StatementIndentationFixer.
+     * Must run after OrderedClassElementsFixer, SingleClassElementPerStatementFixer, VisibilityRequiredFixer.
      */
     public function getPriority(): int
     {

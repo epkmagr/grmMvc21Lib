@@ -11,17 +11,27 @@ class Player
 {
     /**
      * @var string   the name of the player
-     * @var CardHand the hand with cards
-     * @var int      the scoreLow of the player with ace as 1
-     * @var int      the scoreHigh of the player with ace as 14
-     * @var int      the bestScore of the player, scoreLow or scoreHigh
-     * @var bool     true if the player is content, false otherwise
      */
     private $name;
+    /**
+     * @var CardHand the hand with cards
+     */
     private $hand;
+    /**
+     * @var int      the scoreLow of the player with ace as 1
+     */
     private $scoreLow;
+    /**
+     * @var int      the scoreHigh of the player with ace as 14
+     */
     private $scoreHigh;
+    /**
+     * @var int      the bestScore of the player, scoreLow or scoreHigh
+     */
     private $bestScore;
+    /**
+     * @var bool     true if the player is content, false otherwise
+     */
     private $content;
 
     /**
@@ -64,7 +74,7 @@ class Player
     /**
      * Get the scoreLow of the player. Ace counted as 1.
      *
-     * @return int $scoreLow as the scoreLow of the player
+     * @return int as the scoreLow of the player
      */
     public function getScoreLow()
     {
@@ -78,9 +88,9 @@ class Player
      *
      * @return void
      */
-    public function setScoreLow(int $score)
+    public function setScoreLow(int $scoreLow)
     {
-        $this->scoreLow = $score;
+        $this->scoreLow = $scoreLow;
     }
 
     /**
@@ -100,9 +110,9 @@ class Player
      *
      * @return void
      */
-    public function setScoreHigh(int $score)
+    public function setScoreHigh(int $scoreHigh)
     {
-        $this->scoreHigh = $score;
+        $this->scoreHigh = $scoreHigh;
     }
 
     /**
@@ -138,7 +148,7 @@ class Player
     /**
      * Set the score to the sum of cards in the hand. Ace is counted as 1.
      */
-    public function getSumOfHandAceLow()
+    public function getSumOfHandAceLow(): void
     {
         $this->setScoreLow($this->hand->getSumOfHandAceLow());
     }
@@ -146,7 +156,7 @@ class Player
     /**
      * Get the score to the sum of cards in the hand. Ace is counted as 14.
      */
-    public function getSumOfHandAceHigh()
+    public function getSumOfHandAceHigh(): void
     {
         $this->setScoreHigh($this->hand->getSumOfHandAceHigh());
     }
@@ -173,6 +183,7 @@ class Player
 
     /**
      * Get the result for a player.
+     * @SuppressWarnings(PHPMD.ElseExpression)
      *
      * @return string as the result of the score
      */
@@ -205,6 +216,7 @@ class Player
 
     /**
      * Get the result for the bank.
+     * @SuppressWarnings(PHPMD.ElseExpression)
      *
      * @return string as the result of the score
      */

@@ -246,6 +246,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "install-path": "../sebastian/phpcpd"
         },
         {

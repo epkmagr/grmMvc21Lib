@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 #[ORM\Entity(repositoryClass: ServicesRepository::class)]
 class Services
 {

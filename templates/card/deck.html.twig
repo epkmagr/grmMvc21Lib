@@ -17,7 +17,7 @@
             {% for card in deck %}
                 {% set suit = card.getSuit() %}
                 {% set value = card.getValue() %}
-                <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
+                <div {% if '♥' in suit or '♦' in suit %} class="card red" {% else %} class="card" {% endif %}>
                     <div class="top">
                         <span class="number">{{ value }}</span>
                         <span class="icon">{{ suit | raw }}</span>

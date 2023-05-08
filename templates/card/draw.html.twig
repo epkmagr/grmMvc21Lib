@@ -14,12 +14,12 @@
             <a href="{{ path('card') }}">&#8617;</a>
         </div>
         <div class="col-md-2  col-md-offset-2">
-            <h3>Draget kort</h3>
+            <h3 class="h3Left">Draget kort</h3>
             {% if cards %}
                 {% for card in cards %}
                     {% set suit = card.getSuit() %}
                     {% set value = card.getValue() %}
-                    <div {% if 'hearts' in suit or 'diams' in suit %} class="card red" {% else %} class="card" {% endif %}>
+                    <div {% if '♥' in suit or '♦' in suit %} class="card red" {% else %} class="card" {% endif %}>
                         <div class="top">
                             <span class="number">{{ value }}</span>
                             <span class="icon">{{ suit | raw }}</span>
@@ -36,7 +36,7 @@
         <div class="col-md-4  col-md-offset-1">
             <h3>Antalet kort kvar</h3>
             <h3>{{ noOfCardsLeft }}</h3>
-            <form method="post">
+            <form method="post" action="{{ path('draw') }}">
                 <div class="center">
                     <input class="myButton" type="submit" name="draw" value="Ta ett kort">
                     <input class="myButton" type="submit" name="clear" value="Återställ">

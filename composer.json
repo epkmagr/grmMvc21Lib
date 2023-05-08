@@ -6,58 +6,57 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0.2",
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/annotations": "^1.0",
-        "doctrine/doctrine-bundle": "^2.5",
+        "doctrine/annotations": "^2.0",
+        "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.11",
-        "league/commonmark": "^2.2",
+        "doctrine/orm": "^2.14",
+        "league/commonmark": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.3",
-        "phpstan/phpdoc-parser": "^1.2",
+        "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.2",
-        "symfony/asset": "6.0.*",
-        "symfony/console": "6.0.*",
-        "symfony/doctrine-messenger": "6.0.*",
-        "symfony/dotenv": "6.0.*",
-        "symfony/expression-language": "6.0.*",
+        "symfony/asset": "6.1.*",
+        "symfony/console": "6.1.*",
+        "symfony/doctrine-messenger": "6.1.*",
+        "symfony/dotenv": "6.1.*",
+        "symfony/expression-language": "6.1.*",
         "symfony/flex": "^2",
-        "symfony/form": "6.0.*",
-        "symfony/framework-bundle": "6.0.*",
-        "symfony/http-client": "6.0.*",
-        "symfony/intl": "6.0.*",
-        "symfony/mailer": "6.0.*",
-        "symfony/mime": "6.0.*",
-        "symfony/monolog-bundle": "^3.1",
-        "symfony/notifier": "6.0.*",
-        "symfony/process": "6.0.*",
-        "symfony/property-access": "6.0.*",
-        "symfony/property-info": "6.0.*",
-        "symfony/proxy-manager-bridge": "6.0.*",
-        "symfony/runtime": "6.0.*",
-        "symfony/security-bundle": "6.0.*",
-        "symfony/serializer": "6.0.*",
-        "symfony/string": "6.0.*",
-        "symfony/translation": "6.0.*",
-        "symfony/twig-bundle": "6.0.*",
-        "symfony/validator": "6.0.*",
-        "symfony/web-link": "6.0.*",
-        "symfony/webapp-meta": "^1.0",
-        "symfony/yaml": "6.0.*",
+        "symfony/form": "6.1.*",
+        "symfony/framework-bundle": "6.1.*",
+        "symfony/http-client": "6.1.*",
+        "symfony/intl": "6.1.*",
+        "symfony/mailer": "6.1.*",
+        "symfony/mime": "6.1.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/notifier": "6.1.*",
+        "symfony/process": "6.1.*",
+        "symfony/property-access": "6.1.*",
+        "symfony/property-info": "6.1.*",
+        "symfony/runtime": "6.1.*",
+        "symfony/security-bundle": "6.1.*",
+        "symfony/serializer": "6.1.*",
+        "symfony/string": "6.1.*",
+        "symfony/translation": "6.1.*",
+        "symfony/twig-bundle": "6.1.*",
+        "symfony/validator": "6.1.*",
+        "symfony/web-link": "6.1.*",
+        "symfony/webpack-encore-bundle": "^1.16",
+        "symfony/yaml": "6.1.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/markdown-extra": "^3.3",
+        "twig/markdown-extra": "^3.5",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "6.0.*",
-        "symfony/css-selector": "6.0.*",
-        "symfony/debug-bundle": "6.0.*",
-        "symfony/maker-bundle": "^1.40",
-        "symfony/phpunit-bridge": "^6.0",
-        "symfony/stopwatch": "6.0.*",
-        "symfony/web-profiler-bundle": "6.0.*"
+        "symfony/browser-kit": "6.1.*",
+        "symfony/css-selector": "6.1.*",
+        "symfony/debug-bundle": "6.1.*",
+        "symfony/maker-bundle": "^1.48",
+        "symfony/phpunit-bridge": "^6.2",
+        "symfony/stopwatch": "6.1.*",
+        "symfony/web-profiler-bundle": "6.1.*"
     },
     "config": {
         "allow-plugins": {
@@ -87,7 +86,8 @@
         "symfony/polyfill-php72": "*",
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php74": "*",
-        "symfony/polyfill-php80": "*"
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
     },
     "scripts": {
         "auto-scripts": {
@@ -100,24 +100,27 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "csfix": "php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
-        "csfixall": "php tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php fix src tests",
-        "phpcs": "php tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
-        "phpcbf": "php tools/php-codesniffer/vendor/bin/phpcbf --standard=PSR12 src",
-        "phpmd": "php tools/phpmd/vendor/bin/phpmd src text phpmd.xml || true",
-        "phpstan": "php tools/phpstan/vendor/bin/phpstan analyse -l 9 src || true",
-        "phpcpd": "php tools/phpcpd/vendor/bin/phpcpd src || true",
+        "clean": "rm -rf build .phpunit.result.cache",
+        "clean-all": [
+            "@clean",
+            "rm -rf vendor composer.lock"
+        ],
+        "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
+        "csfix:dry": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v",
+        "csfixall": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php fix src tests",
+        "phpcs": "tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
+        "phpcbf": "tools/php-codesniffer/vendor/bin/phpcbf --standard=PSR12 src",
+        "phpmd": "tools/phpmd/vendor/bin/phpmd . text phpmd.xml || true",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan || true",
+        "phpcpd": "tools/phpcpd/vendor/bin/phpcpd src || true",
         "lint": [
-            "@phpcpd",
             "@phpmd",
             "@phpstan"
         ],
-        "phpdoc": "php tools/phpdoc/phpdoc",
-        "phpunit": [
-            "@putenv XDEBUG_MODE=coverage",
-            "php vendor/bin/phpunit"
-        ],
-        "phpmetrics": "php tools/phpmetrics/vendor/bin/phpmetrics --config=phpmetrics.json"
+        "phpdoc": "tools/phpdoc/phpdoc",
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "phpunit:text": "XDEBUG_MODE=coverage bin/phpunit --coverage-text",
+        "phpmetrics": "tools/phpmetrics/vendor/bin/phpmetrics --config=phpmetrics.json"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -125,7 +128,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.0.*"
+            "require": "6.1.*"
         }
     }
 }

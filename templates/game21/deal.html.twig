@@ -1,0 +1,118 @@
+{# templates/me.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardgame{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="dealDiv" role="main">
+    <div class="jumbotron">
+        <h1>Kortspel 21</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 home21">
+            <a href="{{ path('game21') }}">&#8617;</a>
+        </div>
+        <div class="col-md-6">
+            <h3 class="h3Left">{{ bank.getName() }}</h3>
+            {% for card in bank.getHand().getCards() %}
+                {% set suit = card.getSuit() %}
+                {% set value = card.getValue() %}
+                {% if loop.last %}
+                    <div class="cardDeal flipped">
+                    </div>
+                {% else %}
+                    <div {% if 'hearts' in suit or 'diams' in suit %} class="cardDeal red" {% else %} class="cardDeal" {% endif %}>
+                        <div class="top">
+                            <span class="number">{{ value }}</span>
+                            <span class="icon">{{ suit | raw }}</span>
+                        </div>
+                        <div class="lg_icon">{{ suit | raw }}</div>
+                        <div class="bottom">
+                            <span class="icon rotate">{{ suit | raw }}</span>
+                            <span class="number rotate">{{ value }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% set bankScoreLow = bank.getScoreLow() %}
+            {% set bankScoreHigh = bank.getScoreHigh() %}
+            {% set win = bank.getBankResult() %}
+            {% set showResult = result %}
+            {% if showResult is not same as "" %}
+                {% if bankScoreLow > 0 %}
+                    <h3 class="h3Left">Poäng: {{bankScoreLow ~ '/' ~ bankScoreHigh }} </h3>
+                    <h3 class="h3Left">{{ win }}</h3>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-md-2">
+            <h3>Antalet kort kvar</h3>
+            <h3>{{ noOfCardsLeft }}</h3>
+            {% set showResult = result %}
+            {% if showResult is not same as "" %}
+                <h3></h3>
+                <h3>Resultat</h3>
+                <h3>{{ result | raw }}</h3>
+            {% endif %}
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <form method="post">
+                <div class="center">
+                    <label for="html">Antal spelare: </label>
+                    <input class="numberInput" type="number" name="noOfPlayers" max="4" min="1"
+                        value={{ app.request.get('players') }}>
+                    <br>
+                    <label for="html">Antal kort: </label>
+                    <input class="numberInput" type="number" name="noOfCards" max="3" min="1"
+                        value={{ app.request.get('cards') }}>
+                    <input class="submitButton" type="submit" name="setup" value="Välj setup">
+                    <input class="submitButton" type="submit" name="deal" value="Spela">
+                    <input class="submitButton" type="submit" name="clear" value="Återställ">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:10em;">
+        {% set no = 0 %}
+        {% for player in myPlayers %}
+            <div class="col-md-2 col-md-offset-1">
+                <h3 class="h3Left"> {{ player.getName()}} </h3>
+                {% for card in player.getHand().getCards() %}
+                    {% set suit = card.getSuit() %}
+                    {% set value = card.getValue() %}
+                    <div {% if 'hearts' in suit or 'diams' in suit %} class="cardDeal red" {% else %} class="cardDeal" {% endif %}>
+                        <div class="top">
+                            <span class="number">{{ value }}</span>
+                            <span class="icon">{{ suit | raw }}</span>
+                        </div>
+                        <div class="lg_icon">{{ suit | raw }}</div>
+                        <div class="bottom">
+                            <span class="icon rotate">{{ suit | raw }}</span>
+                            <span class="number rotate">{{ value }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% set playerScoreLow = player.getScoreLow() %}
+                {% set playerScoreHigh = player.getScoreHigh() %}
+                {% set content = player.isContent() %}
+                {% set win = player.getPlayerResult() %}
+                {% if content %}
+                    {% set contentText = "" %}
+                {% else %}
+                    {% set contentText = "Icke" %}
+                {% endif %}
+                {% if playerScoreLow > 0 and playerScoreLow <= 21 %}
+                    <h3 class="h3Left">Poäng: {{ playerScoreLow }}/{{ playerScoreHigh }}</h3>
+                    <form method="post">
+                        <input class="submitButton" type="submit" name="content{{no}}" value={{ contentText }}&nbsp;Nöjd>
+                    </form>
+                {% elseif playerScoreLow != 21 %}
+                    <h3 class="h3Left">{{ win }}</h3>
+                {% endif %}
+            </div>
+            {% set no = no + 1 %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
