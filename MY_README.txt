@@ -22,7 +22,7 @@ Kolla läget
 docker-compose run php81 bin/console debug:router
 
 Starta lokalt
-php -S localhost:8889 -t public &
+php -S localhost:8881 -t public &
 Kolla vilka processer/jobb som är igång
 jobs
 kill %1 (om jobb 1 ska stoppas, %2 om jobb 2 ska stoppas)
@@ -77,3 +77,6 @@ Sqlite3
 sqlite3 -header -column var/data.db
 php bin/console dbal:run-sql 'SELECT * FROM book;'
 
+Symfony migrera vid förändring i databasen, Sqlite3
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate

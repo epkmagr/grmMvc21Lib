@@ -12,6 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Game21ImgController extends AbstractController
 {
+    #[Route("/", name: "home")]
+    public function start(): Response
+    {
+        return $this->render('me.html.twig');
+    }
+
     #[Route("/game/initImg", name: "initImg", methods: ["GET"])]
     public function initImg(SessionInterface $session): Response
     {
