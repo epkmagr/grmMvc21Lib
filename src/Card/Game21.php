@@ -319,7 +319,7 @@ class Game21
         return $result . '<br>' . $winner;
     }
 
-    public function prepareJsonDeal()
+    public function getJsonData()
     {
         $data = [
             'no of players' => $this->getNoOfPlayers(),

@@ -91,4 +91,10 @@ class Game21ImgController extends AbstractController
 
         return $this->redirectToRoute('dealImg');
     }
+
+    #[Route("/game/doc", name: "game21Documentation", methods: ["GET"])]
+    public function game21Documentation(): Response
+    {
+        return $this->render('game21/documentation.html.twig');
+    }
 }

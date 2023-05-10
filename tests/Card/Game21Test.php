@@ -42,9 +42,20 @@ class Game21Test extends KernelTestCase
     public function testCreateGameAndGetJsonInfo()
     {
         $game = new Game21();
-        $this->assertEquals("Banken", $game->getAllPlayersInfo(true)[0]["name"]);
-        $this->assertEquals("", $game->getAllPlayersInfo(true)[0]["result"]);
-        $this->assertEquals("Spelare 1", $game->getAllPlayersInfo(true)[1]["name"]);
-        $this->assertEquals("Nytt kort?", $game->getAllPlayersInfo(true)[1]["result"]);
+        $dealer["name"] = "Banken";
+        $dealer["cards"] = [];
+        $dealer["sum low/high"] = "0/0";
+        $dealer["result"] = "";
+        $player["name"] = "Spelare 1";
+        $player["cards"] = [];
+        $player["sum low/high"] = "0/0";
+        $player["result"] = "Nytt kort?";
+        $defaultData["no of players"] = 1;
+        $defaultData["no of cards to draw"] = 1;
+        $defaultData["Players info"][0] = $dealer;
+        $defaultData["Players info"][1] = $player;
+        $defaultData["remaining cards"] = 52;
+        $defaultData["the winner is"] = '';
+        $this->assertEquals($defaultData, $game->getJsonData());
     }
 }

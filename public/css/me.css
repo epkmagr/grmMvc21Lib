@@ -66,8 +66,13 @@ h3 {
     margin: 0.5em;
     font-size: large;
     border-radius: 10px;
+    border: 2px solid black;
     background-image: linear-gradient(to bottom, #b6d2ea, #88b5dd, #3172ab);
     text-align: center;
+}
+
+.myButton>a {
+    text-decoration: none;
 }
 
 .submitButton {

@@ -66,7 +66,8 @@ h3 {
 .myButton,
 .submitButton,
 .bookButton,
-.contentImgButton {
+.contentImgButton,
+.jsonButton {
     padding: 0.5em;
     margin: 0.5em;
     font-size: large;
@@ -309,47 +310,13 @@ table tbody tr:nth-of-type(even) {
     text-align: center;
 }
 
-/* Pig game */
-.pig-content {
-    margin: 0 auto;
-    padding: 1em;
-    max-width: 800px;
-    background-color: #eee;
-    font-size: 2em;
+.myButton,
+.jsonButton {
+    border: 2px solid black;
 }
 
-.pig-input {
-    font-size: 1em;
-}
-
-.pig-h1 {
-    border-bottom: 4px double green;
-}
-
-.pig-die {
-    font-size: 2em;
-}
-
-.flash-notice {
-    padding: 0.5em;
-    color: #004085;
-    background-color: #cce5ff;
-    border-color: #b8daff;
-}
-
-.flash-notice:before {
-    content: "ⓘ";
-}
-
-.flash-warning {
-    padding: 0.5em;
-    color: #856404;
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-}
-
-.flash-warning:before {
-    content: "⚠";
+.jsonButton {
+    font-size: x-large;
 }
 
 .myButton > input[type=submit] {
@@ -358,6 +325,8 @@ table tbody tr:nth-of-type(even) {
     color: #0c1d2c;
 }
 
-.myButton > a {
-    color: #0c1d2c;    
+.myButton > a,
+.jsonButton > a {
+    color: #0c1d2c;   
+    text-decoration: none; 
 }

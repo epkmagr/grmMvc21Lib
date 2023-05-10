@@ -17,7 +17,7 @@ class JsonCardController extends AbstractController
     public function gameStatus(SessionInterface $session): Response
     {
         $game = $session->get('spel21Img');
-        $data = $game->prepareJsonDeal();
+        $data = $game->getJsonData();
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
