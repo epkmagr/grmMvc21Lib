@@ -318,4 +318,17 @@ class Game21
 
         return $result . '<br>' . $winner;
     }
+
+    public function prepareJsonDeal()
+    {
+        $data = [
+            'no of players' => $this->getNoOfPlayers(),
+            'no of cards to draw' => $this->getNoOfCards(),
+            'Players info' => $this->getAllPlayersInfo(true),
+            'remaining cards' => $this->getDeck()->getNoOfCards(),
+            'the winner is' => $this->getWinner()
+        ];
+        
+        return $data;
+    }
 }
