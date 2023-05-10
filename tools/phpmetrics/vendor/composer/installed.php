@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '54d3144126699a8714cab706781e6bdff8854d78',
+        'reference' => '38e34b647fc471b94e8bfda8dd490c215bb9e6fc',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,20 +13,20 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '54d3144126699a8714cab706781e6bdff8854d78',
+            'reference' => '38e34b647fc471b94e8bfda8dd490c215bb9e6fc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'halleck45/php-metrics' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'replaced' => array(
                 0 => '*',
             ),
         ),
         'halleck45/phpmetrics' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'replaced' => array(
                 0 => '*',
             ),
@@ -38,7 +38,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'phpmetrics/phpmetrics' => array(
             'pretty_version' => 'v2.8.2',
@@ -47,7 +47,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpmetrics/phpmetrics',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
     ),
 );

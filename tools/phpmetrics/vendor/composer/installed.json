@@ -132,8 +132,5 @@
         }
     ],
     "dev": true,
-    "dev-package-names": [
-        "nikic/php-parser",
-        "phpmetrics/phpmetrics"
-    ]
+    "dev-package-names": []
 }
