@@ -110,7 +110,6 @@ class BookController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
-        //return $this->redirectToRoute('delete_book', ['id'=> $id]);
         return $this->redirectToRoute('show_all_books');
     }
 

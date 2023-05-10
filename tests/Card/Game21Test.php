@@ -42,6 +42,10 @@ class Game21Test extends KernelTestCase
     public function testCreateGameAndGetJsonInfo()
     {
         $game = new Game21();
+        $dealer = array();
+        $player = array();
+        $defaultData = array();
+        
         $dealer["name"] = "Banken";
         $dealer["cards"] = [];
         $dealer["sum low/high"] = "0/0";

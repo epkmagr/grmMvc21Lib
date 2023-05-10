@@ -16,7 +16,7 @@ class Game21PlayTest extends KernelTestCase
     public function testPlayEqualBankWins()
     {
         $game = new Game21();
-        $result = $game->play();
+        $game->play();
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
@@ -35,7 +35,7 @@ class Game21PlayTest extends KernelTestCase
     public function testPlayBankWins()
     {
         $game = new Game21();
-        $result = $game->play();
+        $game->play();
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
@@ -147,7 +147,7 @@ class Game21PlayTest extends KernelTestCase
     public function testPlayBankThickPlayerWins()
     {
         $game = new Game21();
-        $result = $game->play();
+        $game->play();
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
@@ -165,7 +165,7 @@ class Game21PlayTest extends KernelTestCase
     public function testPlayPlayerThickBankWins()
     {
         $game = new Game21();
-        $result = $game->play();
+        $game->play();
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();

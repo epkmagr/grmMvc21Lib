@@ -106,7 +106,6 @@ class Deck
      */
     public function sortDeck(): array
     {
-        $cardsImg = [];
         $clubsImg = [];
         $diamsImg = [];
         $spadesImg = [];
