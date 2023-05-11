@@ -15,9 +15,9 @@ class CardTest extends KernelTestCase
      */
     public function testCreateObjectWithArgument()
     {
-        $card = new Card('&hearts;', '7');
+        $card = new Card('♥', '7');
         $this->assertInstanceOf("\App\Card\Card", $card);
-        $this->assertEquals($card->getSuit(), '&hearts;');
+        $this->assertEquals($card->getSuit(), '♥');
         $this->assertEquals($card->getValue(), '7');
     }
 }

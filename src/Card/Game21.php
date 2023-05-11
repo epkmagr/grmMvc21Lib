@@ -298,19 +298,24 @@ class Game21
     {
         $result = 'Vinnaren är: ';
         $winner = $this->dealer->getName();
-        $bestScore = $this->dealer->getBestScore();
+        $dealerScore = $this->dealer->getBestScore();
+        $playerBestScore = 0;
+        $noOfCardsBestScore = 0;
         foreach ($this->players as $player) {
-            $playerBestScore = $player->getBestScore();
-            $noOfCardsBestScore = $player->getNoOfCards();
-            if ($playerBestScore <= 21 and $playerBestScore > $bestScore) {
-                $winner = $player->getName();
-                $bestScore = $playerBestScore;
-                if ($playerBestScore === $bestScore and $noOfCardsBestScore > $player->getNoOfCards()) {
+            if ($player->getBestScore() > $playerBestScore) {
+                $playerBestScore = $player->getBestScore();
+                $noOfCardsBestScore = $player->getNoOfCards();
+                if ($playerBestScore <= 21 and $playerBestScore > $dealerScore) {
                     $winner = $player->getName();
-                    $bestScore = $playerBestScore;
-                } elseif ($playerBestScore === $bestScore and $noOfCardsBestScore === $player->getNoOfCards()
-                    and ! str_contains($winner, $player->getName())) {
-                    $winner = $winner . ' & ' . $player->getName();
+                    if ($playerBestScore === $dealerScore) {
+                        $winner = $player->getName();
+                    }
+                }
+            } elseif ($player->getBestScore() === $playerBestScore) {
+                if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
+                    if ($player->getBestScore() === $playerBestScore) {
+                        $winner .= ' & ' . $player->getName();
+                    }
                 }
             }
         }

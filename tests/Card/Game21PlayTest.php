@@ -47,7 +47,7 @@ class Game21PlayTest extends KernelTestCase
     }
 
     /**
-     * Construct object and test to play the game with 1 player. Both player has
+     * Construct object and test to play the game with 1 player. Player has
      * 20 and bank has 18 => player is the winner.
      */
     public function testPlay1PlayerWins()
@@ -67,10 +67,10 @@ class Game21PlayTest extends KernelTestCase
     }
 
     /**
-     * Construct object and test to play the game with 1 player. Player 1 has
+     * Construct object and test to play the game with 2 players. Player 1 has
      * 20, Player2 has 19 and bank has 18 => player is the winner.
      */
-/*     public function testPlay2Player1stWins()
+    public function testPlay2Players1stWins()
     {
         $game = new Game21();
         $game->initGame(2, 1);
@@ -84,9 +84,9 @@ class Game21PlayTest extends KernelTestCase
         $game->getPlayers()[0]->setBestScore(20);
         $game->getPlayers()[1]->setContent();
         $game->getPlayers()[1]->setBestScore(19);
-        $this->assertEquals($game->getWinner(), 'Spelare 1');
         $this->assertEquals($game->result(), 'Vinnaren är: <br>Spelare 1');
-    } */
+        $this->assertEquals($game->getWinner(), 'Spelare 1');
+    }
 
     /**
      * Construct object and test to play the game with 2 player. Player 1 has
@@ -115,11 +115,11 @@ class Game21PlayTest extends KernelTestCase
      * Construct object and test to play the game with 2 player. Player 1 has
      * 20, Player 2 has 20 and bank has 18 => player is the winner.
      */
-/*     public function testPlay2BothPlayersWins()
+    public function testPlay2BothPlayersWins()
     {
         $game = new Game21();
         $game->initGame(2, 1);
-        $game->play();
+        //$game->play();
         $card1 = new Card('♥', '10');
         $card2 = new Card('♣', '10');
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
@@ -138,7 +138,7 @@ class Game21PlayTest extends KernelTestCase
         $result = $game->result();
         $this->assertEquals('Spelare 1 & Spelare 2', $game->getWinner());
         $this->assertEquals('Vinnaren är: <br>Spelare 1 & Spelare 2', $result);
-    } */
+    }
 
     /**
      * Construct object and test to play the game with 1 player. Both player has
