@@ -328,7 +328,7 @@ class Game21
             'remaining cards' => $this->getDeck()->getNoOfCards(),
             'the winner is' => $this->getWinner()
         ];
-        
+
         return $data;
     }
 }

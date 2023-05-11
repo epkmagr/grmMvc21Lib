@@ -45,7 +45,7 @@ class Game21Test extends KernelTestCase
         $dealer = array();
         $player = array();
         $defaultData = array();
-        
+
         $dealer["name"] = "Banken";
         $dealer["cards"] = [];
         $dealer["sum low/high"] = "0/0";

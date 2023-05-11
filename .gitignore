@@ -5,8 +5,9 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
-/vendor/
 /tools/
+/vendor/
+tools/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -18,3 +19,7 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> phpdoc/phpdoc ###
+.phpdoc
+###< phpdoc/phpdoc ###
