@@ -50,7 +50,7 @@ class CardHand
         /**
      * Get the hand of the cards in json format.
      *
-     * @return array<Card>
+     * @return array<int, string>
      */
     public function getCardsJson()
     {
@@ -66,7 +66,7 @@ class CardHand
     /**
      * Get the hand of the cards with images.
      *
-     * @return array<Card>
+     * @return array<int, string>
      */
     public function getCardsImg()
     {
