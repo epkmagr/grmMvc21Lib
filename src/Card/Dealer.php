@@ -41,13 +41,33 @@ class Dealer extends Participant
             $this->content = true;
             $this->bestScore = $this->scoreHigh;
         } else {
-            $res = '';
             if ($this->scoreHigh > $this->scoreLow) {
                 $this->bestScore = $this->scoreHigh;
             } else {
                 $this->bestScore = $this->scoreLow;
             }
         }
+        // switch (true):
+        //     case $this->scoreLow > 21:
+        //         $res = 'FÖRLUST';
+        //         $this->content = true;
+        //         $this->bestScore = 0;
+        //     case $this->scoreLow >= 18:
+        //         $res = 'NÖJD';
+        //         $this->content = true;
+        //         $this->bestScore = $this->scoreLow;
+        //         if ($this->scoreHigh <= 21) {
+        //             $res = 'NÖJD';
+        //             $this->content = true;
+        //             $this->bestScore = $this->scoreHigh;
+        //         }
+        //     default:
+        //         if ($this->scoreHigh > $this->scoreLow) {
+        //             $this->bestScore = $this->scoreHigh;
+        //         } else {
+        //             $this->bestScore = $this->scoreLow;
+        //         }
+        // endswitch;
 
         return $res;
     }

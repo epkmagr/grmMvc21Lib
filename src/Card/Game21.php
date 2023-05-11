@@ -300,7 +300,6 @@ class Game21
         $winner = $this->dealer->getName();
         $dealerScore = $this->dealer->getBestScore();
         $playerBestScore = 0;
-        $noOfCardsBestScore = 0;
         foreach ($this->players as $player) {
             if ($player->getBestScore() > $playerBestScore) {
                 $playerBestScore = $player->getBestScore();
