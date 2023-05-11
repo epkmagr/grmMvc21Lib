@@ -88,4 +88,28 @@ class CardHandTest extends KernelTestCase
         $cardHand->addNewCard(new Card('♣', '7'));
         $this->assertEquals($cardHand->getSumOfHandAceHigh(), 21);
     }
+
+    /**
+     * Construct object, check the sum low and high with ace and queen.
+     */
+    public function testGetSumOfHandWithQueen()
+    {
+        $cardHand = new CardHand();
+        $cardHand->addNewCard(new Card('♥', 'A'));
+        $cardHand->addNewCard(new Card('♣', 'Q'));
+        $this->assertEquals(26, $cardHand->getSumOfHandAceHigh());
+        $this->assertEquals(13, $cardHand->getSumOfHandAceLow());
+    }
+
+    /**
+     * Construct object, check the sum low and high with ace and queen.
+     */
+    public function testGetSumOfHandWithJack()
+    {
+        $cardHand = new CardHand();
+        $cardHand->addNewCard(new Card('♥', 'A'));
+        $cardHand->addNewCard(new Card('♣', 'J'));
+        $this->assertEquals(25, $cardHand->getSumOfHandAceHigh());
+        $this->assertEquals(12, $cardHand->getSumOfHandAceLow());
+    }
 }

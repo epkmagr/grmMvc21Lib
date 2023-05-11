@@ -29,9 +29,9 @@ class Player21Test extends KernelTestCase
     public function testGetResultContent()
     {
         $player = new Player21('Spelare 1');
-        $card1 = new Card('&hearts;', '7');
+        $card1 = new Card('♥', '7');
         $player->increaseHand($card1);
-        $card2 = new Card('&hearts;', 'A');
+        $card2 = new Card('♥', 'A');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'NÖJD');
@@ -44,9 +44,9 @@ class Player21Test extends KernelTestCase
     public function testGetResultNotContent()
     {
         $player = new Player21('Spelare 1');
-        $card1 = new Card('&hearts;', '7');
+        $card1 = new Card('♥', '7');
         $player->increaseHand($card1);
-        $card2 = new Card('&hearts;', '1');
+        $card2 = new Card('♥', '1');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'Nytt kort?');
@@ -60,11 +60,31 @@ class Player21Test extends KernelTestCase
     public function testGetResultLoss()
     {
         $player = new Player21('Spelare 1');
-        $card1 = new Card('&hearts;', '10');
+        $card1 = new Card('♥', '10');
         $player->increaseHand($card1);
-        $card2 = new Card('&hearts;', 'K');
+        $card2 = new Card('♥', 'K');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'FÖRLUST');
+    }
+
+    /**
+     * Construct object and verify that the object is of expected instance.
+     * Use valid argument. Test that the player has 21 as score low.
+     */
+    public function testGetResult21()
+    {
+        $player = new Player21('Spelare 1');
+        $card1 = new Card('♥', '7');
+        $player->increaseHand($card1);
+        $card2 = new Card('♥', 'A');
+        $player->increaseHand($card2);
+        $card3 = new Card('♥', 'K');
+        $player->increaseHand($card3);
+        $player->getSumOfHand();
+        $card2 = new Card('♥', 'A');
+        $this->assertEquals(21, $player->getScoreLow());
+        $this->assertEquals(34, $player->getScoreHigh());
+        $this->assertEquals('NÖJD', $player->getResult());
     }
 }

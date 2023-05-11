@@ -29,9 +29,9 @@ class DealerTest extends KernelTestCase
     public function testGetResultContent()
     {
         $player = new Dealer('Spelare 1');
-        $card1 = new Card('&hearts;', '7');
+        $card1 = new Card('♥', '7');
         $player->increaseHand($card1);
-        $card2 = new Card('&hearts;', 'A');
+        $card2 = new Card('♥', 'A');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'NÖJD');
@@ -44,9 +44,9 @@ class DealerTest extends KernelTestCase
     public function testGetResultNotContent()
     {
         $player = new Dealer('Spelare 1');
-        $card1 = new Card('&hearts;', '7');
+        $card1 = new Card('♥', '7');
         $player->increaseHand($card1);
-        $card2 = new Card('&hearts;', '1');
+        $card2 = new Card('♥', '1');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), '');
@@ -60,11 +60,29 @@ class DealerTest extends KernelTestCase
     public function testGetResultLoss()
     {
         $player = new Dealer('Spelare 1');
-        $card1 = new Card('&hearts;', '10');
+        $card1 = new Card('♥', '10');
         $player->increaseHand($card1);
-        $card2 = new Card('&hearts;', 'K');
+        $card2 = new Card('♥', 'K');
         $player->increaseHand($card2);
         $player->getSumOfHand();
         $this->assertEquals($player->getResult(), 'FÖRLUST');
+    }
+
+    /**
+     * Construct object and verify that the object is of expected instance.
+     * Use valid argument. Test that the player's result is 'FÖRLUST' when
+     * having sum > 21.
+     */
+    public function testGetResultScoreHighLargerThanScoreLow()
+    {
+        $player = new Dealer('Spelare 1');
+        $card1 = new Card('♥', '1');
+        $player->increaseHand($card1);
+        $card2 = new Card('♥', 'A');
+        $player->increaseHand($card2);
+        $player->getSumOfHand();
+        $this->assertEquals(2, $player->getScoreLow());
+        $this->assertEquals(15, $player->getScoreHigh());
+        $this->assertEquals('', $player->getResult());
     }
 }
