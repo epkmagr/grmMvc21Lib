@@ -168,11 +168,11 @@ class Game21PlayTest extends KernelTestCase
         $game->play();
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
-        $game->getDealer()->setContent();
-        $game->getDealer()->setBestScore(20);
         $game->getPlayers()[0]->setContent();
         $game->getPlayers()[0]->setBestScore(22);
         $result = $game->play();
+        $game->getDealer()->setContent();
+        $game->getDealer()->setBestScore(20);
         $this->assertEquals('Vinnaren är: <br>Banken', $result);
     }
 }

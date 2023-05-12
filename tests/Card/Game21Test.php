@@ -22,6 +22,7 @@ class Game21Test extends KernelTestCase
         $this->assertEquals(1, $game->getNoOfPlayers());
         $this->assertEquals(1, $game->getNoOfCards());
         $this->assertEquals(52, $game->getDeck()->getNoOfCards());
+        $this->assertFalse($game->getDealer()->isContent());
     }
 
     /**
@@ -61,5 +62,25 @@ class Game21Test extends KernelTestCase
         $defaultData["remaining cards"] = 52;
         $defaultData["the winner is"] = '';
         $this->assertEquals($defaultData, $game->getJsonData());
+    }
+
+    /**
+     * Construct object, init, play and then reset and check status
+     * Use no argument.
+     */
+    public function testReset()
+    {
+        $game = new Game21();
+        $game->initGame(2);
+        $game->play();
+        $game->play();
+        $game->reset();
+        $this->assertInstanceOf("\App\Card\Game21", $game);
+        $this->assertEquals('Banken', $game->getDealer()->getName());
+        $this->assertEquals('Spelare 1', $game->getPlayers()[0]->getName());
+        $this->assertEquals(2, $game->getNoOfPlayers());
+        $this->assertEquals(1, $game->getNoOfCards());
+        $this->assertEquals(52, $game->getDeck()->getNoOfCards());
+        $this->assertFalse($game->getDealer()->isContent());
     }
 }
