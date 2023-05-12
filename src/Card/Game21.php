@@ -203,7 +203,7 @@ class Game21
         if ($this->checkIfPlayersAreContent()) {
             // Let the dealer play when all the player are content
             while (! $this->dealer->isContent()) {
-                $this->playDealer();
+                $this->dealer->play($this->noOfCards, $this->deck);
             }
             $result = $this->result();
         }
@@ -215,12 +215,7 @@ class Game21
     {
         for ($i = 0; $i < $this->noOfCards; ++$i) {
             foreach ($this->players as $player) {
-                if ('Nytt kort?' == $player->getResult() and !$player->isContent()) {
-                    $card = $this->deck->getTopCard();
-                    if ($card) {
-                        $player->increaseHand($card);
-                    }
-                }
+                $player->play($this->deck);
             }
         }
         foreach ($this->players as $player) {
@@ -229,24 +224,6 @@ class Game21
         }
     }
 
-    private function playDealer(): void
-    {
-        for ($i = 0; $i < $this->noOfCards; ++$i) {
-            if ('' == $this->dealer->getResult()) {
-                $card = $this->deck->getTopCard();
-                if ($card) {
-                    $this->dealer->increaseHand($card);
-                }
-            }
-            if ('' !== $this->dealer->getResult()) {
-                $this->dealer->setContent();
-            }
-        }
-        $this->dealer->getSumOfHand();
-    }
-    /**
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-     */
     public function getAllPlayersInfo()
     {
         $allPlayersInfo = array();

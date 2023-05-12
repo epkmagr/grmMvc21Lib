@@ -20,6 +20,27 @@ class Dealer extends Participant
     }
 
     /**
+     * Play the bank.
+     *
+     * @return void
+     */
+    public function play($noOfCards, $deck): void
+    {
+        for ($i = 0; $i < $noOfCards; ++$i) {
+            if ('' == $this->getResult()) {
+                $card = $deck->getTopCard();
+                if ($card) {
+                    $this->increaseHand($card);
+                }
+            }
+            if ('' !== $this->getResult()) {
+                $this->setContent();
+            }
+        }
+        $this->getSumOfHand();
+    }
+
+    /**
      * Get the result for the bank.
      * @SuppressWarnings(PHPMD.ElseExpression)
      *

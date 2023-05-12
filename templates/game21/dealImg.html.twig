@@ -20,9 +20,6 @@
                     {% for card in bank.getHand().getCardsImg() %}
                         {% if loop.first %}
                             <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}">
-                        {% elseif loop.last %}
-                            <img class="cardImg" src="{{ asset('images/cards/back.png') }}"
-                                style="margin-left: -{{ loop.index }}em">
                         {% else %}
                             <img class="cardImg" src="{{ asset('images/cards/')}}{{card}}"
                                 style="margin-left: -{{ loop.index }}em">

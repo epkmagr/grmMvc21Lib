@@ -29,6 +29,21 @@ class Player21 extends Participant
         return $this->bestScore;
     }
 
+        /**
+     * Get the best score of the player.
+     *
+     * @return void
+     */
+    public function play($deck)
+    {
+        if ('Nytt kort?' == $this->getResult() and !$this->isContent()) {
+            $card = $deck->getTopCard();
+            if ($card) {
+                $this->increaseHand($card);
+            }
+        }
+    }
+
     /**
      * Get the result for a player.
      * @SuppressWarnings(PHPMD.ElseExpression)
