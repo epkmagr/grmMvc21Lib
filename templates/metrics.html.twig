@@ -73,7 +73,7 @@
                 Average weighted method count by class (CC) 9 - Ok. Dessutom någon bugg - Inte ok</li>
                 <li><strong>Cohesion:</strong> Lack of cohesion of methods (LCOM) är 1.37.
                 JsonController och BookRepository har LCOM 5
-                BookRepository, Card and Deck has LCOM 2 and Userository has LCOM 3.
+                BookRepository, Card and Deck has LCOM 2 and UserRepository has LCOM 3.
                 ProductController har LCOM 4.
                 Feel ok.</li>
                 <li><strong>Coupling:</strong> Card and Dice has AC 5 medan Deck har 6. - Inte ok.
@@ -93,7 +93,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h3>Scrutinizer</h3>
             <p>For report, see:
-            <a href="https://scrutinizer-ci.com/g/epkmagr/grmMvc21Lib/?branch=main">Scrutinizer for my repository.</a>
+            <a href="https://scrutinizer-ci.com/g/epkmagr/grmMvc21Lib/inspections/bcb7e252-196a-4a16-8582-a831df6ecc0b">Scrutinizer for my repository.</a>
             </p>
             <figure class="figure">
                 <img src="{{ absolute_url(asset('images/metricsBefore/scrutinizer.png')) }}" alt="scrutinizer before" class="figure-img img-fluid maxWidthFigure">
@@ -114,15 +114,26 @@
             <h3>Improvements</h3>
             <h4>Phpmetrics</h4>
             <p>New measurements, see:
-            <a href="{{ asset('metricsNew') }}">Phpmetrics</a>
+            <a href="{{ asset('docs/metrics') }}">Phpmetrics</a>
             </p>
+            <figure class="figure">
+                <img src="{{ absolute_url(asset('images/metricsAfter/phpmetrics.png')) }}" alt="phpmetrics before" class="figure-img img-fluid maxWidthFigure">
+            </figure>
             <ul>
-            <li><strong>Complexity:</strong> Minska Average relative System complexity: 90</li>
-            <li><strong>Cohesion:</strong> Minska LCOM </li>
+            <li><strong>Complexity:</strong> Minska Average relative System complexity: 90 => 79.1 nu. Minskat 
+            violations till 3 och de är inte på mina klasser.</li>
+            <li><strong>Cohesion:</strong> Lack of cohesion of methods (LCOM) är 1.37.
+                BookRepository har LCOM 4 och hade förut 5 och resten av klasserna har 2 eller mindre.</li>
             <li><strong>Coupling:</strong> Minska AC och EC något kanske?</li>
             <li>Kodtäckning</li>
             </ul>
             <h4>Scrutinizer</h4>
+            <p>For report, see:
+            <a href="https://scrutinizer-ci.com/g/epkmagr/grmMvc21Lib/?branch=main">Scrutinizer for my repository.</a>
+            </p>
+            <figure class="figure">
+                <img src="{{ absolute_url(asset('images/metricsAfter/scrutinizer.png')) }}" alt="scrutinizer before" class="figure-img img-fluid maxWidthFigure">
+            </figure>
             <figure class="figure">
                 <img src="https://scrutinizer-ci.com/g/epkmagr/grmMvc21Lib/badges/quality-score.png?b=main&s=c50297c348a4f2bc6f72ba80fe66a46ee52c74dd" alt="Scrutinizer" class="figure-img img-fluid">
                 <img src="https://scrutinizer-ci.com/g/epkmagr/grmMvc21Lib/badges/coverage.png?b=main&s=31f5672349041fe1041704fa32b22934d25c1200" alt="Scrutinizer" class="figure-img img-fluid">
@@ -130,13 +141,10 @@
                 <img src="https://scrutinizer-ci.com/g/epkmagr/grmMvc21Lib/badges/code-intelligence.svg?b=main&s=fba97541a22d517007b264a6d0b51c853226abfd" alt="Scrutinizer" class="figure-img img-fluid">
             </figure>
             <ul>
-                <li>3852 issues => 20 Removed vendor, tests and tools.</li>
-                <li>Reduced to 0 critical severities. The other ones was not in my code.
-                Removed vendor, tests and tools.</li>
-                <li>No security issues. All of mine is reduced,
-                the rest is not in my code. Removed vendor, tests and tools.</li>
-                <li>Increase the rating to 9,62</li>
-                <li>Looked into my CardController</li>
+                <li>Minskat issues till 3 och de är inte mina klasser</li>
+                <li>Förbättrade kodtäckning</li>
+                <li>Increase the rating to 9,95</li>
+                <li>Förbättrade mest Game21 klassen</li>
             </ul>
         </div>
     </div>

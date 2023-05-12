@@ -101,6 +101,11 @@ Search.appendIndex(
             "summary": "Constructor\u0020to\u0020initiate\u0020the\u0020dicehand\u0020with\u0020a\u0020number\u0020of\u0020dices.",
             "url": "classes/App-Card-Dealer.html#method___construct"
         },                {
+            "fqsen": "\\App\\Card\\Dealer\u003A\u003Aplay\u0028\u0029",
+            "name": "play",
+            "summary": "Play\u0020the\u0020bank.",
+            "url": "classes/App-Card-Dealer.html#method_play"
+        },                {
             "fqsen": "\\App\\Card\\Dealer\u003A\u003AgetResult\u0028\u0029",
             "name": "getResult",
             "summary": "Get\u0020the\u0020result\u0020for\u0020the\u0020bank.",
@@ -216,6 +221,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020name\u0020of\u0020the\u0020winner.",
             "url": "classes/App-Card-Game21.html#method_getWinner"
         },                {
+            "fqsen": "\\App\\Card\\Game21\u003A\u003Areset\u0028\u0029",
+            "name": "reset",
+            "summary": "Resets\u0020the\u0020game.",
+            "url": "classes/App-Card-Game21.html#method_reset"
+        },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AinitGame\u0028\u0029",
             "name": "initGame",
             "summary": "Initiate\u0020the\u0020game,\u0020shuffle\u0020the\u0020deck\u0020of\u0020cards.\u0020Set\u0020the\u0020number\u0020of\u0020players\u0020and\nthe\u0020number\u0020of\u0020cards\u0020to\u0020draw\u0020per\u0020round.",
@@ -231,20 +241,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-Game21.html#method_playPlayers"
         },                {
-            "fqsen": "\\App\\Card\\Game21\u003A\u003AplayDealer\u0028\u0029",
-            "name": "playDealer",
-            "summary": "",
-            "url": "classes/App-Card-Game21.html#method_playDealer"
-        },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetAllPlayersInfo\u0028\u0029",
             "name": "getAllPlayersInfo",
             "summary": "",
             "url": "classes/App-Card-Game21.html#method_getAllPlayersInfo"
-        },                {
-            "fqsen": "\\App\\Card\\Game21\u003A\u003AcheckIfAllAreContent\u0028\u0029",
-            "name": "checkIfAllAreContent",
-            "summary": "",
-            "url": "classes/App-Card-Game21.html#method_checkIfAllAreContent"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AcheckIfPlayersAreContent\u0028\u0029",
             "name": "checkIfPlayersAreContent",
@@ -431,6 +431,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020best\u0020score\u0020of\u0020the\u0020player.",
             "url": "classes/App-Card-Player21.html#method_getBestScore"
         },                {
+            "fqsen": "\\App\\Card\\Player21\u003A\u003Aplay\u0028\u0029",
+            "name": "play",
+            "summary": "Get\u0020the\u0020best\u0020score\u0020of\u0020the\u0020player.",
+            "url": "classes/App-Card-Player21.html#method_play"
+        },                {
             "fqsen": "\\App\\Card\\Player21\u003A\u003AgetResult\u0028\u0029",
             "name": "getResult",
             "summary": "Get\u0020the\u0020result\u0020for\u0020a\u0020player.",
@@ -505,6 +510,11 @@ Search.appendIndex(
             "name": "initImgCallback",
             "summary": "",
             "url": "classes/App-Controller-Game21ImgController.html#method_initImgCallback"
+        },                {
+            "fqsen": "\\App\\Controller\\Game21ImgController\u003A\u003ArestartGame\u0028\u0029",
+            "name": "restartGame",
+            "summary": "",
+            "url": "classes/App-Controller-Game21ImgController.html#method_restartGame"
         },                {
             "fqsen": "\\App\\Controller\\Game21ImgController\u003A\u003AdealImg\u0028\u0029",
             "name": "dealImg",
