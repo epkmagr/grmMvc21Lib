@@ -39,6 +39,23 @@ class DealerTest extends KernelTestCase
 
     /**
      * Construct object and verify that the object is of expected instance.
+     * Use valid argument. Test that the player is content when having sum >= 18.
+     */
+    public function testGetResultContentScoreLow()
+    {
+        $player = new Dealer('Spelare 1');
+        $card1 = new Card('♥', '7');
+        $player->increaseHand($card1);
+        $card2 = new Card('♥', 'A');
+        $player->increaseHand($card2);
+        $card3 = new Card('♥', '10');
+        $player->increaseHand($card3);
+        $player->getSumOfHand();
+        $this->assertEquals($player->getResult(), 'NÖJD');
+    }
+
+    /**
+     * Construct object and verify that the object is of expected instance.
      * Use valid argument. Test that the player not is content when having sum < 18.
      */
     public function testGetResultNotContent()
