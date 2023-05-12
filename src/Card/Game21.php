@@ -129,7 +129,7 @@ class Game21
     public function isItGameover(): bool
     {
         $gameover = false;
-        if ($this->checkIfAllAreContent()) {
+        if ($this->checkIfPlayersAreContent() and $this->dealer->isContent()) {
             $gameover = true;
         }
 
@@ -144,6 +144,23 @@ class Game21
     public function getWinner(): string
     {
         return $this->winner;
+    }
+
+    /**
+     * Resets the game.
+     *
+     * @return void
+     */
+    public function reset(): void
+    {
+        $this->deck = new Deck();
+        $this->dealer = new Dealer('Banken');
+        $this->players = [new Player21('Spelare 1')];
+        $this->gameover = false;
+        $this->winner = "";
+        if ($this->noOfPlayers > 1) {
+            $this->initGame($this->noOfPlayers, $this->noOfCards);
+        }
     }
 
     /**
@@ -185,10 +202,10 @@ class Game21
         // Calculate the result and return it
         if ($this->checkIfPlayersAreContent()) {
             // Let the dealer play when all the player are content
-            $this->playDealer();
-            if ($this->checkIfAllAreContent()) {
-                $result = $this->result();
+            while (! $this->dealer->isContent()) {
+                $this->playDealer();
             }
+            $result = $this->result();
         }
 
         return $result;
@@ -230,16 +247,14 @@ class Game21
     /**
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public function getAllPlayersInfo(bool $jsonCards=false)
+    public function getAllPlayersInfo()
     {
         $allPlayersInfo = array();
         // Add info about the dealer
         $playerInfo = array();
         $playerInfo['name'] = $this->dealer->getName();
         $playerInfo['cards'] = $this->dealer->getHand()->getCards();
-        if ($jsonCards) {
-            $playerInfo['cards'] = $this->dealer->getHand()->getCardsJson();
-        }
+        $playerInfo['cards'] = $this->dealer->getHand()->getCardsJson();
         $playerInfo['sum low/high'] = $this->dealer->getScoreLow() . '/' . $this->dealer->getScoreHigh();
         $playerInfo['result'] = $this->dealer->getResult();
         array_push($allPlayersInfo, $playerInfo);
@@ -248,33 +263,13 @@ class Game21
             $playerInfo = array();
             $playerInfo['name'] = $player->getName();
             $playerInfo['cards'] = $player->getHand()->getCards();
-            if ($jsonCards) {
-                $playerInfo['cards'] = $player->getHand()->getCardsJson();
-            }
+            $playerInfo['cards'] = $player->getHand()->getCardsJson();
             $playerInfo['sum low/high'] = $player->getScoreLow() . '/' . $player->getScoreHigh();
             $playerInfo['result'] = $player->getResult();
             array_push($allPlayersInfo, $playerInfo);
         }
 
         return $allPlayersInfo;
-    }
-
-    private function checkIfAllAreContent(): bool
-    {
-        $noOfContent = 0;
-
-        foreach ($this->players as $player) {
-            if ($player->isContent()) {
-                ++$noOfContent;
-            }
-        }
-        if ($this->dealer->isContent()) {
-            ++$noOfContent;
-        }
-
-        $total = count($this->players) + 1; // dealer included
-
-        return $total === $noOfContent ? true : false;
     }
 
     private function checkIfPlayersAreContent(): bool
@@ -304,11 +299,8 @@ class Game21
         foreach ($this->players as $player) {
             if ($player->getBestScore() > $playerBestScore) {
                 $playerBestScore = $player->getBestScore();
-                if ($playerBestScore <= 21 and $playerBestScore > $dealerScore) {
+                if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
                     $winner = $player->getName();
-                    if ($playerBestScore === $dealerScore) {
-                        $winner = $player->getName();
-                    }
                 }
             } elseif ($player->getBestScore() === $playerBestScore) {
                 if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
@@ -328,7 +320,7 @@ class Game21
         $data = [
             'no of players' => $this->getNoOfPlayers(),
             'no of cards to draw' => $this->getNoOfCards(),
-            'Players info' => $this->getAllPlayersInfo(true),
+            'Players info' => $this->getAllPlayersInfo(),
             'remaining cards' => $this->getDeck()->getNoOfCards(),
             'the winner is' => $this->getWinner()
         ];

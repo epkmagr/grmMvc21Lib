@@ -46,6 +46,17 @@ class Game21ImgController extends AbstractController
         return $this->redirectToRoute('dealImgPost');
     }
 
+    #[Route("/game/restartImg", name: "restartGame", methods: ['GET', 'POST'])]
+    public function restartGame(
+        SessionInterface $session
+    ): Response {
+        $game = $session->get("spel21Img");
+        $game->reset();
+        $session->set("spel21Img", $game);
+
+        return $this->redirectToRoute('dealImg');
+    }
+
     #[Route("/game/dealImg", name: "dealImg", methods: ["GET"])]
     public function dealImg(SessionInterface $session): Response
     {

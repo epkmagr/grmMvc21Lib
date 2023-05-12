@@ -20,11 +20,11 @@ class Game21PlayTest extends KernelTestCase
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
-        $game->getDealer()->setScoreLow(21);
+        $game->getDealer()->setBestScore(21);
         $game->getPlayers()[0]->setContent();
-        $game->getPlayers()[0]->setScoreLow(21);
+        $game->getPlayers()[0]->setBestScore(21);
         $result = $game->play();
-        $this->assertEquals($result, 'Vinnaren är: <br>Banken');
+        $this->assertEquals('Vinnaren är: <br>Banken', $result);
         $this->assertTrue($game->isItGameover());
     }
 
@@ -39,9 +39,9 @@ class Game21PlayTest extends KernelTestCase
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
-        $game->getDealer()->setScoreLow(21);
+        $game->getDealer()->setBestScore(21);
         $game->getPlayers()[0]->setContent();
-        $game->getPlayers()[0]->setScoreLow(20);
+        $game->getPlayers()[0]->setBestScore(20);
         $result = $game->play();
         $this->assertEquals($result, 'Vinnaren är: <br>Banken');
     }
@@ -59,8 +59,8 @@ class Game21PlayTest extends KernelTestCase
         $game->getDealer()->setContent();
         $game->getPlayers()[0]->setContent();
         $game->play();
-        $game->getDealer()->setScoreLow(18);
-        $game->getPlayers()[0]->setScoreLow(20);
+        $game->getDealer()->setBestScore(18);
+        $game->getPlayers()[0]->setBestScore(20);
         $result = $game->result();
         $this->assertEquals($game->getWinner(), 'Spelare 1');
         $this->assertEquals($result, 'Vinnaren är: <br>Spelare 1');
@@ -151,11 +151,11 @@ class Game21PlayTest extends KernelTestCase
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
-        $game->getDealer()->setScoreLow(22);
+        $game->getDealer()->setBestScore(22);
         $game->getPlayers()[0]->setContent();
-        $game->getPlayers()[0]->setScoreLow(20);
+        $game->getPlayers()[0]->setBestScore(20);
         $result = $game->play();
-        $this->assertEquals($result, 'Vinnaren är: <br>Spelare 1');
+        $this->assertEquals('Vinnaren är: <br>Spelare 1', $result);
     }
 
     /**
@@ -169,10 +169,10 @@ class Game21PlayTest extends KernelTestCase
         $this->assertEquals($game->getDealer()->getName(), 'Banken');
         $this->assertEquals($game->getPlayers()[0]->getName(), 'Spelare 1');
         $game->getDealer()->setContent();
-        $game->getDealer()->setScoreLow(20);
+        $game->getDealer()->setBestScore(20);
         $game->getPlayers()[0]->setContent();
-        $game->getPlayers()[0]->setScoreLow(22);
+        $game->getPlayers()[0]->setBestScore(22);
         $result = $game->play();
-        $this->assertEquals($result, 'Vinnaren är: <br>Banken');
+        $this->assertEquals('Vinnaren är: <br>Banken', $result);
     }
 }
