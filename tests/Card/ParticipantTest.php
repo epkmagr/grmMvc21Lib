@@ -11,7 +11,7 @@ class ParticipantTest extends KernelTestCase
 {
     /**
      * Construct object and verify that the object is of expected instance.
-     * Use no argument. Set the name and test that the name is set, that no 
+     * Use no argument. Set the name and test that the name is set, that no
      * of cards in hand is 0.
      */
     public function testCreateObjectNoArgument()

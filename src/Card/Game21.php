@@ -293,6 +293,7 @@ class Game21
 
     /**
      * @SuppressWarnings(PHPMD.ElseExpression)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function result(): string
     {
@@ -303,7 +304,6 @@ class Game21
         foreach ($this->players as $player) {
             if ($player->getBestScore() > $playerBestScore) {
                 $playerBestScore = $player->getBestScore();
-                $noOfCardsBestScore = $player->getNoOfCards();
                 if ($playerBestScore <= 21 and $playerBestScore > $dealerScore) {
                     $winner = $player->getName();
                     if ($playerBestScore === $dealerScore) {
