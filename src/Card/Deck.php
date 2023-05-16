@@ -64,7 +64,7 @@ class Deck
     {
         $card = $this->cards[$number];
         unset($this->cards[$number]);
-        array_values($this->cards);
+        $this->cards = array_values($this->cards);
 
         return $card;
     }

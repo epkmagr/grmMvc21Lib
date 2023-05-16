@@ -32,10 +32,10 @@ class DeckTest extends KernelTestCase
         $card = $deck->getCard(0);
         $this->assertEquals($card->getSuit(), '♣');
         $this->assertEquals($card->getValue(), 'A');
-        $card = $deck->getCard(13);
+        $card = $deck->getCard(12); // 51 cards in deck now
         $this->assertEquals($card->getSuit(), '♦');
         $this->assertEquals($card->getValue(), 'A');
-        $card = $deck->getCard(51);
+        $card = $deck->getCard(49); // 50 cards in deeck now, get last card
         $this->assertEquals($card->getSuit(), '♥');
         $this->assertEquals($card->getValue(), 'K');
     }
@@ -54,7 +54,7 @@ class DeckTest extends KernelTestCase
         $card = $deck->getCard(0);
         $str = $card->getSuit().$card->getValue();
         $this->assertNotEquals($str, '♣A');
-        $card = $deck->getCard(51);
+        $card = $deck->getCard(50); //51 cards in the deck now
         $str = $card->getSuit().$card->getValue();
         $this->assertNotEquals($str, '♠K');
     }

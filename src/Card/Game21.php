@@ -128,12 +128,12 @@ class Game21
      */
     public function isItGameover(): bool
     {
-        $gameover = false;
+        //$gameover = false;
         if ($this->checkIfPlayersAreContent() and $this->dealer->isContent()) {
-            $gameover = true;
+            $this->gameover = true;
         }
 
-        return $gameover;
+        return $this->gameover;
     }
 
     /**
@@ -276,20 +276,34 @@ class Game21
         foreach ($this->players as $player) {
             if ($player->getBestScore() > $playerBestScore) {
                 $playerBestScore = $player->getBestScore();
-                if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
-                    $winner = $player->getName();
-                }
+                $winner = $this->getPlayerWinner($winner, $playerBestScore, $dealerScore, $player);
             } elseif ($player->getBestScore() === $playerBestScore) {
-                if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
-                    if ($player->getBestScore() === $playerBestScore) {
-                        $winner .= ' & ' . $player->getName();
-                    }
-                }
+                $winner = $this->getSeveralWinners($winner, $playerBestScore, $dealerScore, $player);
             }
         }
         $this->winner = $winner;
 
         return $result . '<br>' . $winner;
+    }
+
+    private function getPlayerWinner(string $winner, int $playerBestScore, int $dealerScore, Player21 $player) {
+
+        //$playerBestScore = $player->getBestScore();
+        if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
+            $winner = $player->getName();
+        }
+
+        return $winner;
+    }
+
+    private function getSeveralWinners(string $winner, int $playerBestScore, int $dealerScore, Player21 $player) {
+
+        if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
+            if ($player->getBestScore() === $playerBestScore) {
+                $winner .= ' & ' . $player->getName();
+            }
+        }
+        return $winner;
     }
 
     public function getJsonData()

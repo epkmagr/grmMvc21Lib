@@ -14,6 +14,7 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    /** @phpstan-ignore-next-line */
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
