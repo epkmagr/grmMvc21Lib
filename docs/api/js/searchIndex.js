@@ -256,16 +256,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-Game21.html#method_result"
         },                {
-            "fqsen": "\\App\\Card\\Game21\u003A\u003AgetPlayerWinner\u0028\u0029",
-            "name": "getPlayerWinner",
-            "summary": "",
-            "url": "classes/App-Card-Game21.html#method_getPlayerWinner"
-        },                {
-            "fqsen": "\\App\\Card\\Game21\u003A\u003AgetSeveralWinners\u0028\u0029",
-            "name": "getSeveralWinners",
-            "summary": "",
-            "url": "classes/App-Card-Game21.html#method_getSeveralWinners"
-        },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetJsonData\u0028\u0029",
             "name": "getJsonData",
             "summary": "",

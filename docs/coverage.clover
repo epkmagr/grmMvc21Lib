@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684227873">
-  <project timestamp="1684227873">
+<coverage generated="1684229118">
+  <project timestamp="1684229118">
     <file name="/home/grm/dbwebb-kurser/mvc/me/grmMvc21Lib/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="12" coveredelements="12"/>
@@ -149,7 +149,7 @@
     </file>
     <file name="/home/grm/dbwebb-kurser/mvc/me/grmMvc21Lib/src/Card/Game21.php">
       <class name="App\Card\Game21" namespace="global">
-        <metrics complexity="44" methods="19" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="93" coveredstatements="93" elements="112" coveredelements="112"/>
+        <metrics complexity="50" methods="19" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="96" coveredstatements="89" elements="115" coveredelements="106"/>
       </class>
       <line num="55" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="57" type="stmt" count="12"/>
@@ -232,7 +232,7 @@
       <line num="258" type="stmt" count="5"/>
       <line num="261" type="stmt" count="8"/>
       <line num="263" type="stmt" count="8"/>
-      <line num="270" type="method" name="result" visibility="public" complexity="4" crap="4" count="8"/>
+      <line num="270" type="method" name="result" visibility="public" complexity="10" crap="10" count="8"/>
       <line num="272" type="stmt" count="8"/>
       <line num="273" type="stmt" count="8"/>
       <line num="274" type="stmt" count="8"/>
@@ -241,29 +241,32 @@
       <line num="277" type="stmt" count="8"/>
       <line num="278" type="stmt" count="8"/>
       <line num="279" type="stmt" count="8"/>
-      <line num="280" type="stmt" count="2"/>
-      <line num="281" type="stmt" count="1"/>
-      <line num="284" type="stmt" count="8"/>
-      <line num="286" type="stmt" count="8"/>
-      <line num="289" type="method" name="getPlayerWinner" visibility="private" complexity="4" crap="4" count="8"/>
+      <line num="280" type="stmt" count="8"/>
+      <line num="282" type="stmt" count="2"/>
+      <line num="283" type="stmt" count="1"/>
+      <line num="284" type="stmt" count="1"/>
+      <line num="285" type="stmt" count="1"/>
+      <line num="290" type="stmt" count="8"/>
       <line num="292" type="stmt" count="8"/>
-      <line num="293" type="stmt" count="5"/>
-      <line num="296" type="stmt" count="8"/>
-      <line num="299" type="method" name="getSeveralWinners" visibility="private" complexity="4" crap="4" count="1"/>
-      <line num="301" type="stmt" count="1"/>
-      <line num="302" type="stmt" count="1"/>
-      <line num="303" type="stmt" count="1"/>
-      <line num="306" type="stmt" count="1"/>
-      <line num="309" type="method" name="getJsonData" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="311" type="stmt" count="1"/>
-      <line num="312" type="stmt" count="1"/>
-      <line num="313" type="stmt" count="1"/>
-      <line num="314" type="stmt" count="1"/>
-      <line num="315" type="stmt" count="1"/>
-      <line num="316" type="stmt" count="1"/>
+      <line num="295" type="method" name="getPlayerWinner" visibility="private" complexity="4" crap="20" count="0"/>
+      <line num="297" type="stmt" count="0"/>
+      <line num="298" type="stmt" count="0"/>
+      <line num="301" type="stmt" count="0"/>
+      <line num="304" type="method" name="getSeveralWinners" visibility="private" complexity="4" crap="20" count="0"/>
+      <line num="307" type="stmt" count="0"/>
+      <line num="308" type="stmt" count="0"/>
+      <line num="309" type="stmt" count="0"/>
+      <line num="312" type="stmt" count="0"/>
+      <line num="315" type="method" name="getJsonData" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="317" type="stmt" count="1"/>
+      <line num="318" type="stmt" count="1"/>
       <line num="319" type="stmt" count="1"/>
-      <metrics loc="322" ncloc="217" classes="1" methods="19" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="93" coveredstatements="93" elements="112" coveredelements="112"/>
+      <line num="320" type="stmt" count="1"/>
+      <line num="321" type="stmt" count="1"/>
+      <line num="322" type="stmt" count="1"/>
+      <line num="323" type="stmt" count="1"/>
+      <line num="325" type="stmt" count="1"/>
+      <metrics loc="328" ncloc="224" classes="1" methods="19" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="96" coveredstatements="89" elements="115" coveredelements="106"/>
     </file>
     <file name="/home/grm/dbwebb-kurser/mvc/me/grmMvc21Lib/src/Card/Participant.php">
       <class name="App\Card\Participant" namespace="global">
@@ -375,6 +378,6 @@
       </class>
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="9" loc="1141" ncloc="726" classes="8" methods="71" coveredmethods="71" conditionals="0" coveredconditionals="0" statements="249" coveredstatements="249" elements="320" coveredelements="320"/>
+    <metrics files="9" loc="1147" ncloc="733" classes="8" methods="71" coveredmethods="69" conditionals="0" coveredconditionals="0" statements="252" coveredstatements="245" elements="323" coveredelements="314"/>
   </project>
 </coverage>

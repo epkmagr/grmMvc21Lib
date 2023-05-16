@@ -276,36 +276,20 @@ class Game21
         foreach ($this->players as $player) {
             if ($player->getBestScore() > $playerBestScore) {
                 $playerBestScore = $player->getBestScore();
-                $winner = $this->getPlayerWinner($winner, $playerBestScore, $dealerScore, $player);
+                if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
+                    $winner = $player->getName();
+                }
             } elseif ($player->getBestScore() === $playerBestScore) {
-                $winner = $this->getSeveralWinners($winner, $playerBestScore, $dealerScore, $player);
+                if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
+                    if ($player->getBestScore() === $playerBestScore) {
+                        $winner .= ' & ' . $player->getName();
+                    }
+                }
             }
         }
         $this->winner = $winner;
 
         return $result . '<br>' . $winner;
-    }
-
-    private function getPlayerWinner(string $winner, int $playerBestScore, int $dealerScore, Player21 $player)
-    {
-
-        //$playerBestScore = $player->getBestScore();
-        if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
-            $winner = $player->getName();
-        }
-
-        return $winner;
-    }
-
-    private function getSeveralWinners(string $winner, int $playerBestScore, int $dealerScore, Player21 $player)
-    {
-
-        if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
-            if ($player->getBestScore() === $playerBestScore) {
-                $winner .= ' & ' . $player->getName();
-            }
-        }
-        return $winner;
     }
 
     public function getJsonData()
