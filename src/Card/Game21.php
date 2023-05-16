@@ -264,9 +264,8 @@ class Game21
     }
 
     /**
-     * @SuppressWarnings(PHPMD.ElseExpression)
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     */
+    * returns the result of the game
+    */
     public function result(): string
     {
         $winner = $this->dealer->getName();
@@ -279,12 +278,8 @@ class Game21
                 if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
                     $winner = $player->getName();
                 }
-            } elseif ($playerScore === $playerBestScore) {
-                if ($playerScore <= 21 and $player->getBestScore() > $dealerScore) {
-                    if ($playerScore === $playerBestScore) {
-                        $winner .= ' & ' . $player->getName();
-                    }
-                }
+            } elseif ($playerScore === $playerBestScore and $playerScore <= 21 and $playerScore > $dealerScore) {
+                $winner .= ' & ' . $player->getName();
             }
         }
         $this->winner = $winner;
