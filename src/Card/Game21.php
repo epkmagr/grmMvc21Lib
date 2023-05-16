@@ -286,7 +286,8 @@ class Game21
         return $result . '<br>' . $winner;
     }
 
-    private function getPlayerWinner(string $winner, int $playerBestScore, int $dealerScore, Player21 $player) {
+    private function getPlayerWinner(string $winner, int $playerBestScore, int $dealerScore, Player21 $player)
+    {
 
         //$playerBestScore = $player->getBestScore();
         if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
@@ -296,7 +297,8 @@ class Game21
         return $winner;
     }
 
-    private function getSeveralWinners(string $winner, int $playerBestScore, int $dealerScore, Player21 $player) {
+    private function getSeveralWinners(string $winner, int $playerBestScore, int $dealerScore, Player21 $player)
+    {
 
         if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
             if ($player->getBestScore() === $playerBestScore) {
