@@ -53,7 +53,6 @@ class Dealer extends Participant
             $this->bestScore = 0;
             return 'FÖRLUST';
         } elseif ($this->scoreLow >= 18) {
-            $res = 'NÖJD';
             $this->content = true;
             $this->bestScore = $this->scoreLow;
             return 'NÖJD';
