@@ -269,19 +269,19 @@ class Game21
      */
     public function result(): string
     {
-        $result = 'Vinnaren är: ';
         $winner = $this->dealer->getName();
         $dealerScore = $this->dealer->getBestScore();
         $playerBestScore = 0;
         foreach ($this->players as $player) {
-            if ($player->getBestScore() > $playerBestScore) {
+            $playerScore = $player->getBestScore();
+            if ($playerScore > $playerBestScore) {
                 $playerBestScore = $player->getBestScore();
                 if ($playerBestScore <= 21 and $playerBestScore > $dealerScore or $dealerScore > 21) {
                     $winner = $player->getName();
                 }
-            } elseif ($player->getBestScore() === $playerBestScore) {
-                if ($player->getBestScore() <= 21 and $player->getBestScore() > $dealerScore) {
-                    if ($player->getBestScore() === $playerBestScore) {
+            } elseif ($playerScore === $playerBestScore) {
+                if ($playerScore <= 21 and $player->getBestScore() > $dealerScore) {
+                    if ($playerScore === $playerBestScore) {
                         $winner .= ' & ' . $player->getName();
                     }
                 }
@@ -289,7 +289,7 @@ class Game21
         }
         $this->winner = $winner;
 
-        return $result . '<br>' . $winner;
+        return 'Vinnaren är: ' . '<br>' . $winner;
     }
 
     public function getJsonData()
