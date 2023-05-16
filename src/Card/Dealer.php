@@ -48,19 +48,19 @@ class Dealer extends Participant
      */
     public function getResult()
     {
-        $res = '';
         if ($this->scoreLow > 21) {
-            $res = 'FÖRLUST';
             $this->content = true;
             $this->bestScore = 0;
+            return 'FÖRLUST';
         } elseif ($this->scoreLow >= 18) {
             $res = 'NÖJD';
             $this->content = true;
             $this->bestScore = $this->scoreLow;
+            return 'NÖJD';
         } elseif ($this->scoreHigh >= 18 and $this->scoreHigh <= 21) {
-            $res = 'NÖJD';
             $this->content = true;
             $this->bestScore = $this->scoreHigh;
+            return 'NÖJD';
         } else {
             if ($this->scoreHigh > $this->scoreLow) {
                 $this->bestScore = $this->scoreHigh;
@@ -68,28 +68,7 @@ class Dealer extends Participant
                 $this->bestScore = $this->scoreLow;
             }
         }
-        // switch (true):
-        //     case $this->scoreLow > 21:
-        //         $res = 'FÖRLUST';
-        //         $this->content = true;
-        //         $this->bestScore = 0;
-        //     case $this->scoreLow >= 18:
-        //         $res = 'NÖJD';
-        //         $this->content = true;
-        //         $this->bestScore = $this->scoreLow;
-        //         if ($this->scoreHigh <= 21) {
-        //             $res = 'NÖJD';
-        //             $this->content = true;
-        //             $this->bestScore = $this->scoreHigh;
-        //         }
-        //     default:
-        //         if ($this->scoreHigh > $this->scoreLow) {
-        //             $this->bestScore = $this->scoreHigh;
-        //         } else {
-        //             $this->bestScore = $this->scoreLow;
-        //         }
-        // endswitch;
 
-        return $res;
+        return '';
     }
 }
