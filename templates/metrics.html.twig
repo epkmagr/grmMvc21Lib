@@ -17,7 +17,16 @@
             utvecklingsmiljö. Det andra verktyget (Scrutinizer CI) är en extern
             byggtjänst som kopplar sig mot mitt repo på GitHub/GitLab.</p>
 
-            <p><strong>Codestyle:</strong></p>
+            <p><strong>Codestyle:</strong>
+                Kodstil relaterar till hur man skriver "snygg" kod. Till exempel gällande 
+                hur man ska använda sig av white spaces, tabs, vertical alignment, hur/var 
+                kommentarer ska skrivas och så vidare. Helt enkelt hur koden visuellt ska 
+                se ut för att öka läsbarheten.
+                Det finns riktlinjer på hur man ska skriva sin 
+                kod för att det ska bli lättare att underhålla, utveckla och förstå koden. 
+                Riktlinjer/kodstil kan till exempel vara att man ska använda sig av 
+                camel-case när man namnger variabler och funktioner.
+            </p>
 
             <p><strong>Coverage:</strong></p>
             <ul>
@@ -52,7 +61,13 @@
                 <li>High number of EC (incoming) might say that many other classes
                 depends on this class.</li>
             </ul>
-            <p><strong>CRAP (Change Risk Anti-Patterns):</strong></p>
+            <p><strong>CRAP (Change Risk Anti-Patterns):</strong> 
+                CRAP är en metod för att mäta kodkvaliteten baserat på Coupling och Complexity. 
+                CRAP räknar antalet rader kod och multiplicera med antalet gånger en metod eller 
+                funktion blir kallad, och till sist dividerar med komplexiteten för metoden eller 
+                funktionen. Ett högt CRAP kan innebära större risk för att ändringar i koden kan 
+                introducera nya buggar eller fel. 
+            </p>
         </div>
     </div>
     <div class="row">
