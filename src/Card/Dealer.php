@@ -60,13 +60,8 @@ class Dealer extends Participant
             $this->content = true;
             $this->bestScore = $this->scoreHigh;
             return 'NÖJD';
-        } else {
-            if ($this->scoreHigh > $this->scoreLow) {
-                $this->bestScore = $this->scoreHigh;
-            } else {
-                $this->bestScore = $this->scoreLow;
-            }
         }
+        $this->bestScore = max($this->scoreLow, $this->scoreHigh);
 
         return '';
     }
