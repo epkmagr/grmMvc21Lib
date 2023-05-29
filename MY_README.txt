@@ -43,8 +43,9 @@ Gör en gång bara:
 git init && git symbolic-ref HEAD refs/heads/main
 git remote add origin git@github.com:epkmagr/mvc_vt23_report.git
 git branch -M main
-git pull origin main --rebase
-git push -u origin main
+git pull origin main --rebase (första gången)
+git push -u origin main (första gången)
+Glöm inte composer install om jag behöver ladda ner repot igen.
 
 Gör vid varje push:
 git status
