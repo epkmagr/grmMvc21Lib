@@ -31,21 +31,22 @@ class BookControllerTest extends WebTestCase
         // $this->assertSelectorTextContains('th', 'Författare');
     }
 
-/*     public function testCreateBook(): void
-    {
-        $client = static::createClient();
-        $client->request('GET', '/book/create');
-        $this->assertResponseIsSuccessful();
-        $this->assertRouteSame('create_book');
-        $this->assertSelectorTextContains('h1', 'New deck');
-    }
+     public function testCreateBook(): void
+     {
+         $client = static::createClient();
+         $client->request('GET', '/book/create');
+         $this->assertResponseIsSuccessful();
+         $this->assertRouteSame('create_book');
+         $this->assertSelectorTextContains('h1', 'Bibliotek');
+         $this->assertSelectorTextContains('legend', 'Lägg till en ny book');
+     }
 
-    public function testSaveBook(): void
-    {
-        $client = static::createClient();
-        $client->request('POST', '/book/create');
-        $this->assertResponseIsSuccessful();
-        $this->assertRouteSame('save_book');
-        $this->assertSelectorTextContains('h1', 'New deck');
-    } */
+/*    public function testSaveBook(): void
+     {
+         $client = static::createClient();
+         $client->request('POST', '/book/create');
+         $this->assertResponseIsSuccessful();
+         $this->assertRouteSame('save_book');
+         $this->assertSelectorTextContains('h1', 'New deck');
+     } */
 }

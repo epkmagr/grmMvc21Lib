@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2023-05-16 14:16:59        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2023-05-29 15:43:49        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -262,6 +262,64 @@
 
     var relations = [
     {
+        "name": "\\App\\Repository\\BookRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Persistence\\ManagerRegistry",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Book",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Card\\Card",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Card\\Dealer",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Card\\Participant",
+        "size": 3000,
+        "relations": [
+            "\\App\\Card\\CardHand",
+            "\\App\\Card\\Card"
+        ]
+    },
+    {
+        "name": "\\App\\Card\\Player21",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Card\\CardHand",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Card\\Deck",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Card\\Game21",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "\\App\\Controller\\Game21ImgController",
         "size": 3000,
         "relations": [
@@ -288,18 +346,17 @@
         "relations": []
     },
     {
-        "name": "\\App\\Card\\Game21",
-        "size": 3000,
-        "relations": [
-            "\\App\\Card\\Deck",
-            "\\App\\Card\\Dealer",
-            "\\App\\Card\\Player21"
-        ]
-    },
-    {
         "name": "\\Symfony\\Component\\HttpFoundation\\Request",
         "size": 3000,
         "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\MeController",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
     },
     {
         "name": "\\App\\Controller\\BookController",
@@ -312,33 +369,6 @@
             "\\Symfony\\Component\\HttpFoundation\\Request",
             "\\App\\Entity\\Book",
             "\\Doctrine\\Persistence\\ManagerRegistry"
-        ]
-    },
-    {
-        "name": "\\App\\Repository\\BookRepository",
-        "size": 3000,
-        "relations": [
-            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
-            "\\Doctrine\\Persistence\\ManagerRegistry",
-            "\\App\\Entity\\Book"
-        ]
-    },
-    {
-        "name": "\\App\\Entity\\Book",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Doctrine\\Persistence\\ManagerRegistry",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controller\\MeController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response"
         ]
     },
     {
@@ -364,47 +394,6 @@
             "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\App\\Repository\\BookRepository",
             "\\Symfony\\Component\\HttpFoundation\\JsonResponse"
-        ]
-    },
-    {
-        "name": "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Card\\Participant",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Card\\CardHand",
-        "size": 3000,
-        "relations": [
-            "\\App\\Card\\Card"
-        ]
-    },
-    {
-        "name": "\\App\\Card\\Card",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Card\\Player21",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Card\\Deck",
-        "size": 3000,
-        "relations": [
-            "\\App\\Card\\Card"
-        ]
-    },
-    {
-        "name": "\\App\\Card\\Dealer",
-        "size": 3000,
-        "relations": [
-            "\\App\\Card\\Participant"
         ]
     },
     {

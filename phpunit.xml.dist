@@ -33,7 +33,7 @@
         </report>
         <exclude>
             <directory>src/Repository</directory>
-            <directory>src/Controller</directory>
+            <!-- <directory>src/Controller</directory> -->
         </exclude>
     </coverage>
 
