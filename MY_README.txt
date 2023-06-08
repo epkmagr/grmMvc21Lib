@@ -81,3 +81,11 @@ php bin/console dbal:run-sql 'SELECT * FROM book;'
 Symfony migrera vid förändring i databasen, Sqlite3
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
+
+PHPmetrics
+composer phpmetrics
+
+FIXA TILL VT24
+1. Använd phpunit test istället för symfonys
+2. Se till att göra tester på controllers
+3. Ev fixa till koden så att värdena blir bättre
