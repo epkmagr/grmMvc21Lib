@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+/* use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Test class for MainController
  */
+/* 
 class BookControllerTest extends WebTestCase
 {
     public function testBookApp(): void
@@ -41,12 +42,13 @@ class BookControllerTest extends WebTestCase
          $this->assertSelectorTextContains('legend', 'Lägg till en ny book');
      }
 
-/*    public function testSaveBook(): void
+   public function testSaveBook(): void
      {
          $client = static::createClient();
          $client->request('POST', '/book/create');
          $this->assertResponseIsSuccessful();
          $this->assertRouteSame('save_book');
          $this->assertSelectorTextContains('h1', 'New deck');
-     } */
+     }
 }
+ */

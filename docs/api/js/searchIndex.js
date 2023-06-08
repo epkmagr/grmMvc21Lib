@@ -253,7 +253,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003Aresult\u0028\u0029",
             "name": "result",
-            "summary": "",
+            "summary": "returns\u0020the\u0020result\u0020of\u0020the\u0020game",
             "url": "classes/App-Card-Game21.html#method_result"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetJsonData\u0028\u0029",
